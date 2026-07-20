@@ -2,7 +2,7 @@
 <!-- deploy-test: claude desktop 2026-07-20-1623 -->
 <title>Steadfast Research Group - Brand Bible</title>
 <!-- auto-deployed from github.com/gabriele332/srg-brand-bible via Netlify -->
-<meta name="description" content="Steadfast Research Group brand bible - three logo options built from the flag.">
+<meta name="description" content="Steadfast Research Group brand bible - three logo options and three brand systems built from the flag.">
 <meta name="theme-color" content="#6E7A50">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%9A%A9%3C/text%3E%3C/svg%3E">
 <style>
@@ -86,6 +86,41 @@
   .tl b{font-weight:500;font-size:clamp(18px,2.6vw,26px);letter-spacing:-.02em}
   .tl b span{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--faint);margin-top:3px}
 
+  /* brand systems */
+  .fmask{-webkit-mask:var(--flag-ink) center/contain no-repeat;mask:var(--flag-ink) center/contain no-repeat}
+  .sys{margin-top:30px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--surface)}
+  .sys-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:14px;padding:30px 32px 0}
+  .sys-head .num{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--sage)}
+  .sys-head h3{font-size:23px;margin:0;letter-spacing:-.02em}
+  .sys-head .kw{font-family:var(--mono);font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--faint);margin-left:auto}
+  .sys-lead{margin:10px 0 0;padding:0 32px;font-size:14px;font-weight:300;line-height:1.6;color:var(--soft);max-width:78ch}
+  .sys-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px;padding:24px 32px 30px}
+  @media(max-width:880px){.sys-grid{grid-template-columns:1fr}.sys-head .kw{margin-left:0;width:100%}}
+  .sys-stage{border-radius:14px;min-height:210px;display:grid;place-items:center;padding:30px;border:1px solid var(--line)}
+  .sys-side{display:flex;flex-direction:column;gap:12px}
+  .pal{display:flex;gap:8px}
+  .pal div{flex:1;min-width:0}
+  .pal i{display:block;height:46px;border-radius:9px;border:1px solid var(--line)}
+  .pal em{display:block;font-style:normal;font-family:var(--mono);font-size:9.5px;color:var(--soft);margin-top:5px;text-align:center}
+  .spec{border:1px solid var(--line);border-radius:12px;padding:14px 16px;font-size:13px;color:var(--soft);font-weight:300;line-height:1.55}
+  .spec b{display:block;color:var(--ink);font-weight:600;font-size:16px;margin-bottom:3px}
+  .chip{border-radius:12px;padding:15px 17px;display:flex;align-items:center;gap:14px;border:1px solid var(--line)}
+  .chip .bar{width:6px;align-self:stretch;border-radius:3px;flex:0 0 auto}
+  .chip b{font-size:16px;letter-spacing:-.01em;display:block}
+  .chip small{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;margin-top:4px}
+  .sys.dark{background:#14170F;border-color:rgba(232,234,224,.16)}
+  .sys.dark .sys-head h3{color:#F2F4EA}
+  .sys.dark .sys-head .num{color:#B8E04A}
+  .sys.dark .sys-head .kw{color:#8B917F}
+  .sys.dark .sys-lead,.sys.dark .spec{color:#A9AF9F}
+  .sys.dark .sys-stage,.sys.dark .spec,.sys.dark .chip,.sys.dark .pal i{border-color:rgba(232,234,224,.14)}
+  .sys.dark .spec b{color:#F2F4EA}
+  .sys.dark .pal em{color:#8B917F}
+  .sys.cream{background:#F3EDDD;border-color:rgba(32,43,60,.2)}
+  .sys.cream .sys-head h3,.sys.cream .spec b{color:#202B3C}
+  .sys.cream .sys-head .num{color:#A93B2E}
+  .sys.cream .sys-stage,.sys.cream .spec,.sys.cream .chip,.sys.cream .pal i{border-color:rgba(32,43,60,.18)}
+
   footer{background:#12130d;color:#9AA57E;text-align:center;padding:52px 0 72px;margin-top:0}
   footer .fl{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
   footer .fs{color:#7D8072;font-size:13px;margin-top:12px;font-weight:300;max-width:60ch;margin-inline:auto}
@@ -97,14 +132,14 @@
 
 <header class="nav"><div class="nav-in">
   <div class="bd"><span class="m flag"></span><span>SRG &middot; Brand Bible</span></div>
-  <nav><a href="#options">Logo Options</a><a href="#ref">Reference</a><a href="#color">Color</a><a href="#voice">Voice</a></nav>
+  <nav><a href="#options">Logo Options</a><a href="#systems">Systems</a><a href="#ref">Reference</a><a href="#color">Color</a><a href="#voice">Voice</a></nav>
 </div></header>
 
 <section class="hero" style="border:none"><div class="wrap">
   <div class="m flag"></div>
   <div class="ey">Brand Bible &nbsp;&middot;&nbsp; Logo Options &nbsp;&middot;&nbsp; 2026</div>
   <h1>Steadfast<br>Research Group</h1>
-  <p>Three logo options, all built from the flag Blake sent. Option 01 is the flag itself, almost exactly the reference; the other two put it to work as a wordmark lockup and a research seal. Pick the one that feels most like SRG.</p>
+  <p>Three logo options and three complete brand systems, all built from the flag Blake sent. Option 01 is the flag itself, almost exactly the reference; everything else puts it to work - as lockups, seals, and three genuinely different directions the brand could take. Pick what feels most like SRG.</p>
 </div></section>
 
 <!-- REFERENCE -->
@@ -150,9 +185,88 @@
   </div>
 </div></section>
 
+<!-- BRAND SYSTEMS -->
+<section id="systems"><div class="wrap reveal">
+  <div class="sh"><span class="n">02</span><span class="ey">Brand Systems</span></div>
+  <h2>One flag, three companies.</h2>
+  <p class="lead">Three complete brand directions, each with its own palette, typography, and packaging attitude - all flying the same flag. System 01 develops the reference direction; 02 and 03 take the mark somewhere genuinely different.</p>
+
+  <div class="sys">
+    <div class="sys-head"><span class="num">System 01</span><h3>The Field Standard</h3><span class="kw">Calm &middot; Clinical &middot; Grounded</span></div>
+    <p class="sys-lead">The reference direction: field sage on warm bone, quiet sans type, generous whitespace. Feels like a calm, disciplined lab - nothing shouts, everything is accounted for.</p>
+    <div class="sys-grid">
+      <div class="sys-stage" style="background:radial-gradient(120% 120% at 50% 0,#FFFFFF,#EFEBDF)">
+        <div class="lockup"><div class="m flag"></div><div><b>Steadfast</b><small>RESEARCH GROUP</small></div></div>
+      </div>
+      <div class="sys-side">
+        <div class="pal">
+          <div><i style="background:#6E7A50"></i><em>6E7A50</em></div>
+          <div><i style="background:#454E33"></i><em>454E33</em></div>
+          <div><i style="background:#A7AB9E"></i><em>A7AB9E</em></div>
+          <div><i style="background:#23271F"></i><em>23271F</em></div>
+          <div><i style="background:#F4F1E8"></i><em>F4F1E8</em></div>
+        </div>
+        <div class="spec"><b>Steadfast</b>Tight Helvetica-style sans for headlines, mono for data and eyebrows. Whitespace does the talking.</div>
+        <div class="chip" style="background:#FBFAF4"><span class="bar" style="background:#6E7A50"></span><div><b style="color:#23271F">BPC-157</b><small style="color:#6E7A50">10 MG &middot; Research use only</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sys dark">
+    <div class="sys-head"><span class="num">System 02</span><h3>The Night Lab</h3><span class="kw">Technical &middot; Precise &middot; Modern</span></div>
+    <p class="sys-lead">A dark instrument panel: carbon black, assay green, mono-first typography. The flag becomes a status light - data-forward, engineered, built for people who read the COA before the label.</p>
+    <div class="sys-grid">
+      <div class="sys-stage" style="background:radial-gradient(120% 130% at 50% 0,#191D10,#0B0D07)">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:13px;text-align:center">
+          <span class="fmask" style="width:56px;height:48px;background:#B8E04A"></span>
+          <b style="font-family:var(--mono);font-size:34px;font-weight:700;letter-spacing:.34em;margin-right:-.34em;color:#F2F4EA">SRG</b>
+          <small style="font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:#8B917F">STEADFAST RESEARCH GROUP</small>
+        </div>
+      </div>
+      <div class="sys-side">
+        <div class="pal">
+          <div><i style="background:#0E100B"></i><em>0E100B</em></div>
+          <div><i style="background:#B8E04A"></i><em>B8E04A</em></div>
+          <div><i style="background:#F2F4EA"></i><em>F2F4EA</em></div>
+          <div><i style="background:#6F7A62"></i><em>6F7A62</em></div>
+          <div><i style="background:#23271F"></i><em>23271F</em></div>
+        </div>
+        <div class="spec"><b style="font-family:var(--mono);letter-spacing:.08em">SRG // ASSAY</b>Monospace leads everywhere - headlines, labels, data. Green is reserved for verified numbers.</div>
+        <div class="chip" style="background:#0B0D07"><span class="bar" style="background:#B8E04A"></span><div><b style="color:#F2F4EA">BPC-157</b><small style="color:#B8E04A">Purity &ge;99.1% &middot; HPLC verified</small></div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sys cream">
+    <div class="sys-head"><span class="num">System 03</span><h3>The Charter</h3><span class="kw">Official &middot; Heritage &middot; Trusted</span></div>
+    <p class="sys-lead">Midnight navy, parchment, a signal-red stamp and serif type. The flag reads as a planted standard - certificates, seals, and the confidence of an institution that has always been here.</p>
+    <div class="sys-grid">
+      <div class="sys-stage" style="background:#202B3C">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:11px;text-align:center">
+          <span class="fmask" style="width:52px;height:44px;background:#F3EDDD"></span>
+          <b style="font-family:Georgia,'Times New Roman',serif;font-size:26px;font-weight:600;letter-spacing:.02em;color:#F3EDDD">Steadfast Research Group</b>
+          <small style="font-family:var(--mono);font-size:9px;letter-spacing:.3em;color:#A98D5A">EST. 2026 &middot; THE STANDARD HOLDS</small>
+        </div>
+      </div>
+      <div class="sys-side">
+        <div class="pal">
+          <div><i style="background:#202B3C"></i><em>202B3C</em></div>
+          <div><i style="background:#F3EDDD"></i><em>F3EDDD</em></div>
+          <div><i style="background:#A93B2E"></i><em>A93B2E</em></div>
+          <div><i style="background:#A98D5A"></i><em>A98D5A</em></div>
+          <div><i style="background:#23271F"></i><em>23271F</em></div>
+        </div>
+        <div class="spec"><b style="font-family:Georgia,'Times New Roman',serif">Steadfast</b>Serif display over mono details, hairline rules, stamped accents. Red appears only as the seal of verification.</div>
+        <div class="chip" style="background:#FBF7EC"><span class="bar" style="background:#A93B2E"></span><div><b style="font-family:Georgia,'Times New Roman',serif;color:#202B3C">Certificate of Analysis</b><small style="color:#A93B2E">Verified &middot; Lot 26-014</small></div></div>
+      </div>
+    </div>
+  </div>
+
+</div></section>
+
 <!-- COLOR -->
 <section id="color"><div class="wrap reveal">
-  <div class="sh"><span class="n">02</span><span class="ey">Color</span></div>
+  <div class="sh"><span class="n">03</span><span class="ey">Color</span></div>
   <h2>Field sage on bone.</h2>
   <p class="lead">Pulled straight from the site and the vials: a muted olive sage, warm bone paper, and ink. Calm, scientific, and grounded.</p>
   <div class="sws">
@@ -166,7 +280,7 @@
 
 <!-- VOICE -->
 <section id="voice"><div class="wrap reveal">
-  <div class="sh"><span class="n">03</span><span class="ey">Voice</span></div>
+  <div class="sh"><span class="n">04</span><span class="ey">Voice</span></div>
   <h2>Say less, prove more.</h2>
   <p class="lead">Exact, calm, allergic to hype. State the method, state the number, stop. The compliance line is always present.</p>
   <div class="tl">
@@ -178,7 +292,7 @@
 
 <footer><div class="wrap">
   <div class="fl">For Research Use Only &middot; Not For Human Consumption</div>
-  <div class="fs">Steadfast Research Group &middot; Brand Bible &middot; 2026. Three logo options built from the flag reference. Pick one to develop into the full identity.</div>
+  <div class="fs">Steadfast Research Group &middot; Brand Bible &middot; 2026. Three logo options and three brand systems built from the flag reference. Pick a direction to develop into the full identity.</div>
 </div></footer>
 
 <script>
