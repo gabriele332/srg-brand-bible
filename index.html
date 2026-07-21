@@ -35,8 +35,11 @@
 
   .hero{position:relative;padding:130px 0 100px;overflow:hidden}
   .orbit{position:absolute;border:1px solid var(--line-soft);border-radius:50%;pointer-events:none}
-  .o1{width:720px;height:720px;top:-160px;left:50%;transform:translateX(-50%)}
-  .o2{width:1100px;height:1100px;top:-350px;left:50%;transform:translateX(-50%)}
+  .orbit::before{content:"";position:absolute;top:-3.5px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--olive);box-shadow:0 0 14px rgba(138,154,107,.9)}
+  .o1{width:720px;height:720px;top:-160px;left:50%;animation:orbitspin 42s linear infinite}
+  .o2{width:1100px;height:1100px;top:-350px;left:50%;animation:orbitspin 84s linear infinite reverse}
+  @keyframes orbitspin{from{transform:translateX(-50%) rotate(0deg)}to{transform:translateX(-50%) rotate(360deg)}}
+  @media(prefers-reduced-motion:reduce){.o1,.o2{animation:none;transform:translateX(-50%)}.orbit::before{display:none}}
   .hero .tag{position:absolute;font-family:var(--mono);font-size:10px;letter-spacing:.3em;color:var(--gray-3);text-transform:uppercase}
   .hero .m{width:92px;height:80px;background-image:var(--flag-white);margin-bottom:28px;position:relative}
   .hero h1{font-family:var(--display);font-weight:300;letter-spacing:-.03em;font-size:clamp(40px,7vw,84px);line-height:1.02;margin:.3em 0 0;color:var(--white);position:relative}
@@ -431,6 +434,13 @@
         <li>"PEPTIDE" is the placeholder - swap for the product name per SKU (BPC-157, Semaglutide, TB-500...); the strength box updates per SKU.</li>
         <li>Same art in both colorways; only the label color, cap color, and strength-box text color change.</li>
       </ul>
+      <div class="btnrow" style="margin-top:20px">
+        <a class="pill solid" href="assets/srg-label-black.png" download>PNG &middot; Black</a>
+        <a class="pill solid" href="assets/srg-label-sage.png" download>PNG &middot; Sage</a>
+        <a class="pill ghost" href="assets/srg-label-black.svg" download>SVG &middot; Black</a>
+        <a class="pill ghost" href="assets/srg-label-sage.svg" download>SVG &middot; Sage</a>
+        <a class="pill ghost" href="assets/srg-labels-print.pdf" download>Print PDF &middot; both</a>
+      </div>
     </div>
     <div class="lcard wide"><span class="lab">On the vial</span>
       <svg viewBox="0 0 460 268" style="width:100%;max-width:460px;display:block;margin:0 auto">
