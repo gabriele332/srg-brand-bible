@@ -359,147 +359,121 @@
   <h2>The vial, measured.</h2>
   <p class="lead">Sizing and layout for peptide vial labels and unit packaging. Full print-ready details - dielines, safe zones, materials, and the artwork checklist - live in the guideline PDF below.</p>
   <div class="lgrid">
-    <div class="lcard"><span class="lab">Vial formats &amp; label sizes</span>
+    <div class="lcard"><span class="lab">Vial formats &amp; label sizes &middot; for this design</span>
       <table class="vspec">
-        <tr><th>Vial</th><th>Body</th><th>Label size</th></tr>
-        <tr><td>2 mL</td><td>&Oslash;16 &times; 35 mm</td><td>47 &times; 19 mm</td></tr>
-        <tr><td>3 mL (standard)</td><td>&Oslash;22 &times; 47 mm</td><td>63.5 &times; 25.4 mm (2.5" &times; 1")</td></tr>
-        <tr><td>5 mL</td><td>&Oslash;24 &times; 52 mm</td><td>70 &times; 30 mm</td></tr>
+        <tr><th>Vial</th><th>Body</th><th>Label wrap (this design)</th></tr>
+        <tr><td>3 mL</td><td>&Oslash;22 &times; 47 mm</td><td>63.5 &times; 30 mm</td></tr>
+        <tr><td>5 mL</td><td>&Oslash;24 &times; 52 mm</td><td>70 &times; 34 mm</td></tr>
+        <tr><td>10 mL</td><td>&Oslash;25 &times; 54 mm</td><td>73 &times; 38 mm</td></tr>
       </table>
       <ul class="lnotes">
-        <li>Wrap coverage &asymp;90% of circumference - leave a 5-8 mm gap (no overlap on glass).</li>
-        <li>Safe zone 2 mm inside trim; 1.5 mm bleed if printing full-bleed; 1.5-2 mm corner radius.</li>
-        <li>Material: white BOPP + matte laminate, freezer-grade adhesive (-20&deg;C storage, condensation on thaw).</li>
+        <li>The stacked layout wants height - run the label the full straight wall, keeping &ge;2 mm off shoulder and heel.</li>
+        <li>Front panel (art zone) &asymp; 40% of wrap width, centered opposite the seam.</li>
+        <li>Wrap &asymp;90% of circumference with a 5-8 mm glass gap; white BOPP, matte laminate, freezer-grade adhesive.</li>
+        <li>2 mL vials (&Oslash;16): use a condensed stack - flag, Steadfast, product name, strength, one compliance line.</li>
       </ul>
     </div>
-    <div class="lcard"><span class="lab">Label layout &middot; 63.5 &times; 25.4 mm</span>
-      <svg viewBox="0 0 320 132" style="width:100%;display:block">
-        <rect x="6" y="6" width="308" height="120" rx="8" fill="#101010" stroke="#8A9A6B" stroke-width="1" stroke-dasharray="4 3"/>
-        <rect x="14" y="14" width="292" height="104" rx="5" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="1"/>
-        <rect x="20" y="20" width="64" height="92" rx="4" fill="#151515"/>
-        <text x="52" y="55" text-anchor="middle" font-family="monospace" font-size="7" fill="#8A9A6B">FLAG</text>
-        <text x="52" y="66" text-anchor="middle" font-family="monospace" font-size="7" fill="#8A9A6B">+ BRAND</text>
-        <text x="96" y="46" font-family="sans-serif" font-weight="600" font-size="19" fill="#FFFFFF">BPC-157</text>
-        <text x="96" y="64" font-family="monospace" font-size="8.5" fill="#B3B2B2">5 MG &#183; LYOPHILIZED &#183; &#8805;99%</text>
-        <text x="96" y="94" font-family="monospace" font-size="6.6" fill="#8A8A8A">FOR RESEARCH USE ONLY &#183; NOT FOR HUMAN CONSUMPTION</text>
-        <rect x="252" y="58" width="46" height="46" rx="3" fill="#151515" stroke="rgba(255,255,255,.2)"/>
-        <text x="275" y="78" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#B3B2B2">QR</text>
-        <text x="275" y="88" text-anchor="middle" font-family="monospace" font-size="6.5" fill="#B3B2B2">COA</text>
-        <text x="252" y="50" font-family="monospace" font-size="6.5" fill="#8A8A8A">LOT 26-014</text>
-      </svg>
+    <div class="lcard"><span class="lab">Content stack &middot; top to bottom, centered axis</span>
+      <table class="vspec">
+        <tr><th>#</th><th>Element</th><th>Spec at 3 mL scale</th></tr>
+        <tr><td>1</td><td>Flag mark</td><td>White outline, &asymp;8 mm tall</td></tr>
+        <tr><td>2</td><td>Steadfast</td><td>Manrope SemiBold, mixed case, &asymp;4.2 mm cap height</td></tr>
+        <tr><td>3</td><td>Rule</td><td>0.4 pt, &asymp;80% of panel width</td></tr>
+        <tr><td>4</td><td>RESEARCH GROUP</td><td>Caps, +0.35em tracking, &asymp;1.6 mm</td></tr>
+        <tr><td>5</td><td>Product name</td><td>Manrope ExtraBold caps (PEPTIDE = placeholder), &asymp;4.8 mm</td></tr>
+        <tr><td>6</td><td>Strength box</td><td>White rectangle, label-color text, e.g. 5 MG</td></tr>
+        <tr><td>7</td><td>Compliance</td><td>3 centered lines, caps, &asymp;1.7 mm, never removed</td></tr>
+        <tr><td>8</td><td>Rule</td><td>Closes the stack</td></tr>
+      </table>
       <ul class="lnotes">
-        <li>Hierarchy: peptide name &gt; strength/spec &gt; brand band &gt; lot + QR &gt; compliance.</li>
-        <li>Minimum type at print: 5 pt compliance, 6.5 pt data, QR &ge;10 &times; 10 mm with quiet zone.</li>
-        <li>Text in 100K black (or white on Carbon); olive reserved for verified data.</li>
+        <li>Lot, expiry, and the COA QR print on the back of the wrap, opposite the front panel.</li>
       </ul>
     </div>
-    <div class="lcard wide"><span class="lab">The label, open &middot; flat art at true proportion &middot; 63.5 &times; 25.4 mm</span>
-
-      <svg viewBox="0 0 635 254" style="width:100%;display:block;margin-bottom:6px">
-        <defs><g id="fm1" fill="none" stroke="#EDEDED" stroke-width="3.6" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
-        <g id="qr1" stroke="none"><rect x="0" y="0" width="72" height="72" rx="4" fill="none" stroke="#5C5C5C"/><rect x="8" y="8" width="16" height="16" fill="#B3B2B2"/><rect x="48" y="8" width="16" height="16" fill="#B3B2B2"/><rect x="8" y="48" width="16" height="16" fill="#B3B2B2"/><rect x="32" y="14" width="8" height="8" fill="#8A8A8A"/><rect x="14" y="32" width="8" height="8" fill="#8A8A8A"/><rect x="32" y="32" width="8" height="8" fill="#B3B2B2"/><rect x="48" y="34" width="8" height="8" fill="#8A8A8A"/><rect x="34" y="50" width="8" height="8" fill="#8A8A8A"/><rect x="52" y="52" width="10" height="10" fill="#B3B2B2"/></g></defs>
-        <rect x="1" y="1" width="633" height="252" rx="12" fill="#0D0D0D" stroke="#333"/>
-        <line x1="152" y1="26" x2="152" y2="228" stroke="rgba(255,255,255,.14)"/>
-        <use href="#fm1" transform="translate(38,40) scale(0.8)"/>
-        <text x="76" y="152" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="14.5" letter-spacing="4" fill="#FFFFFF">STEADFAST</text>
-        <text x="76" y="170" text-anchor="middle" font-family="Consolas,monospace" font-size="7.5" letter-spacing="3" fill="#8A9A6B">RESEARCH GROUP</text>
-        <text x="182" y="112" font-family="Manrope,sans-serif" font-weight="600" font-size="52" letter-spacing="-1" fill="#FFFFFF">BPC-157</text>
-        <text x="184" y="146" font-family="Consolas,monospace" font-size="15" letter-spacing="2" fill="#B3B2B2">5 MG &#183; LYOPHILIZED &#183; &#8805;99% PURITY</text>
-        <line x1="184" y1="168" x2="480" y2="168" stroke="#8A9A6B" stroke-width="1.4"/>
-        <text x="184" y="192" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#8A9A6B">HPLC + MS VERIFIED &#183; COA VIA QR</text>
-        <text x="184" y="226" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#8A8A8A">FOR RESEARCH USE ONLY &#183; NOT FOR HUMAN CONSUMPTION</text>
-        <text x="525" y="44" font-family="Consolas,monospace" font-size="10" fill="#8A8A8A">LOT 26-014</text>
-        <use href="#qr1" transform="translate(525,56)"/>
-        <text x="525" y="146" font-family="Consolas,monospace" font-size="10" fill="#8A8A8A">EXP 07/2028</text>
-      </svg>
-      <span class="lab" style="margin-bottom:14px">System 01 &middot; Carbon</span>
-
-      <svg viewBox="0 0 635 254" style="width:100%;display:block;margin-bottom:6px">
-        <defs><g id="fm2" fill="none" stroke="#454E33" stroke-width="3.6" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
-        <g id="qr2" stroke="none"><rect x="0" y="0" width="72" height="72" rx="4" fill="none" stroke="#8C9081"/><rect x="8" y="8" width="16" height="16" fill="#23271F"/><rect x="48" y="8" width="16" height="16" fill="#23271F"/><rect x="8" y="48" width="16" height="16" fill="#23271F"/><rect x="32" y="14" width="8" height="8" fill="#5C6152"/><rect x="14" y="32" width="8" height="8" fill="#5C6152"/><rect x="32" y="32" width="8" height="8" fill="#23271F"/><rect x="48" y="34" width="8" height="8" fill="#5C6152"/><rect x="34" y="50" width="8" height="8" fill="#5C6152"/><rect x="52" y="52" width="10" height="10" fill="#23271F"/></g></defs>
-        <rect x="1" y="1" width="633" height="252" rx="12" fill="#F4F1E8" stroke="#D8D3C4"/>
-        <line x1="152" y1="26" x2="152" y2="228" stroke="rgba(35,39,31,.18)"/>
-        <use href="#fm2" transform="translate(38,40) scale(0.8)"/>
-        <text x="76" y="152" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="14.5" letter-spacing="4" fill="#23271F">STEADFAST</text>
-        <text x="76" y="170" text-anchor="middle" font-family="Consolas,monospace" font-size="7.5" letter-spacing="3" fill="#6E7A50">RESEARCH GROUP</text>
-        <text x="182" y="112" font-family="Manrope,sans-serif" font-weight="600" font-size="52" letter-spacing="-1" fill="#23271F">BPC-157</text>
-        <text x="184" y="146" font-family="Consolas,monospace" font-size="15" letter-spacing="2" fill="#5C6152">5 MG &#183; LYOPHILIZED &#183; &#8805;99% PURITY</text>
-        <line x1="184" y1="168" x2="480" y2="168" stroke="#6E7A50" stroke-width="1.4"/>
-        <text x="184" y="192" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#6E7A50">HPLC + MS VERIFIED &#183; COA VIA QR</text>
-        <text x="184" y="226" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#5C6152">FOR RESEARCH USE ONLY &#183; NOT FOR HUMAN CONSUMPTION</text>
-        <text x="525" y="44" font-family="Consolas,monospace" font-size="10" fill="#5C6152">LOT 26-014</text>
-        <use href="#qr2" transform="translate(525,56)"/>
-        <text x="525" y="146" font-family="Consolas,monospace" font-size="10" fill="#5C6152">EXP 07/2028</text>
-      </svg>
-      <span class="lab" style="margin-bottom:14px">System 02 &middot; Field</span>
-
-      <svg viewBox="0 0 635 254" style="width:100%;display:block;margin-bottom:6px">
-        <defs><g id="fm3" fill="none" stroke="#F4F1E8" stroke-width="3.6" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
-        <g id="qr3" stroke="none"><rect x="0" y="0" width="72" height="72" rx="4" fill="none" stroke="#9AA284"/><rect x="8" y="8" width="16" height="16" fill="#F4F1E8"/><rect x="48" y="8" width="16" height="16" fill="#F4F1E8"/><rect x="8" y="48" width="16" height="16" fill="#F4F1E8"/><rect x="32" y="14" width="8" height="8" fill="#C9D3A8"/><rect x="14" y="32" width="8" height="8" fill="#C9D3A8"/><rect x="32" y="32" width="8" height="8" fill="#F4F1E8"/><rect x="48" y="34" width="8" height="8" fill="#C9D3A8"/><rect x="34" y="50" width="8" height="8" fill="#C9D3A8"/><rect x="52" y="52" width="10" height="10" fill="#F4F1E8"/></g></defs>
-        <rect x="1" y="1" width="633" height="252" rx="12" fill="#454E33" stroke="#38402A"/>
-        <line x1="152" y1="26" x2="152" y2="228" stroke="rgba(244,241,232,.22)"/>
-        <use href="#fm3" transform="translate(38,40) scale(0.8)"/>
-        <text x="76" y="152" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="14.5" letter-spacing="4" fill="#F4F1E8">STEADFAST</text>
-        <text x="76" y="170" text-anchor="middle" font-family="Consolas,monospace" font-size="7.5" letter-spacing="3" fill="#C9D3A8">RESEARCH GROUP</text>
-        <text x="182" y="112" font-family="Manrope,sans-serif" font-weight="600" font-size="52" letter-spacing="-1" fill="#F4F1E8">BPC-157</text>
-        <text x="184" y="146" font-family="Consolas,monospace" font-size="15" letter-spacing="2" fill="#C9D3A8">5 MG &#183; LYOPHILIZED &#183; &#8805;99% PURITY</text>
-        <line x1="184" y1="168" x2="480" y2="168" stroke="#C9D3A8" stroke-width="1.4"/>
-        <text x="184" y="192" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#C9D3A8">HPLC + MS VERIFIED &#183; COA VIA QR</text>
-        <text x="184" y="226" font-family="Consolas,monospace" font-size="10.5" letter-spacing="1.2" fill="#B9BFA6">FOR RESEARCH USE ONLY &#183; NOT FOR HUMAN CONSUMPTION</text>
-        <text x="525" y="44" font-family="Consolas,monospace" font-size="10" fill="#B9BFA6">LOT 26-014</text>
-        <use href="#qr3" transform="translate(525,56)"/>
-        <text x="525" y="146" font-family="Consolas,monospace" font-size="10" fill="#B9BFA6">EXP 07/2028</text>
-      </svg>
-      <span class="lab">System 03 &middot; Olive</span>
+    <div class="lcard wide"><span class="lab">The label &middot; final art (Blake's design) &middot; two colorways</span>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:18px">
+        <div>
+          <svg viewBox="0 0 360 430" style="width:100%;display:block;border-radius:10px">
+            <rect x="0" y="0" width="360" height="430" rx="10" fill="#141414"/>
+            <g transform="translate(134,26) scale(0.95)" fill="none" stroke="#FFFFFF" stroke-width="3.8" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
+            <text x="180" y="162" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">Steadfast</text>
+            <line x1="84" y1="180" x2="276" y2="180" stroke="#FFFFFF" stroke-width="1.3"/>
+            <text x="183" y="203" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14" letter-spacing="6" fill="#FFFFFF">RESEARCH GROUP</text>
+            <text x="181" y="262" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="45" letter-spacing="2" fill="#FFFFFF">PEPTIDE</text>
+            <rect x="127" y="280" width="106" height="33" fill="#FFFFFF"/>
+            <text x="180" y="304" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="21" fill="#141414">5 MG</text>
+            <text x="180" y="346" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">LYOPHILIZED POWDER</text>
+            <text x="180" y="369" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">FOR RESEARCH USE ONLY</text>
+            <text x="180" y="392" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">NOT FOR HUMAN CONSUMPTION</text>
+            <line x1="84" y1="410" x2="276" y2="410" stroke="#FFFFFF" stroke-width="1.1"/>
+          </svg>
+          <span class="lab" style="margin-top:10px;margin-bottom:0">Colorway 01 &middot; Black &middot; black cap</span>
+        </div>
+        <div>
+          <svg viewBox="0 0 360 430" style="width:100%;display:block;border-radius:10px">
+            <rect x="0" y="0" width="360" height="430" rx="10" fill="#869274"/>
+            <g transform="translate(134,26) scale(0.95)" fill="none" stroke="#FFFFFF" stroke-width="3.8" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
+            <text x="180" y="162" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">Steadfast</text>
+            <line x1="84" y1="180" x2="276" y2="180" stroke="#FFFFFF" stroke-width="1.3"/>
+            <text x="183" y="203" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14" letter-spacing="6" fill="#FFFFFF">RESEARCH GROUP</text>
+            <text x="181" y="262" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="45" letter-spacing="2" fill="#FFFFFF">PEPTIDE</text>
+            <rect x="127" y="280" width="106" height="33" fill="#FFFFFF"/>
+            <text x="180" y="304" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="21" fill="#66704E">5 MG</text>
+            <text x="180" y="346" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">LYOPHILIZED POWDER</text>
+            <text x="180" y="369" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">FOR RESEARCH USE ONLY</text>
+            <text x="180" y="392" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="500" font-size="14.5" fill="#FFFFFF">NOT FOR HUMAN CONSUMPTION</text>
+            <line x1="84" y1="410" x2="276" y2="410" stroke="#FFFFFF" stroke-width="1.1"/>
+          </svg>
+          <span class="lab" style="margin-top:10px;margin-bottom:0">Colorway 02 &middot; Sage &middot; sage cap</span>
+        </div>
+      </div>
+      <ul class="lnotes">
+        <li>Front-panel art exactly as created: flag &rarr; Steadfast &rarr; rule &rarr; RESEARCH GROUP &rarr; product name &rarr; strength box &rarr; three compliance lines &rarr; rule. All centered, all white on the label color.</li>
+        <li>"PEPTIDE" is the placeholder - swap for the product name per SKU (BPC-157, Semaglutide, TB-500...); the strength box updates per SKU.</li>
+        <li>Same art in both colorways; only the label color, cap color, and strength-box text color change.</li>
+      </ul>
     </div>
-
-    <div class="lcard wide"><span class="lab">On the vial &middot; 3 mL, label wrapped</span>
-      <svg viewBox="0 0 660 260" style="width:100%;max-width:660px;display:block;margin:0 auto">
-        <g transform="translate(60,10)">
-          <rect x="14" y="0" width="72" height="16" rx="5" fill="#8A9A6B"/>
-          <rect x="18" y="16" width="64" height="8" fill="#6F7D54"/>
-          <rect x="26" y="24" width="48" height="12" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.25)"/>
-          <path d="M14 36 L86 36 L92 52 L92 232 Q92 240 84 240 L16 240 Q8 240 8 232 L8 52 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-          <rect x="8" y="88" width="84" height="118" fill="#0D0D0D" stroke="#333"/>
-          <text x="50" y="118" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="15" fill="#FFFFFF">BPC-157</text>
-          <text x="50" y="134" text-anchor="middle" font-family="Consolas,monospace" font-size="6.5" fill="#B3B2B2">5 MG &#183; &#8805;99%</text>
-          <line x1="20" y1="146" x2="80" y2="146" stroke="#8A9A6B" stroke-width="1"/>
-          <text x="50" y="162" text-anchor="middle" font-family="Consolas,monospace" font-size="5.4" fill="#8A9A6B">STEADFAST RESEARCH GROUP</text>
-          <text x="50" y="184" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#8A8A8A">RESEARCH USE ONLY</text>
-          <text x="50" y="194" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#8A8A8A">NOT FOR HUMAN CONSUMPTION</text>
-          <text x="50" y="256" text-anchor="middle" font-family="Consolas,monospace" font-size="9" fill="#5C5C5C">CARBON</text>
+    <div class="lcard wide"><span class="lab">On the vial</span>
+      <svg viewBox="0 0 460 268" style="width:100%;max-width:460px;display:block;margin:0 auto">
+        <g transform="translate(70,6)">
+          <rect x="10" y="0" width="80" height="20" rx="6" fill="#1A1A1A"/>
+          <rect x="14" y="20" width="72" height="10" fill="#9C9C9C"/>
+          <rect x="24" y="30" width="52" height="12" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.25)"/>
+          <path d="M12 42 L88 42 L94 58 L94 240 Q94 248 86 248 L14 248 Q6 248 6 240 L6 58 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+          <rect x="6" y="74" width="88" height="152" fill="#141414" stroke="#333"/>
+          <g transform="translate(38,80) scale(0.26)" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
+          <text x="50" y="122" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">Steadfast</text>
+          <line x1="24" y1="128" x2="76" y2="128" stroke="#FFFFFF" stroke-width=".7"/>
+          <text x="50" y="137" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.6" letter-spacing="2" fill="#FFFFFF">RESEARCH GROUP</text>
+          <text x="50" y="156" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="13.5" letter-spacing=".5" fill="#FFFFFF">PEPTIDE</text>
+          <rect x="34" y="162" width="32" height="11" fill="#FFFFFF"/>
+          <text x="50" y="170.5" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="7.5" fill="#141414">5 MG</text>
+          <text x="50" y="188" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">LYOPHILIZED POWDER</text>
+          <text x="50" y="197" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">FOR RESEARCH USE ONLY</text>
+          <text x="50" y="206" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">NOT FOR HUMAN CONSUMPTION</text>
+          <line x1="24" y1="214" x2="76" y2="214" stroke="#FFFFFF" stroke-width=".6"/>
+          <text x="50" y="264" text-anchor="middle" font-family="Consolas,monospace" font-size="9" fill="#5C5C5C">BLACK</text>
         </g>
-        <g transform="translate(280,10)">
-          <rect x="14" y="0" width="72" height="16" rx="5" fill="#8A9A6B"/>
-          <rect x="18" y="16" width="64" height="8" fill="#6F7D54"/>
-          <rect x="26" y="24" width="48" height="12" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.25)"/>
-          <path d="M14 36 L86 36 L92 52 L92 232 Q92 240 84 240 L16 240 Q8 240 8 232 L8 52 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-          <rect x="8" y="88" width="84" height="118" fill="#F4F1E8" stroke="#D8D3C4"/>
-          <text x="50" y="118" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="15" fill="#23271F">BPC-157</text>
-          <text x="50" y="134" text-anchor="middle" font-family="Consolas,monospace" font-size="6.5" fill="#5C6152">5 MG &#183; &#8805;99%</text>
-          <line x1="20" y1="146" x2="80" y2="146" stroke="#6E7A50" stroke-width="1"/>
-          <text x="50" y="162" text-anchor="middle" font-family="Consolas,monospace" font-size="5.4" fill="#6E7A50">STEADFAST RESEARCH GROUP</text>
-          <text x="50" y="184" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#5C6152">RESEARCH USE ONLY</text>
-          <text x="50" y="194" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#5C6152">NOT FOR HUMAN CONSUMPTION</text>
-          <text x="50" y="256" text-anchor="middle" font-family="Consolas,monospace" font-size="9" fill="#5C5C5C">FIELD</text>
-        </g>
-        <g transform="translate(500,10)">
-          <rect x="14" y="0" width="72" height="16" rx="5" fill="#8A9A6B"/>
-          <rect x="18" y="16" width="64" height="8" fill="#6F7D54"/>
-          <rect x="26" y="24" width="48" height="12" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.25)"/>
-          <path d="M14 36 L86 36 L92 52 L92 232 Q92 240 84 240 L16 240 Q8 240 8 232 L8 52 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
-          <rect x="8" y="88" width="84" height="118" fill="#454E33" stroke="#38402A"/>
-          <text x="50" y="118" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="15" fill="#F4F1E8">BPC-157</text>
-          <text x="50" y="134" text-anchor="middle" font-family="Consolas,monospace" font-size="6.5" fill="#C9D3A8">5 MG &#183; &#8805;99%</text>
-          <line x1="20" y1="146" x2="80" y2="146" stroke="#C9D3A8" stroke-width="1"/>
-          <text x="50" y="162" text-anchor="middle" font-family="Consolas,monospace" font-size="5.4" fill="#C9D3A8">STEADFAST RESEARCH GROUP</text>
-          <text x="50" y="184" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#B9BFA6">RESEARCH USE ONLY</text>
-          <text x="50" y="194" text-anchor="middle" font-family="Consolas,monospace" font-size="4.6" fill="#B9BFA6">NOT FOR HUMAN CONSUMPTION</text>
-          <text x="50" y="256" text-anchor="middle" font-family="Consolas,monospace" font-size="9" fill="#5C5C5C">OLIVE</text>
+        <g transform="translate(290,6)">
+          <rect x="10" y="0" width="80" height="20" rx="6" fill="#77815F"/>
+          <rect x="14" y="20" width="72" height="10" fill="#9C9C9C"/>
+          <rect x="24" y="30" width="52" height="12" fill="rgba(255,255,255,.10)" stroke="rgba(255,255,255,.25)"/>
+          <path d="M12 42 L88 42 L94 58 L94 240 Q94 248 86 248 L14 248 Q6 248 6 240 L6 58 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
+          <rect x="6" y="74" width="88" height="152" fill="#869274" stroke="#6F7A5C"/>
+          <g transform="translate(38,80) scale(0.26)" fill="none" stroke="#FFFFFF" stroke-width="4" stroke-linejoin="miter"><path d="M34 7 L59 93"/><path d="M35 10 L63 14 L67 33 L41 29 Z"/><path d="M66 16 L91 19 L82 29 L93 42 L68 36"/></g>
+          <text x="50" y="122" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">Steadfast</text>
+          <line x1="24" y1="128" x2="76" y2="128" stroke="#FFFFFF" stroke-width=".7"/>
+          <text x="50" y="137" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.6" letter-spacing="2" fill="#FFFFFF">RESEARCH GROUP</text>
+          <text x="50" y="156" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="13.5" letter-spacing=".5" fill="#FFFFFF">PEPTIDE</text>
+          <rect x="34" y="162" width="32" height="11" fill="#FFFFFF"/>
+          <text x="50" y="170.5" text-anchor="middle" font-family="Manrope,sans-serif" font-weight="800" font-size="7.5" fill="#66704E">5 MG</text>
+          <text x="50" y="188" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">LYOPHILIZED POWDER</text>
+          <text x="50" y="197" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">FOR RESEARCH USE ONLY</text>
+          <text x="50" y="206" text-anchor="middle" font-family="Manrope,sans-serif" font-size="4.8" fill="#FFFFFF">NOT FOR HUMAN CONSUMPTION</text>
+          <line x1="24" y1="214" x2="76" y2="214" stroke="#FFFFFF" stroke-width=".6"/>
+          <text x="50" y="264" text-anchor="middle" font-family="Consolas,monospace" font-size="9" fill="#5C5C5C">SAGE</text>
         </g>
       </svg>
     </div>
-
     <div class="lcard wide"><span class="lab">Unit packaging</span>
       <table class="vspec">
         <tr><th>Piece</th><th>Size</th><th>Spec</th></tr>
