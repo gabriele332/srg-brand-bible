@@ -78,6 +78,10 @@
   .seal .ring{position:absolute;inset:0;width:100%;height:100%}
   .seal .sealflag{position:absolute;inset:0;margin:auto}
 
+  /* emphasis */
+  h1 i,h2 i,.lead i{font-style:italic;color:var(--olive)}
+  .lead i{font-weight:400}
+
   /* logo kit */
   .fmask{display:inline-block;-webkit-mask:var(--flag-ink) center/contain no-repeat;mask:var(--flag-ink) center/contain no-repeat}
   .lk{border:1px solid var(--line);border-radius:18px;padding:24px 26px;margin-top:18px;background:var(--bg-soft)}
@@ -100,6 +104,22 @@
   .lk.olv .lk-head b{color:#F4F1E8}
   .lk.olv .lk-tile{border-color:rgba(244,241,232,.18)}
   .lk.olv .lk-tile em,.lk.olv .lk-pal em{color:#C6CBB4}
+  .dlrows{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}
+  @media(max-width:1000px){.dlrows{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:560px){.dlrows{grid-template-columns:1fr}}
+  .dlrow{border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .dlrow .dl-label{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-1)}
+  .dlrow .fmts{display:flex;gap:6px}
+  .dlrow .fmt{font-family:var(--mono);font-size:9.5px;letter-spacing:.08em;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--white);text-decoration:none}
+  .dlrow .fmt:hover{background:rgba(255,255,255,.08)}
+  .lk.light .dlrow{border-color:rgba(35,39,31,.15)}
+  .lk.light .dlrow .dl-label{color:#5C6152}
+  .lk.light .dlrow .fmt{border-color:rgba(35,39,31,.28);color:#23271F}
+  .lk.light .dlrow .fmt:hover{background:rgba(35,39,31,.07)}
+  .lk.olv .dlrow{border-color:rgba(244,241,232,.18)}
+  .lk.olv .dlrow .dl-label{color:#C6CBB4}
+  .lk.olv .dlrow .fmt{border-color:rgba(244,241,232,.32);color:#F4F1E8}
+  .lk.olv .dlrow .fmt:hover{background:rgba(244,241,232,.1)}
 
   /* brand systems */
   .sys{margin-top:30px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--bg-soft)}
@@ -221,14 +241,14 @@
   <span class="tag" style="bottom:90px;left:40px">Research use only</span>
   <div class="m flag"></div>
   <div class="ey">Brand Bible &nbsp;&middot;&nbsp; 2026</div>
-  <h1>Steadfast by name.<br>Consistent by design.</h1>
-  <p>The working brand book for Steadfast Research Group - three brand systems all flying the same flag, plus the color, typography, voice, and label specs behind steadfastresearchgroup.com. One flag. Three ways to build a company around it.</p>
+  <h1>Steadfast by name.<br>Consistent by <i>design</i>.</h1>
+  <p>The working brand book for Steadfast Research Group - three brand systems all flying the same flag, plus the color, typography, voice, and label specs behind steadfastresearchgroup.com. <i style="color:var(--olive)">One flag.</i> Three ways to build a company around it.</p>
 </div></section>
 
 <!-- REFERENCE -->
 <section id="ref"><div class="wrap reveal">
   <div class="sh"><span class="n">00</span><span class="ey">The Reference</span></div>
-  <h2>Starting point: the flag.</h2>
+  <h2>Starting point: <i>the flag</i>.</h2>
   <p class="lead">This is the flag mark provided as the reference. Every option below is built from it - the flag stays, only the way it is used changes.</p>
   <div class="ref">
     <div class="m flag"></div>
@@ -239,8 +259,8 @@
 <!-- BRAND SYSTEMS -->
 <section id="systems"><div class="wrap reveal">
   <div class="sh"><span class="n">01</span><span class="ey">Brand Systems</span></div>
-  <h2>One flag. Three systems.</h2>
-  <p class="lead">Three complete brand systems - same flag, same typography, three different color worlds. Manrope Light headlines, Inter body, and mono data in every system; only the palette and attitude change. System 01 is what is live on the site today. Pick the system, keep the flag.</p>
+  <h2>One flag. <i>Three systems</i>.</h2>
+  <p class="lead">Three complete brand systems - <i>same flag, same typography</i>, three different color worlds. Manrope Light headlines, Inter body, and mono data in every system; only the palette and attitude change. System 01 is what is live on the site today. Pick the system, <i>keep the flag</i>.</p>
 
   <div class="sys">
     <div class="sys-head"><span class="num">System 01</span><h3>Carbon</h3><span class="kw">Technical &middot; Premium &middot; Live on site</span></div>
@@ -326,6 +346,12 @@
       <div class="lk-tile"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span class="flag" style="display:block;width:42px;height:37px;background-image:var(--flag-white)"></span><b class="lk-word" style="color:#FFFFFF;font-size:11.5px">STEADFAST</b><small class="lk-sub" style="color:#8A9A6B;margin-top:0">RESEARCH GROUP</small></div><em>Stacked</em></div>
     </div>
     <div class="lk-pal"><em>Icon in palette</em><span class="fmask" style="background:#FFFFFF"></span><span class="fmask" style="background:#B3B2B2"></span><span class="fmask" style="background:#8A8A8A"></span><span class="fmask" style="background:#8A9A6B"></span></div>
+    <div class="dlrows">
+      <div class="dlrow"><span class="dl-label">Icon</span><span class="fmts"><a class="fmt" href="assets/logos/srg-carbon-icon.png" download>PNG</a><a class="fmt" href="assets/logos/srg-carbon-icon.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Wordmark</span><span class="fmts"><a class="fmt" href="assets/logos/srg-carbon-wordmark.png" download>PNG</a><a class="fmt" href="assets/logos/srg-carbon-wordmark.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Horizontal</span><span class="fmts"><a class="fmt" href="assets/logos/srg-carbon-lockup-horizontal.png" download>PNG</a><a class="fmt" href="assets/logos/srg-carbon-lockup-horizontal.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Stacked</span><span class="fmts"><a class="fmt" href="assets/logos/srg-carbon-lockup-stacked.png" download>PNG</a><a class="fmt" href="assets/logos/srg-carbon-lockup-stacked.svg" download>SVG</a></span></div>
+    </div>
   </div>
 
   <div class="lk light">
@@ -337,6 +363,12 @@
       <div class="lk-tile"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span class="flag" style="display:block;width:42px;height:37px;background-image:var(--flag-sage)"></span><b class="lk-word" style="color:#23271F;font-size:11.5px">STEADFAST</b><small class="lk-sub" style="color:#6E7A50;margin-top:0">RESEARCH GROUP</small></div><em>Stacked</em></div>
     </div>
     <div class="lk-pal"><em>Icon in palette</em><span class="fmask" style="background:#6E7A50"></span><span class="fmask" style="background:#454E33"></span><span class="fmask" style="background:#A7AB9E"></span><span class="fmask" style="background:#23271F"></span></div>
+    <div class="dlrows">
+      <div class="dlrow"><span class="dl-label">Icon</span><span class="fmts"><a class="fmt" href="assets/logos/srg-field-icon.png" download>PNG</a><a class="fmt" href="assets/logos/srg-field-icon.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Wordmark</span><span class="fmts"><a class="fmt" href="assets/logos/srg-field-wordmark.png" download>PNG</a><a class="fmt" href="assets/logos/srg-field-wordmark.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Horizontal</span><span class="fmts"><a class="fmt" href="assets/logos/srg-field-lockup-horizontal.png" download>PNG</a><a class="fmt" href="assets/logos/srg-field-lockup-horizontal.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Stacked</span><span class="fmts"><a class="fmt" href="assets/logos/srg-field-lockup-stacked.png" download>PNG</a><a class="fmt" href="assets/logos/srg-field-lockup-stacked.svg" download>SVG</a></span></div>
+    </div>
   </div>
 
   <div class="lk olv">
@@ -348,6 +380,12 @@
       <div class="lk-tile"><div style="display:flex;flex-direction:column;align-items:center;gap:6px"><span class="flag" style="display:block;width:42px;height:37px;background-image:var(--flag-white)"></span><b class="lk-word" style="color:#F4F1E8;font-size:11.5px">STEADFAST</b><small class="lk-sub" style="color:#C9D3A8;margin-top:0">RESEARCH GROUP</small></div><em>Stacked</em></div>
     </div>
     <div class="lk-pal"><em>Icon in palette</em><span class="fmask" style="background:#F4F1E8"></span><span class="fmask" style="background:#C9D3A8"></span><span class="fmask" style="background:#FFFFFF"></span><span class="fmask" style="background:#23271F"></span></div>
+    <div class="dlrows">
+      <div class="dlrow"><span class="dl-label">Icon</span><span class="fmts"><a class="fmt" href="assets/logos/srg-olive-icon.png" download>PNG</a><a class="fmt" href="assets/logos/srg-olive-icon.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Wordmark</span><span class="fmts"><a class="fmt" href="assets/logos/srg-olive-wordmark.png" download>PNG</a><a class="fmt" href="assets/logos/srg-olive-wordmark.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Horizontal</span><span class="fmts"><a class="fmt" href="assets/logos/srg-olive-lockup-horizontal.png" download>PNG</a><a class="fmt" href="assets/logos/srg-olive-lockup-horizontal.svg" download>SVG</a></span></div>
+      <div class="dlrow"><span class="dl-label">Stacked</span><span class="fmts"><a class="fmt" href="assets/logos/srg-olive-lockup-stacked.png" download>PNG</a><a class="fmt" href="assets/logos/srg-olive-lockup-stacked.svg" download>SVG</a></span></div>
+    </div>
   </div>
 
   <div class="dl">
@@ -360,7 +398,7 @@
 <!-- COLOR -->
 <section id="color"><div class="wrap reveal">
   <div class="sh"><span class="n">02</span><span class="ey">Color</span></div>
-  <h2>Carbon, white, and olive.</h2>
+  <h2>Carbon, white, and <i>olive</i>.</h2>
   <p class="lead">Pulled straight from steadfastresearchgroup.com: near-black surfaces, white type, quiet grays, and one olive accent - the color of the vial cap.</p>
   <div class="sws">
     <div class="sw"><i style="background:#0D0D0D"></i><div class="nm">Carbon</div><div class="hx">#0D0D0D</div></div>
@@ -375,7 +413,7 @@
 <!-- TYPOGRAPHY -->
 <section id="type"><div class="wrap reveal">
   <div class="sh"><span class="n">03</span><span class="ey">Typography</span></div>
-  <h2>Light headlines, quiet data.</h2>
+  <h2>Light headlines, <i>quiet data</i>.</h2>
   <p class="lead">The same stack as the site: Manrope Light for headlines, Inter for body copy, and monospace for data, eyebrows, and compliance lines.</p>
   <div class="type">
     <div class="trow"><span class="lab">Display &middot; Manrope 300 &middot; tight tracking</span><span class="t-display">Every batch, documented and consistent.</span></div>
@@ -387,7 +425,7 @@
 <!-- THE STANDARD -->
 <section id="standard"><div class="wrap reveal">
   <div class="sh"><span class="n">04</span><span class="ey">The Standard</span></div>
-  <h2>What the brand promises.</h2>
+  <h2>What the brand <i>promises</i>.</h2>
   <p class="lead">Three pillars, straight from the site. Every piece of brand material should reinforce at least one of them.</p>
   <div class="pillars">
     <div class="pillar"><div class="ic flag"></div><h3>Quality Without Compromise</h3>
@@ -402,7 +440,7 @@
 <!-- APPLICATIONS -->
 <section id="apps"><div class="wrap reveal">
   <div class="sh"><span class="n">05</span><span class="ey">Applications</span></div>
-  <h2>How it shows up.</h2>
+  <h2>How it <i>shows up</i>.</h2>
   <p class="lead">The system in use - product cards, buttons, and the compliance line that never leaves the page.</p>
   <div class="apps">
     <div class="appcard"><span class="lab">Product card</span>
@@ -424,7 +462,7 @@
 <!-- LABELS & PACKAGING -->
 <section id="labels"><div class="wrap reveal">
   <div class="sh"><span class="n">06</span><span class="ey">Labels &amp; Packaging</span></div>
-  <h2>The vial, measured.</h2>
+  <h2>The vial, <i>measured</i>.</h2>
   <p class="lead">Sizing and layout for peptide vial labels and unit packaging. Full print-ready details - dielines, safe zones, materials, and the artwork checklist - live in the guideline PDF below.</p>
   <div class="lgrid">
     <div class="lcard"><span class="lab">Vial formats &amp; label sizes &middot; for this design</span>
@@ -567,7 +605,7 @@
 <!-- VOICE -->
 <section id="voice"><div class="wrap reveal">
   <div class="sh"><span class="n">07</span><span class="ey">Voice</span></div>
-  <h2>Say less, prove more.</h2>
+  <h2>Say less, <i>prove more</i>.</h2>
   <p class="lead">Exact, calm, allergic to hype. State the method, state the number, stop. The compliance line is always present.</p>
   <div class="tl">
     <b>Steadfast by name. Consistent by design.<span>Site hero</span></b>
