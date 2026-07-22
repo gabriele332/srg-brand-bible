@@ -297,7 +297,7 @@
   .pal>div:hover i{transform:scale(1.08)}
   .sealcard:hover{transform:translateY(-4px)}
   .sealcard img{transition:transform .7s cubic-bezier(.2,.8,.2,1)}
-  .sealcard:hover img{transform:rotate(8deg) scale(1.04)}
+  .sealcard:hover img{transform:rotate(4deg) scale(1.02)}
   .ref .m{transition:transform .5s cubic-bezier(.2,.8,.2,1)}
   .ref:hover .m{transform:rotate(-4deg) scale(1.05)}
   .st-item{opacity:0;transform:translateY(16px)}
@@ -613,7 +613,6 @@
         <a class="pill solid" href="assets/srg-label-sage.png" download>PNG &middot; Sage</a>
         <a class="pill ghost" href="assets/srg-label-black.svg" download>SVG &middot; Black</a>
         <a class="pill ghost" href="assets/srg-label-sage.svg" download>SVG &middot; Sage</a>
-        <a class="pill ghost" href="assets/srg-labels-print.pdf" download>Print PDF &middot; both</a>
         <a class="pill solid" style="background:#4285F4;color:#FFFFFF" href="https://drive.google.com/drive/folders/1f_JbCH2aaAQFToD2Fi_KtrGGffhuZ8qK?usp=drive_link" target="_blank" rel="noopener">Print files &middot; Google Drive</a>
         <a class="pill ghost" href="srg-label-guidelines.pdf" download>Packaging guideline PDF</a>
       </div>
@@ -796,7 +795,7 @@
     document.querySelectorAll('.sealcard,.lk-tile,.lcard').forEach(function(el){
       el.classList.add('tilt');
       el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();
-        var rx=((e.clientY-r.top)/r.height-.5)*-7, ry=((e.clientX-r.left)/r.width-.5)*7;
+        var rx=((e.clientY-r.top)/r.height-.5)*-3.5, ry=((e.clientX-r.left)/r.width-.5)*3.5;
         el.style.transform='perspective(700px) rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg) translateY(-3px)';},{passive:true});
       el.addEventListener('mouseleave',function(){el.style.transform='';});
     });
