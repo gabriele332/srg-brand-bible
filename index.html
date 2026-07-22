@@ -22,10 +22,10 @@
   .flag{background-size:contain;background-repeat:no-repeat;background-position:center}
   .ey{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--olive)}
 
-  header.nav{position:sticky;top:0;z-index:50;overflow:visible;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  header.nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
   .nav-in{display:flex;align-items:center;gap:20px;height:60px;max-width:1120px;margin:0 auto;padding:0 34px}
-  .nav-in .bd{position:relative;display:flex;align-items:center;gap:11px;padding-left:58px;font-family:var(--display);font-weight:600;letter-spacing:.06em;text-decoration:none;cursor:pointer}
-  .nav-in .bd .m{position:absolute;left:0;top:15px;width:48px;height:54px;background-image:var(--flag-white);z-index:3;pointer-events:none}
+  .nav-in .bd{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;letter-spacing:.06em;text-decoration:none}
+  .nav-in .bd .m{width:30px;height:27px;background-image:var(--flag-white)}
   .nav-in .bd b{font-family:var(--display);font-weight:600;font-size:14px;letter-spacing:.22em;color:var(--white)}
   .nav-in .bd small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.34em;color:var(--gray-2);margin-top:2px}
   .nav-in nav{margin-left:auto;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none}
@@ -33,7 +33,7 @@
   .nav-in a{font-family:var(--body);font-weight:400;font-size:13px;color:var(--gray-1);text-decoration:none;padding:8px 12px;border-radius:999px;white-space:nowrap}
   .nav-in a:hover{color:var(--white);background:var(--bg-soft)}
 
-  .hero{position:relative;padding:130px 0 100px;overflow:hidden}
+  .hero{position:relative;padding:130px 0 100px;overflow:visible}
   .orbit{position:absolute;border:1px solid var(--line-soft);border-radius:50%;pointer-events:none}
   .orbit::before{content:"";position:absolute;top:-3.5px;left:50%;width:7px;height:7px;margin-left:-3.5px;border-radius:50%;background:var(--olive);box-shadow:0 0 14px rgba(138,154,107,.9)}
   .o1{width:720px;height:720px;top:-160px;left:50%;animation:orbitspin 42s linear infinite}
@@ -311,7 +311,7 @@
 
   /* ---- motion round 2 ---- */
   #heroglow{position:absolute;width:560px;height:560px;border-radius:50%;left:72%;top:28%;transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(138,154,107,.17),transparent 62%);pointer-events:none;z-index:0;transition:left .25s ease-out,top .25s ease-out}
+    background:radial-gradient(circle,rgba(138,154,107,.17),transparent 62%);pointer-events:none;z-index:0;transition:left .06s linear,top .06s linear}
   .tilt{will-change:transform;transform-style:preserve-3d}
   .ico svg *{stroke-dasharray:1 0;stroke-dashoffset:0}
   .ico:hover svg *{stroke-dasharray:1 1;animation:icodraw .9s ease forwards}
@@ -320,8 +320,6 @@
   .sw:hover{transform:translateY(-3px)}
   .sw:active i{transform:scale(.96)}
   .sw i{transition:transform .2s ease;display:block}
-  .nav-in .bd .m{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
-  .nav-in .bd:hover .m{transform:translateY(3px) rotate(-4deg)}
   @media(prefers-reduced-motion:reduce){#heroglow{display:none}.ico:hover svg *{animation:none}}
 </style>
 
