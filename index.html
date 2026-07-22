@@ -312,9 +312,6 @@
   /* ---- motion round 2 ---- */
   #heroglow{position:absolute;width:560px;height:560px;border-radius:50%;left:72%;top:28%;transform:translate(-50%,-50%);
     background:radial-gradient(circle,rgba(138,154,107,.17),transparent 62%);pointer-events:none;z-index:0;transition:left .25s ease-out,top .25s ease-out}
-  .ticker{overflow:hidden;border-top:1px solid var(--line);padding:13px 0;white-space:nowrap}
-  .ticker span{display:inline-block;padding-left:100%;animation:tick 30s linear infinite;font-family:var(--mono);font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:var(--gray-2)}
-  @keyframes tick{to{transform:translateX(-100%)}}
   .tilt{will-change:transform;transform-style:preserve-3d}
   .ico svg *{stroke-dasharray:1 0;stroke-dashoffset:0}
   .ico:hover svg *{stroke-dasharray:1 1;animation:icodraw .9s ease forwards}
@@ -325,7 +322,7 @@
   .sw i{transition:transform .2s ease;display:block}
   .nav-in .bd .m{transition:transform .4s cubic-bezier(.2,.8,.2,1)}
   .nav-in .bd:hover .m{transform:rotate(-8deg)}
-  @media(prefers-reduced-motion:reduce){.ticker span{animation:none;padding-left:0}#heroglow{display:none}.ico:hover svg *{animation:none}}
+  @media(prefers-reduced-motion:reduce){#heroglow{display:none}.ico:hover svg *{animation:none}}
 </style>
 
 <header class="nav"><div class="nav-in">
@@ -341,11 +338,11 @@
   <div class="ey">Brand Bible &nbsp;&middot;&nbsp; 2026</div>
   <h1>Steadfast by name.<br>Consistent by <i>design</i>.</h1>
   <p>The working brand book for Steadfast Research Group - the flag, the Grotesk wordmark, and the color, typography, voice, and label specs behind steadfastresearchgroup.com. <i style="color:var(--olive)">One flag. One standard.</i></p>
-</div><div class="ticker"><span>FOR RESEARCH USE ONLY &middot; NOT FOR HUMAN CONSUMPTION &middot; EVERY BATCH DOCUMENTED &middot; STEADFAST RESEARCH GROUP &middot; FOR RESEARCH USE ONLY &middot; NOT FOR HUMAN CONSUMPTION &middot; EVERY BATCH DOCUMENTED &middot; STEADFAST RESEARCH GROUP &middot;&nbsp;</span></div>
+</div>
 </section>
 
 <!-- REFERENCE -->
-<section id="ref"><div class="wrap reveal">
+<section id="ref" style="border-top:none"><div class="wrap reveal">
   <div class="sh"><span class="n">00</span><span class="ey">The Reference</span></div>
   <h2>Starting point: <i>the flag</i>.</h2>
   <p class="lead">This is the flag mark provided as the reference. Every option below is built from it - the flag stays, only the way it is used changes.</p>
