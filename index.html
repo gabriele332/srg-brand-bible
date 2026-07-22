@@ -255,22 +255,44 @@
   .reveal{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s ease}
   .reveal.in{opacity:1;transform:none}
   @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}}
+
+  /* logo system grid */
+  .lsgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin-top:34px}
+  .lst{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg-soft)}
+  .lst .st{min-height:215px;display:grid;place-items:center;padding:26px}
+  .lst .st img{max-width:84%;max-height:160px}
+  .lst .mt{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:11px 14px;border-top:1px solid var(--line)}
+  .lst .mt em{font-style:normal;font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2)}
+  .lst .mt .fmts{display:flex;gap:6px}
+  /* iconography */
+  .icogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:12px;margin-top:32px}
+  .ico{border:1px solid var(--line);border-radius:12px;min-height:104px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:14px;background:var(--bg-soft)}
+  .ico svg{width:30px;height:30px;stroke:var(--white);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+  .ico em{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-2);text-align:center}
+  /* email signature */
+  .sig-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:22px;margin-top:32px}
+  @media(max-width:880px){.sig-grid{grid-template-columns:1fr}}
+  .sig-form{border:1px solid var(--line);border-radius:14px;padding:24px;background:var(--bg-soft)}
+  .sig-form label{display:block;font-family:var(--mono);font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--gray-2);margin:14px 0 6px}
+  .sig-form label:first-of-type{margin-top:0}
+  .sig-form input{width:100%;background:transparent;border:1px solid var(--line);border-radius:8px;padding:10px 12px;color:var(--white);font-family:var(--body);font-size:14px;outline:none}
+  .sig-form input:focus{border-color:var(--olive)}
+  .sig-prev{border:1px solid var(--line);border-radius:14px;background:#FFFFFF;padding:28px;display:flex;align-items:center}
 </style>
 
 <header class="nav"><div class="nav-in">
   <div class="bd"><span class="m flag"></span><div><b>STEADFAST</b><small>RESEARCH GROUP &middot; BRAND BIBLE</small></div></div>
-  <nav><a href="#systems">Wordmark</a><a href="#color">Color</a><a href="#type">Type</a><a href="#standard">Standard</a><a href="#apps">Applications</a><a href="#labels">Labels</a><a href="#voice">Voice</a></nav>
+  <nav><a href="#systems">Logo</a><a href="#secondary">Seal</a><a href="#color">Color</a><a href="#type">Type</a><a href="#icons">Icons</a><a href="#standard">Standard</a><a href="#apps">Applications</a><a href="#labels">Labels</a><a href="#email">Email</a><a href="#voice">Voice</a></nav>
 </div></header>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs><image id="fw" width="100" height="90" preserveAspectRatio="xMidYMid meet" href="data:image/png;base64,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"/></defs></svg>
 
 <section class="hero" style="border:none"><div class="wrap">
   <span class="orbit o1"></span><span class="orbit o2"></span>
-  <span class="tag" style="top:120px;right:40px">Purity</span>
   <span class="tag" style="bottom:90px;left:40px">Research use only</span>
   <div class="m flag"></div>
   <div class="ey">Brand Bible &nbsp;&middot;&nbsp; 2026</div>
   <h1>Steadfast by name.<br>Consistent by <i>design</i>.</h1>
-  <p>The working brand book for Steadfast Research Group - three brand systems all flying the same flag, plus the color, typography, voice, and label specs behind steadfastresearchgroup.com. <i style="color:var(--olive)">One flag.</i> Three ways to build a company around it.</p>
+  <p>The working brand book for Steadfast Research Group - the flag, the Grotesk wordmark, and the color, typography, voice, and label specs behind steadfastresearchgroup.com. <i style="color:var(--olive)">One flag. One standard.</i></p>
 </div></section>
 
 <!-- REFERENCE -->
@@ -280,32 +302,29 @@
   <p class="lead">This is the flag mark provided as the reference. Every option below is built from it - the flag stays, only the way it is used changes.</p>
   <div class="ref">
     <div class="m flag"></div>
-    <p><span class="tg">Reference mark</span>A flag you plant and hold: a standard, a claim, something steadfast. This exact mark is the logo in every system below - only the world around it changes.</p>
+    <p><span class="tg">Reference mark</span>A flag you plant and hold: a standard, a claim, something steadfast. This exact mark is the logo everywhere below - only the world around it changes.</p>
   </div>
 </div></section>
 
 <!-- BRAND SYSTEMS -->
 <section id="systems"><div class="wrap reveal">
-  <div class="sh"><span class="n">01</span><span class="ey">The Wordmark</span></div>
+  <div class="sh"><span class="n">01</span><span class="ey">Logo System</span></div>
   <h2>One flag. <i>One wordmark: Grotesk</i>.</h2>
-  <p class="lead">The flag is final and the wordmark is <b style="color:var(--olive)">Grotesk (Space Grotesk)</b> - modern, confident, with a touch of engineered character. Here it is in the three lockups: flag beside the name, flag stacked on top, and the wordmark on its own.</p>
+  <p class="lead">The flag is final and the wordmark is <b style="color:var(--olive)">Grotesk (Space Grotesk)</b>. The full system: every version of the logo - horizontal, stacked, wordmark, icon, and the seal - shown on dark, light, and green. Every tile downloads as outlined SVG and transparent PNG.</p>
 
-  <div class="sys">
-    <div class="sys-head"><span class="num">Final</span><h3>Grotesk</h3><span class="kw">Space Grotesk &middot; Modern &middot; Confident</span></div>
-    <p class="sys-lead">A contemporary grotesque with a bit of engineered character (Space Grotesk). This is the wordmark for the brand - shown here on carbon; it reverses in bone on the black and green labels too.</p>
-    <div class="sys-grid">
-      <div class="sys-stage" style="background:radial-gradient(130% 130% at 50% 0,#1B1B1B,#0D0D0D)">
-        <div class="arr look-grotesk">
-          <div class="cell"><div class="lh"><span class="flag"></span><div><b class="w-b">STEADFAST</b><small class="w-s">RESEARCH GROUP</small></div></div><span class="cap">Horizontal</span></div>
-          <div class="cell"><div class="lstk"><span class="flag"></span><div><b class="w-b">STEADFAST</b><small class="w-s">RESEARCH GROUP</small></div></div><span class="cap">Stacked</span></div>
-          <div class="cell"><div><b class="w-b">STEADFAST</b><small class="w-s">RESEARCH GROUP</small></div><span class="cap">Wordmark only</span></div>
-        </div>
-      </div>
-      <div class="sys-side">
-        <div class="spec2"><b style="font-family:'Space Grotesk',sans-serif;font-weight:500">Steadfast by name.</b>Space Grotesk wordmark - modern grotesque with subtle character. Palette flexible; shown on carbon.</div>
-        <div class="chip" style="background:#0D0D0D"><span class="bar" style="background:#8A9A6B"></span><div><b style="color:#FFFFFF">BPC-157</b><small style="color:#8A9A6B">5 MG &middot; &ge;99% &middot; Research use only</small></div></div>
-      </div>
-    </div>
+  <div class="lsgrid">
+    <div class="lst"><div class="st" style="background:radial-gradient(130% 130% at 50% 0,#1B1B1B,#0D0D0D)"><img src="assets/logos-grotesk/srg-grotesk-white-horizontal.png" alt="SRG horizontal white"></div><div class="mt"><em>Horizontal &middot; White</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-horizontal.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-horizontal.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#F4F1E8"><img src="assets/logos-grotesk/srg-grotesk-black-horizontal.png" alt="SRG horizontal black"></div><div class="mt"><em>Horizontal &middot; Black</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-horizontal.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-horizontal.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#869274"><img src="assets/logos-grotesk/srg-grotesk-white-stacked.png" alt="SRG stacked white"></div><div class="mt"><em>Stacked &middot; White</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-stacked.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-stacked.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#FFFFFF"><img src="assets/logos-grotesk/srg-grotesk-black-stacked.png" alt="SRG stacked black"></div><div class="mt"><em>Stacked &middot; Black</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-stacked.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-stacked.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:radial-gradient(130% 130% at 50% 0,#1B1B1B,#0D0D0D)"><img src="assets/logos-grotesk/srg-grotesk-white-wordmark.png" alt="SRG wordmark white"></div><div class="mt"><em>Wordmark &middot; White</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-wordmark.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-wordmark.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#F4F1E8"><img src="assets/logos-grotesk/srg-grotesk-green-wordmark.png" alt="SRG wordmark green"></div><div class="mt"><em>Wordmark &middot; Green</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-green-wordmark.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-green-wordmark.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:radial-gradient(130% 130% at 50% 0,#1B1B1B,#0D0D0D)"><img src="assets/logos-grotesk/srg-grotesk-white-icon.png" alt="SRG icon white"></div><div class="mt"><em>Icon &middot; White</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-icon.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-icon.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#F4F1E8"><img src="assets/logos-grotesk/srg-grotesk-black-icon.png" alt="SRG icon black"></div><div class="mt"><em>Icon &middot; Black</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-icon.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-icon.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#FFFFFF"><img src="assets/logos-grotesk/srg-grotesk-green-icon.png" alt="SRG icon green"></div><div class="mt"><em>Icon &middot; Green</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-green-icon.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-green-icon.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:radial-gradient(130% 130% at 50% 0,#1B1B1B,#0D0D0D)"><img src="assets/logos-grotesk/srg-grotesk-white-seal.png" alt="SRG seal white"></div><div class="mt"><em>Seal &middot; White</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-seal.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-seal.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#F4F1E8"><img src="assets/logos-grotesk/srg-grotesk-black-seal.png" alt="SRG seal black"></div><div class="mt"><em>Seal &middot; Black</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-seal.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-black-seal.svg" download>SVG</a></span></div></div>
+    <div class="lst"><div class="st" style="background:#869274"><img src="assets/logos-grotesk/srg-grotesk-white-seal.png" alt="SRG seal white"></div><div class="mt"><em>Seal &middot; White on green</em><span class="fmts"><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-seal.png" download>PNG</a><a class="fmt" href="assets/logos-grotesk/srg-grotesk-white-seal.svg" download>SVG</a></span></div></div>
   </div>
 
   <div class="sh" style="margin-top:52px"><span class="ey">Logo Kit &middot; Grotesk &middot; Downloads</span></div>
@@ -420,6 +439,27 @@
 </div></section>
 
 <!-- THE STANDARD -->
+<!-- ICONOGRAPHY -->
+<section id="icons"><div class="wrap reveal">
+  <div class="sh"><span class="n">03b</span><span class="ey">Iconography</span></div>
+  <h2>Small marks, <i>same hand</i>.</h2>
+  <p class="lead">A working icon set drawn in one weight - thin rounded strokes, the same engineered calm as the wordmark. For the site, packaging backs, inserts, and documents. White or olive on dark; ink on light.</p>
+  <div class="icogrid">
+    <div class="ico"><svg viewBox="0 0 24 24"><rect x="8" y="3" width="8" height="3" rx="1"/><path d="M9 6v12a3 3 0 0 0 6 0V6"/><path d="M9 13h6"/></svg><em>Vial</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M10 3h4"/><path d="M11 3v5L6.5 17a2.4 2.4 0 0 0 2.2 3.4h6.6a2.4 2.4 0 0 0 2.2-3.4L13 8V3"/><path d="M8.5 14h7"/></svg><em>Flask</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 4c3 4 5.5 6.8 5.5 9.6a5.5 5.5 0 1 1-11 0C6.5 10.8 9 8 12 4Z"/></svg><em>Droplet</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v18"/><path d="M5 7.5l14 9"/><path d="M19 7.5l-14 9"/></svg><em>Cold chain</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3Z"/><path d="M9 11.5l2.2 2.2 4.3-4.2"/></svg><em>Verified</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M7 3h7l4 4v14H7V3Z"/><path d="M14 3v4h4"/><path d="M10 12h5M10 16h5"/></svg><em>COA</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6"/><rect x="14" y="4" width="6" height="6"/><rect x="4" y="14" width="6" height="6"/><path d="M14 14h3v3M20 14v6h-6"/></svg><em>Batch QR</em></div>
+    <div class="ico"><svg viewBox="0 0 24 24"><path d="M8 21L9.3 4"/><path d="M9.3 4l9 1.5-2.2 2.8 2.8 2.9-9.9 1.6"/></svg><em>Flag</em></div>
+  </div>
+  <div class="dl" style="margin-top:26px">
+    <a class="pill solid" href="assets/srg-icons.svg" download>Download icon set (.svg)</a>
+    <span style="font-size:13px;color:var(--gray-3)">All eight icons on one SVG sheet, stroke outlines.</span>
+  </div>
+</div></section>
+
 <section id="standard"><div class="wrap reveal">
   <div class="sh"><span class="n">04</span><span class="ey">The Standard</span></div>
   <h2>What the brand <i>promises</i>.</h2>
@@ -480,7 +520,7 @@
       <table class="vspec">
         <tr><th>#</th><th>Element</th><th>Spec at 3 mL scale</th></tr>
         <tr><td>1</td><td>Flag mark</td><td>White outline, &asymp;8 mm tall</td></tr>
-        <tr><td>2</td><td>Steadfast</td><td>Space Grotesk SemiBold, mixed case, &asymp;4.2 mm cap height</td></tr>
+        <tr><td>2</td><td>Steadfast</td><td>Space Grotesk Bold, caps, &asymp;3.6 mm cap height</td></tr>
         <tr><td>3</td><td>Rule</td><td>0.4 pt, &asymp;80% of panel width</td></tr>
         <tr><td>4</td><td>RESEARCH GROUP</td><td>Caps, +0.35em tracking, &asymp;1.6 mm</td></tr>
         <tr><td>5</td><td>Product name</td><td>Space Grotesk Bold caps (PEPTIDE = placeholder), &asymp;4.8 mm</td></tr>
@@ -498,7 +538,7 @@
           <svg viewBox="0 0 360 430" style="width:100%;display:block;border-radius:10px">
             <rect x="0" y="0" width="360" height="430" rx="10" fill="#141414"/>
             <use href="#fw" x="130" y="24"/>
-            <text x="180" y="162" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">Steadfast</text>
+            <text x="180" y="162" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="33" letter-spacing="1" fill="#FFFFFF">STEADFAST</text>
             <line x1="84" y1="180" x2="276" y2="180" stroke="#FFFFFF" stroke-width="1.3"/>
             <text x="183" y="203" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="500" font-size="14" letter-spacing="6" fill="#FFFFFF">RESEARCH GROUP</text>
             <text x="181" y="262" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="800" font-size="45" letter-spacing="2" fill="#FFFFFF">PEPTIDE</text>
@@ -515,7 +555,7 @@
           <svg viewBox="0 0 360 430" style="width:100%;display:block;border-radius:10px">
             <rect x="0" y="0" width="360" height="430" rx="10" fill="#869274"/>
             <use href="#fw" x="130" y="24"/>
-            <text x="180" y="162" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="40" fill="#FFFFFF">Steadfast</text>
+            <text x="180" y="162" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="33" letter-spacing="1" fill="#FFFFFF">STEADFAST</text>
             <line x1="84" y1="180" x2="276" y2="180" stroke="#FFFFFF" stroke-width="1.3"/>
             <text x="183" y="203" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="500" font-size="14" letter-spacing="6" fill="#FFFFFF">RESEARCH GROUP</text>
             <text x="181" y="262" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="800" font-size="45" letter-spacing="2" fill="#FFFFFF">PEPTIDE</text>
@@ -547,7 +587,7 @@
       <symbol id="p3ml" viewBox="0 0 254 300">
         <rect x="0" y="0" width="254" height="300" fill="#141414"/>
         <use href="#fw" transform="translate(93,16) scale(0.66)"/>
-        <text x="127" y="112" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="44" fill="#FFFFFF">Steadfast</text>
+        <text x="127" y="112" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="36" letter-spacing="1" fill="#FFFFFF">STEADFAST</text>
         <line x1="46" y1="126" x2="208" y2="126" stroke="#FFFFFF" stroke-width="1.4"/>
         <text x="128" y="146" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="500" font-size="14.5" letter-spacing="4" fill="#FFFFFF">RESEARCH GROUP</text>
         <text x="127" y="192" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="800" font-size="30" fill="#FFFFFF" textLength="216" lengthAdjust="spacingAndGlyphs">SEMAGLUTIDE</text>
@@ -588,7 +628,7 @@
           <path d="M12 42 L88 42 L94 58 L94 240 Q94 248 86 248 L14 248 Q6 248 6 240 L6 58 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
           <rect x="6" y="74" width="88" height="152" fill="#141414" stroke="#333"/>
           <use href="#fw" transform="translate(36,78) scale(0.28)"/>
-          <text x="50" y="122" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">Steadfast</text>
+          <text x="50" y="122" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="11" letter-spacing=".3" fill="#FFFFFF">STEADFAST</text>
           <line x1="24" y1="128" x2="76" y2="128" stroke="#FFFFFF" stroke-width=".7"/>
           <text x="50" y="137" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="4.6" letter-spacing="2" fill="#FFFFFF">RESEARCH GROUP</text>
           <text x="50" y="156" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="800" font-size="13.5" letter-spacing=".5" fill="#FFFFFF">PEPTIDE</text>
@@ -607,7 +647,7 @@
           <path d="M12 42 L88 42 L94 58 L94 240 Q94 248 86 248 L14 248 Q6 248 6 240 L6 58 Z" fill="rgba(255,255,255,.06)" stroke="rgba(255,255,255,.28)" stroke-width="1.5"/>
           <rect x="6" y="74" width="88" height="152" fill="#869274" stroke="#6F7A5C"/>
           <use href="#fw" transform="translate(36,78) scale(0.28)"/>
-          <text x="50" y="122" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="600" font-size="13" fill="#FFFFFF">Steadfast</text>
+          <text x="50" y="122" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="700" font-size="11" letter-spacing=".3" fill="#FFFFFF">STEADFAST</text>
           <line x1="24" y1="128" x2="76" y2="128" stroke="#FFFFFF" stroke-width=".7"/>
           <text x="50" y="137" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-size="4.6" letter-spacing="2" fill="#FFFFFF">RESEARCH GROUP</text>
           <text x="50" y="156" text-anchor="middle" font-family="'Space Grotesk',sans-serif" font-weight="800" font-size="13.5" letter-spacing=".5" fill="#FFFFFF">PEPTIDE</text>
@@ -637,6 +677,27 @@
 </div></section>
 
 <!-- VOICE -->
+<!-- EMAIL SIGNATURE -->
+<section id="email"><div class="wrap reveal">
+  <div class="sh"><span class="n">06b</span><span class="ey">Email Signature</span></div>
+  <h2>Sign off <i>steadfast</i>.</h2>
+  <p class="lead">The standard company signature: flag, name, role, and contacts - nothing else. Fill in the fields and copy; it pastes straight into Gmail or Outlook. Email clients fall back to Arial where Space Grotesk is unavailable.</p>
+  <div class="sig-grid">
+    <div class="sig-form">
+      <label for="sg-name">Name</label><input id="sg-name" value="Full Name">
+      <label for="sg-role">Role</label><input id="sg-role" value="Co-Founder">
+      <label for="sg-email">Email</label><input id="sg-email" value="hello@steadfastresearchgroup.com">
+      <label for="sg-phone">Phone (optional)</label><input id="sg-phone" value="">
+      <div class="btnrow" style="margin-top:20px">
+        <a class="pill solid" href="#" onclick="return sgCopyRich()">Copy signature</a>
+        <a class="pill ghost" href="#" onclick="return sgCopyHtml()">Copy HTML</a>
+      </div>
+      <p id="sg-done" style="font-family:var(--mono);font-size:11px;letter-spacing:.1em;color:var(--olive);margin:12px 0 0;min-height:16px"></p>
+    </div>
+    <div class="sig-prev"><div id="sg-prev" style="width:100%"></div></div>
+  </div>
+</div></section>
+
 <section id="voice"><div class="wrap reveal">
   <div class="sh"><span class="n">07</span><span class="ey">Voice</span></div>
   <h2>Say less, <i>prove more</i>.</h2>
@@ -658,4 +719,26 @@
 <script>
   var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.08});
   document.querySelectorAll('.reveal').forEach(function(el){io.observe(el);});
+</script>
+
+<script>
+  function sgV(id){return (document.getElementById(id).value||'').trim()}
+  function sgHtml(){
+    var n=sgV('sg-name'),r=sgV('sg-role'),e=sgV('sg-email'),p=sgV('sg-phone');
+    var phone=p?'<span style="color:#5C6152">'+p+'</span><span style="color:#B3B2B2"> &nbsp;&middot;&nbsp; </span>':'';
+    return '<table cellpadding="0" cellspacing="0" border="0" style="font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#0D0D0D"><tr>'
+      +'<td style="padding-right:16px;vertical-align:top"><img src="https://srgbrandbible.netlify.app/assets/logos-grotesk/srg-grotesk-black-icon.png" width="46" height="42" alt="SRG" style="display:block"></td>'
+      +'<td style="border-left:2px solid #869274;padding-left:16px">'
+      +'<div style="font-weight:bold;font-size:14px;letter-spacing:.4px">'+n+'</div>'
+      +'<div style="color:#5C6152">'+r+' &nbsp;&middot;&nbsp; Steadfast Research Group</div>'
+      +'<div style="margin-top:6px">'+phone+'<a href="mailto:'+e+'" style="color:#0D0D0D;text-decoration:none">'+e+'</a></div>'
+      +'<div><a href="https://steadfastresearchgroup.com" style="color:#869274;text-decoration:none;font-weight:bold">steadfastresearchgroup.com</a></div>'
+      +'</td></tr></table>';
+  }
+  function sgRender(){var el=document.getElementById('sg-prev');if(el)el.innerHTML=sgHtml();}
+  ['sg-name','sg-role','sg-email','sg-phone'].forEach(function(id){var el=document.getElementById(id);if(el)el.addEventListener('input',sgRender)});
+  sgRender();
+  function sgMsg(t){var m=document.getElementById('sg-done');m.textContent=t;setTimeout(function(){m.textContent=''},2600)}
+  function sgCopyRich(){var el=document.getElementById('sg-prev');var r=document.createRange();r.selectNodeContents(el);var s=getSelection();s.removeAllRanges();s.addRange(r);try{document.execCommand('copy');sgMsg('COPIED - PASTE INTO YOUR EMAIL CLIENT')}catch(e){sgMsg('SELECT THE PREVIEW AND COPY MANUALLY')}s.removeAllRanges();return false}
+  function sgCopyHtml(){navigator.clipboard.writeText(sgHtml()).then(function(){sgMsg('HTML COPIED')});return false}
 </script>
