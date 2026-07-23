@@ -312,8 +312,9 @@
   @media(prefers-reduced-motion:reduce){.hero .m,.sealcard img{animation:none;transition:none}.st-item{opacity:1;transform:none}}
 
   /* ---- motion round 2 ---- */
-  #heroglow{position:absolute;width:560px;height:560px;border-radius:50%;left:72%;top:28%;transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(138,154,107,.17),transparent 62%);pointer-events:none;z-index:0;transition:left .06s linear,top .06s linear}
+  #heroglow,#refglow{position:absolute;width:560px;height:560px;border-radius:50%;left:72%;top:28%;transform:translate(-50%,-50%);
+    background:radial-gradient(circle,rgba(138,154,107,.17),transparent 62%);pointer-events:none;z-index:0;transition:left .06s linear,top .06s linear,opacity .5s ease}
+  #refglow{opacity:0}
   .tilt{will-change:transform;transform-style:preserve-3d}
   .ico svg *{stroke-dasharray:1 0;stroke-dashoffset:0}
   .ico:hover svg *{stroke-dasharray:1 1;animation:icodraw .9s ease forwards}
@@ -322,7 +323,7 @@
   .sw:hover{transform:translateY(-3px)}
   .sw:active i{transform:scale(.96)}
   .sw i{transition:transform .2s ease;display:block}
-  @media(prefers-reduced-motion:reduce){#heroglow{display:none}.ico:hover svg *{animation:none}}
+  @media(prefers-reduced-motion:reduce){#heroglow,#refglow{display:none}.ico:hover svg *{animation:none}}
 </style>
 
 <header class="nav"><div class="nav-in">
@@ -342,7 +343,7 @@
 </section>
 
 <!-- REFERENCE -->
-<section id="ref" style="border-top:none"><div class="wrap reveal">
+<section id="ref" style="border-top:none;position:relative;overflow:hidden"><div id="refglow"></div><div class="wrap reveal" style="position:relative;z-index:1">
   <div class="sh"><span class="n">00</span><span class="ey">The Reference</span></div>
   <h2>Starting point: <i>the flag</i>.</h2>
   <p class="lead">This is the flag mark provided as the reference. Every option below is built from it - the flag stays, only the way it is used changes.</p>
@@ -838,9 +839,11 @@
 
 <script>
   (function(){
-    var hero=document.querySelector('.hero'),glow=document.getElementById('heroglow');
-    if(hero&&glow){hero.addEventListener('mousemove',function(e){var r=hero.getBoundingClientRect();
-      glow.style.left=((e.clientX-r.left)/r.width*100)+'%';glow.style.top=((e.clientY-r.top)/r.height*100)+'%';},{passive:true});}
+    var glowPairs=[[document.querySelector('.hero'),document.getElementById('heroglow')],[document.getElementById('ref'),document.getElementById('refglow')]];
+    glowPairs.forEach(function(pair){var sec=pair[0],glow=pair[1];if(!sec||!glow)return;
+      sec.addEventListener('mousemove',function(e){var r=sec.getBoundingClientRect();
+        glow.style.left=((e.clientX-r.left)/r.width*100)+'%';glow.style.top=((e.clientY-r.top)/r.height*100)+'%';
+        glowPairs.forEach(function(p){if(p[1])p[1].style.opacity=(p[1]===glow)?'1':'0';});},{passive:true});});
     // 3D tilt
     document.querySelectorAll('.sealcard,.lk-tile,.lcard').forEach(function(el){
       el.classList.add('tilt');
