@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="robots" content="noindex,nofollow" />
+<title>SRG — Static Ad Pack 01 | Purple Cow</title>
+<link rel="icon" type="image/png" href="assets/favicon.png" />
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="creative.css" />
+<style>
+  :root{
+    --bg:#0D0D0D;--bg-soft:#151515;--bg-card:#121212;
+    --white:#fff;--g1:#B3B2B2;--g2:#8A8A8A;--g3:#5C5C5C;
+    --olive:#8A9A6B;
+    --line:rgba(255,255,255,.12);--line-soft:rgba(255,255,255,.07);
+    --display:"Space Grotesk",sans-serif;--body:"Inter",system-ui,sans-serif;--mono:"Space Mono",ui-monospace,monospace;
+    --warn:#D8A657;--ok:#8A9A6B;--stop:#C97B6E;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--g1);font-family:var(--body);font-weight:300;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 28px}
+  a{color:var(--olive)}
+  code{font-family:var(--mono);color:var(--olive);font-size:.92em}
+  .ey{font-family:var(--mono);font-size:10.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--olive)}
+  h1,h2,h3,h4{font-family:var(--display);color:var(--white);font-weight:300;letter-spacing:-.02em;margin:0}
+
+  .top{border-bottom:1px solid var(--line);padding:26px 0 24px;position:sticky;top:0;background:rgba(13,13,13,.93);backdrop-filter:blur(10px);z-index:40}
+  .top-in{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+  .bd{display:flex;align-items:center;gap:11px;text-decoration:none}
+  .bd img{width:26px;height:26px;object-fit:contain}
+  .bd b{font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.22em;color:var(--white);display:block}
+  .bd small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.32em;color:var(--g2);margin-top:2px}
+  .top nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
+  .top nav a{font-size:12.5px;color:var(--g1);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid transparent}
+  .top nav a:hover{border-color:var(--line);color:var(--white)}
+
+  .hero{padding:76px 0 54px;border-bottom:1px solid var(--line)}
+  .hero h1{font-size:clamp(36px,6vw,70px);line-height:1.02;margin:.18em 0 0}
+  .hero h1 i{font-style:normal;color:var(--olive)}
+  .hero .lede{max-width:660px;margin:26px 0 0;font-size:16.5px;line-height:1.62}
+  .metaline{display:flex;gap:22px;flex-wrap:wrap;margin-top:30px;font-family:var(--mono);font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--g3)}
+  .metaline b{color:var(--g1);font-weight:400}
+
+  .bar{margin:34px 0 0;border:1px solid rgba(216,166,87,.34);background:rgba(216,166,87,.07);border-radius:4px;padding:18px 20px;display:flex;gap:15px}
+  .bar .ic{color:var(--warn);font-family:var(--mono);font-size:12px;letter-spacing:.1em;flex:none;padding-top:1px}
+  .bar p{margin:0;font-size:14px;line-height:1.6;color:var(--g1)}
+  .bar p b{color:var(--white);font-weight:500}
+  .bar.plain{border-color:var(--line);background:rgba(255,255,255,.025)}
+  .bar.plain .ic{color:var(--olive)}
+
+  section.sec{padding:82px 0;border-bottom:1px solid var(--line)}
+  .sh{display:flex;align-items:baseline;gap:16px;margin-bottom:12px}
+  .sh .n{font-family:var(--mono);font-size:11.5px;letter-spacing:.2em;color:var(--g3)}
+  section.sec h2{font-size:clamp(26px,4vw,42px);line-height:1.06}
+  section.sec h2 i{font-style:normal;color:var(--olive)}
+  .sub{max-width:700px;margin:16px 0 0;font-size:15.5px;line-height:1.66}
+  .sub b{color:var(--white);font-weight:500}
+
+  .method{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:44px}
+  .mcard{border:1px solid var(--line);background:var(--bg-soft);border-radius:5px;padding:28px 26px}
+  .mcard h3{font-size:19px;font-weight:500;margin-bottom:14px}
+  .mcard p{margin:0 0 12px;font-size:14.5px;line-height:1.66}
+  .mcard p:last-child{margin-bottom:0}
+  .q{counter-reset:q;list-style:none;padding:0;margin:8px 0 0}
+  .q li{counter-increment:q;position:relative;padding:11px 0 11px 40px;border-top:1px solid var(--line-soft);font-size:14.5px;line-height:1.55}
+  .q li:before{content:"0" counter(q);position:absolute;left:0;top:12px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;color:var(--olive)}
+  .flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+  .flow span{font-family:var(--mono);font-size:10.5px;letter-spacing:.18em;text-transform:uppercase;padding:9px 14px;border:1px solid var(--line);border-radius:999px;color:var(--white)}
+  .flow span:first-child{border-color:var(--olive);color:var(--olive)}
+  .flow em{font-style:normal;color:var(--g3);align-self:center;font-family:var(--mono);font-size:11px}
+
+  .tbl{width:100%;border-collapse:collapse;margin-top:34px;font-size:13.5px}
+  .tbl th{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--g3);text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);font-weight:400;white-space:nowrap}
+  .tbl td{padding:14px 12px;border-bottom:1px solid var(--line-soft);vertical-align:top;line-height:1.5}
+  .tbl td b{color:var(--white);font-weight:500}
+  .tbl td.num{font-family:var(--mono);font-size:13px;color:var(--olive);white-space:nowrap}
+  .tbl .lot{font-family:var(--mono);font-size:11.5px;color:var(--g3)}
+  .tbl .spec{color:var(--g3);font-size:11px}
+  .scroll{overflow-x:auto}
+
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:22px;margin-top:40px}
+  .lst{border:1px solid var(--line);border-radius:5px;padding:26px;background:var(--bg-soft)}
+  .lst.ok{border-color:rgba(138,154,107,.34)}
+  .lst.no{border-color:rgba(201,123,110,.32)}
+  .lst h3{font-size:16px;font-weight:500;display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .lst h3 span{font-family:var(--mono);font-size:10px;letter-spacing:.14em;padding:4px 9px;border-radius:3px}
+  .lst.ok h3 span{background:rgba(138,154,107,.16);color:var(--ok)}
+  .lst.no h3 span{background:rgba(201,123,110,.14);color:var(--stop)}
+  .lst ul{list-style:none;padding:0;margin:0}
+  .lst li{padding:9px 0 9px 20px;border-top:1px solid var(--line-soft);font-size:14px;line-height:1.55;position:relative}
+  .lst li:before{position:absolute;left:0;top:9px;font-family:var(--mono);font-size:12px}
+  .lst.ok li:before{content:"+";color:var(--ok)}
+  .lst.no li:before{content:"\00d7";color:var(--stop)}
+  .lst li i{font-style:normal;color:var(--g3);display:block;font-size:12.5px;margin-top:3px}
+  .strip-demo{margin-top:26px;border:1px solid var(--line);border-radius:5px;padding:20px 22px;background:#000}
+  .strip-demo .lbl{font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--g3);margin-bottom:12px}
+  .strip-demo p{margin:0;font-size:11.5px;line-height:1.5;color:#9a9a9a}
+
+  .ad{border:1px solid var(--line);border-radius:6px;background:var(--bg-card);margin-top:30px;overflow:hidden}
+  .ad-top{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+  .ad-top .id{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;color:var(--olive)}
+  .ad-top h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+  .chips{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap}
+  .chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--g2);white-space:nowrap}
+  .chip.paid{border-color:rgba(138,154,107,.4);color:var(--ok)}
+  .chip.org{border-color:rgba(216,166,87,.44);color:var(--warn)}
+  .ad-body{display:grid;grid-template-columns:minmax(0,440px) minmax(0,1fr)}
+  .ad-art{padding:26px;border-right:1px solid var(--line);background:#0A0A0A}
+  .ad-brief{padding:28px 30px;min-width:0}
+
+  .stage{position:relative;width:100%;overflow:hidden;border-radius:3px;background:#000}
+  .stage.sq{aspect-ratio:1/1}
+  .stage.st{aspect-ratio:9/16;max-width:300px}
+  .stage .cv{position:absolute;top:0;left:0;transform-origin:top left}
+  .stage.sq .cv{width:1080px;height:1080px}
+  .stage.st .cv{width:1080px;height:1920px}
+  .artmeta{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+  .artmeta .dim{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--g3)}
+  .btn{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--g1);cursor:pointer;text-decoration:none;display:inline-block}
+  .btn:hover{border-color:var(--olive);color:var(--white)}
+  .btn.on{border-color:var(--olive);color:var(--olive)}
+  .btn.dl{border-color:rgba(138,154,107,.5);color:var(--olive)}
+  .btn.dl:hover{background:var(--olive);color:#0D0D0D;border-color:var(--olive)}
+
+  .score{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
+  .score i{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);border:1px solid rgba(138,154,107,.3);border-radius:3px;padding:4px 8px}
+  .blk{display:grid;grid-template-columns:88px minmax(0,1fr);gap:16px;padding:13px 0;border-top:1px solid var(--line-soft)}
+  .blk .k{font-family:var(--mono);font-size:9.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--g3);padding-top:3px}
+  .blk.cow .k{color:var(--olive)}
+  .blk .v{font-size:14.5px;line-height:1.62}
+  .blk.cow .v{color:var(--white);font-size:15.5px;font-family:var(--display);font-weight:400;line-height:1.42}
+  .blk .v b{color:var(--white);font-weight:500}
+
+  details.cap{margin-top:20px;border:1px solid var(--line);border-radius:4px;background:var(--bg-soft)}
+  details.cap summary{cursor:pointer;padding:14px 18px;font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--g1);list-style:none;display:flex;align-items:center;gap:10px}
+  details.cap summary::-webkit-details-marker{display:none}
+  details.cap summary:before{content:"+";color:var(--olive);font-size:13px}
+  details.cap[open] summary:before{content:"\2212"}
+  details.cap .in{padding:4px 18px 18px}
+  pre.txt{margin:0;white-space:pre-wrap;font-family:var(--body);font-weight:300;font-size:14px;line-height:1.68;color:var(--g1)}
+  .fields{margin-top:14px;border-top:1px solid var(--line-soft);padding-top:14px}
+  .fld{display:grid;grid-template-columns:104px minmax(0,1fr);gap:14px;padding:8px 0;font-size:13.5px;line-height:1.55}
+  .fld .k{font-family:var(--mono);font-size:9px;letter-spacing:.14em;text-transform:uppercase;color:var(--g3);padding-top:3px}
+  .row-btn{display:flex;gap:8px;margin-top:16px;flex-wrap:wrap}
+  .spec{margin-top:16px;font-size:13px;line-height:1.6;color:var(--g2);border-left:2px solid var(--line);padding-left:14px}
+  .spec b{color:var(--g1);font-weight:500}
+
+  .open ul{padding:0;margin:26px 0 0;list-style:none}
+  .open li{padding:14px 0 14px 22px;border-top:1px solid var(--line-soft);font-size:14.5px;line-height:1.6;position:relative}
+  .open li:before{content:"!";position:absolute;left:0;top:14px;font-family:var(--mono);font-size:12px;color:var(--warn)}
+  .open li b{color:var(--white);font-weight:500}
+
+  footer{padding:60px 0 80px;color:var(--g3);font-size:13px}
+  footer a{color:var(--g2)}
+
+  .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--olive);color:#0D0D0D;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 22px;border-radius:999px;opacity:0;transition:.22s;pointer-events:none;z-index:99}
+  .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+  @media(max-width:1000px){
+    .ad-body{grid-template-columns:1fr}
+    .ad-art{border-right:0;border-bottom:1px solid var(--line)}
+    .method,.two{grid-template-columns:1fr}
+  }
+  @media(max-width:620px){
+    .wrap{padding:0 18px}
+    .blk,.fld{grid-template-columns:1fr;gap:5px}
+  }
+</style>
+</head>
+<body>
+
+<div class="top"><div class="wrap top-in">
+  <a class="bd" href="../">
+    <img src="assets/flag-white.png" alt="" />
+    <span><b>STEADFAST</b><small>RESEARCH GROUP</small></span>
+  </a>
+  <nav>
+    <a href="#method">Method</a>
+    <a href="#proof">Proof bank</a>
+    <a href="#rules">Compliance</a>
+    <a href="#feed">Feed ads</a>
+    <a href="#stories">Stories</a>
+    <a href="#specs">Specs</a>
+    <a href="../">Brand bible</a>
+  </nav>
+</div></div>
+
+<header class="hero"><div class="wrap">
+  <span class="ey">Static Ad Pack 01 &middot; Internal</span>
+  <h1>Ten ads built out of <i>the paperwork</i>.</h1>
+  <p class="lede">Every concept here runs on the Purple Cow structure &mdash; Cow, Pain, Process, Proof, CTA &mdash;
+     and every figure in the copy comes from a real lot report. Nothing claims a benefit, an outcome, or a human use,
+     because the whole argument is that we don't need to.</p>
+  <div class="metaline">
+    <span>Client <b>Steadfast Research Group</b></span>
+    <span>Format <b>Static &middot; IG + FB</b></span>
+    <span>Assets <b>10 feed &middot; 4 stories</b></span>
+    <span>Built <b>28 Jul 2026</b></span>
+    <span>Status <b>Draft for Blake</b></span>
+  </div>
+  <div class="bar">
+    <span class="ic">FLAG</span>
+    <p><b>Two of these are organic-only.</b> The concepts marked <em>Organic only</em> name a contaminant screen in the
+       caption. The claim is true and it is printed on the lot report, but naming that substance inside a paid Meta
+       creative will almost certainly trip drug-policy review &mdash; even when used to say it was <em>not</em> detected.
+       Run those two on the site, in email, and organic social. Everything marked <em>Paid-safe</em> is written to survive review.</p>
+  </div>
+</div></header>
+
+<section class="sec" id="method"><div class="wrap">
+  <div class="sh"><span class="n">01</span><h2>The <i>Purple Cow</i> structure.</h2></div>
+  <p class="sub">Blake's framework as Matheus and Gabi wrote it up. A rare thing never seen before, that moves you to
+     share it immediately. Four questions gate every concept; five blocks carry every caption.</p>
+  <div class="method">
+    <div class="mcard">
+      <h3>Four questions, asked before anything gets made</h3>
+      <ol class="q">
+        <li>Does this make you want to stop everything you are doing to look at it?</li>
+        <li>Would it make somebody stop and verbally say &ldquo;that's good&rdquo;?</li>
+        <li>Would this move someone immediately to share?</li>
+        <li>Does it hit your heart or your brain in a new place where it never has been hit before?</li>
+      </ol>
+    </div>
+    <div class="mcard">
+      <h3>Where the cow is, for this brand</h3>
+      <p>The peptide category advertises adjectives. Premium. Uncompromising. 99%+ pure, set large over a mountain.
+         Almost nobody publishes anything a buyer can actually check.</p>
+      <p>So the cow is the paperwork. We put the lab report in the ad. We publish the milligrams the lab
+         <em>measured</em> beside the milligrams we <em>printed</em> &mdash; including the lot that came in under label.
+         In a category built on adjectives, an audited number is the rare thing.</p>
+      <div class="flow">
+        <span>Purple Cow</span><em>&rarr;</em><span>Pain</span><em>&rarr;</em><span>Process</span><em>&rarr;</em><span>Proof</span><em>&rarr;</em><span>CTA</span>
+      </div>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec" id="proof"><div class="wrap">
+  <div class="sh"><span class="n">02</span><h2>The <i>proof bank</i>.</h2></div>
+  <p class="sub">Every figure any ad in this pack is allowed to use, and where it came from. Five lot reports, four
+     independent labs. <b>If a number is not in this table, it does not go in an ad.</b> No rounding up, no
+     &ldquo;up to&rdquo;, no borrowing one lot's panel to describe another.</p>
+  <div class="scroll"><table class="tbl">
+    <thead><tr><th>Lot report</th><th>Lab</th><th>Labeled</th><th>Measured</th><th>Purity</th><th>Also on that report</th></tr></thead>
+    <tbody>
+      <tr><td><b>Retatrutide 20 mg</b><br><span class="lot">HLX-SOP-RT20-2PEP</span></td>
+          <td>ILS Laboratories<br><span class="spec">ISO/IEC 17025</span></td>
+          <td class="num">20 mg</td><td class="num">20.37 mg</td>
+          <td class="num">98.76%<br><span class="spec">spec &ge;95%</span></td>
+          <td>Identity confirmed (HPLC-RTM) &middot; arsenic, cadmium, lead, mercury, chromium all not detected &middot; fentanyl immunoassay not detected &middot; sterility (PCR) no growth</td></tr>
+      <tr><td><b>Tirzepatide 10 mg</b><br><span class="lot">Report #151643</span></td>
+          <td>Janoshik</td><td class="num">10 mg</td><td class="num">10.31 mg</td><td class="num">99.443%</td>
+          <td>Run as a blind GLP-1 panel (semaglutide / tirzepatide / retatrutide)</td></tr>
+      <tr><td><b>BPC-157 10 mg</b><br><span class="lot">Report #151664</span></td>
+          <td>Janoshik</td><td class="num">10 mg</td><td class="num">10.23 mg</td><td class="num">98.767%</td>
+          <td>Arg-BPC-157 content &middot; lab comment: sample was tested twice</td></tr>
+      <tr><td><b>GHK-Cu 50 mg</b><br><span class="lot">Lot CU-50</span></td>
+          <td>Testides</td><td class="num">50 mg</td><td class="num">52.33 mg</td><td class="num">99.05%</td>
+          <td>Fill accuracy 104.7% &middot; HPLC-UV at 214 nm &middot; appearance: blue powder</td></tr>
+      <tr><td><b>NAD+ 500 mg lot</b><br><span class="lot">KVR-2026-D620C6 &middot; Batch 5</span></td>
+          <td>Kovera Labs</td><td class="num">500 mg</td><td class="num">494.51 mg</td>
+          <td class="num">99.663%<br><span class="spec">spec &gt;98%</span></td>
+          <td>Identity by LC-MS &middot; endotoxin screen pass (&le;0.5 EU/mL) &middot; rapid sterility: no growth</td></tr>
+    </tbody>
+  </table></div>
+  <div class="bar plain">
+    <span class="ic">NOTE</span>
+    <p>The NAD+ lot came in at <b>494.51 mg against a 500 mg label</b>. Keep it in the copy. A supplier who only ever
+       publishes numbers that flatter them is publishing marketing; one who publishes the number that doesn't is
+       publishing data. That single figure does more work than the other four combined.</p>
+  </div>
+</div></section>
+
+<section class="sec" id="rules"><div class="wrap">
+  <div class="sh"><span class="n">03</span><h2>What we <i>can</i> and cannot say.</h2></div>
+  <p class="sub">Blake's note was to be careful with the verbiage. This is the working version of that, drawn from the
+     compliance rules already governing the site and the blog. The audience for every ad is a qualified researcher &mdash;
+     never a consumer, a patient, or an athlete.</p>
+  <div class="two">
+    <div class="lst ok">
+      <h3>Fair game <span>SAY</span></h3>
+      <ul>
+        <li>Purity measured by HPLC, quoted per lot with the lab named<i>&ldquo;98.76%, ILS Laboratories&rdquo; &mdash; not &ldquo;99%+ pure&rdquo;</i></li>
+        <li>Measured net content against labeled content, and fill accuracy<i>The category's blind spot. Use it constantly.</i></li>
+        <li>Batch-specific Certificate of Analysis, tied to the lot number on the vial</li>
+        <li>Independent third-party testing, with the lab named<i>ILS Laboratories, Janoshik, Testides, Kovera Labs</i></li>
+        <li>Lyophilized powder, vial size, storage and handling as bench procedure</li>
+        <li>Reconstitution math as a concentration that describes the vial<i>mg/mL in the vial. Never a volume to administer.</i></li>
+        <li>Shipping facts: cold-handled, plain unbranded packaging, tracked, most orders out within one business day</li>
+        <li>Prices, sizes, STEADFAST10 for 10% off a first order, free shipping over $200, Subscribe &amp; Save 5%</li>
+        <li>&ldquo;For laboratory and research use only. Not for human consumption.&rdquo;</li>
+      </ul>
+    </div>
+    <div class="lst no">
+      <h3>Never, in any channel <span>DON'T</span></h3>
+      <ul>
+        <li>Any benefit, result, or outcome<i>weight, fat, muscle, recovery, healing, sleep, energy, anti-aging, performance</i></li>
+        <li>Any therapeutic framing<i>treat, cure, prevent, heal, therapy, remedy, reverses</i></li>
+        <li>Dosing of any kind<i>amounts, schedules, cycles, stacks, protocols, titration, mg/kg as a dose</i></li>
+        <li>Second person aimed at an effect<i>your results, you'll notice, what to expect, feel the effects</i></li>
+        <li>Consumer or patient framing<i>patients, consumers, your body, your health, talk to your doctor, supplement</i></li>
+        <li>&ldquo;Safe&rdquo;, &ldquo;safe for humans&rdquo;, &ldquo;pharmaceutical grade&rdquo;, or any implication of approval</li>
+        <li>Comparisons to a prescription drug's effects, or brand names like Ozempic / Mounjaro / Zepbound</li>
+        <li>Before-and-after imagery, bodies, syringes, needles, injection scenes</li>
+        <li>Testimonials or reviews that describe an effect</li>
+        <li>Urgency theatre<i>a real code and a real threshold are fine; invented countdowns are not</i></li>
+      </ul>
+    </div>
+  </div>
+  <div class="strip-demo">
+    <div class="lbl">Mandatory footer strip &mdash; every creative, every size, never below 15px at 1080</div>
+    <p>For laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat,
+       cure, or prevent any disease.</p>
+  </div>
+</div></section>
+
+<section class="sec" id="feed"><div class="wrap">
+  <div class="sh"><span class="n">04</span><h2>Feed ads <i>1:1</i>.</h2></div>
+  <p class="sub">Ten concepts, ordered by how hard the cow hits. Each preview renders live at 1080&times;1080 from the
+     same source the PNG export uses, so what you see is what ships. <b>Download PNG</b> gives you the finished file
+     ready to upload; <b>Actual size</b> drops the preview scaling; <b>Open</b> loads the creative alone on a blank page.</p>
+  <div id="feedList"></div>
+</div></section>
+
+<section class="sec" id="stories"><div class="wrap">
+  <div class="sh"><span class="n">05</span><h2>Stories <i>9:16</i>.</h2></div>
+  <p class="sub">Four verticals, same proof, cut for a single thumb-stop with the tap target kept clear.</p>
+  <div id="storyList"></div>
+</div></section>
+
+<section class="sec" id="specs"><div class="wrap">
+  <div class="sh"><span class="n">06</span><h2>Production <i>specs</i>.</h2></div>
+  <div class="method" style="margin-top:40px">
+    <div class="mcard">
+      <h3>Sizes &amp; safe areas</h3>
+      <p>Feed 1080&times;1080. Story 1080&times;1920 with 250px clear at top and bottom for the profile bar and the tap
+         target. Export PNG for anything carrying a chromatogram or a document, JPG q90 for vial-only art.</p>
+      <p>The footer strip is not optional and does not scale below 15px at 1080. It lives inside the artwork rather than
+         the caption, because Meta truncates captions and never crops pixels.</p>
+    </div>
+    <div class="mcard">
+      <h3>Type &amp; colour</h3>
+      <p>Space Grotesk 600&ndash;700 for headlines, Inter 300 for decks, Space Mono for anything that reads as data:
+         lot numbers, purity figures, URLs, promo codes.</p>
+      <p>Three grounds, all from the brand bible: Carbon <code>#0D0D0D</code>, Field <code>#EFEDE6</code>, Olive
+         <code>#414B37</code>, accent olive <code>#8A9A6B</code>. Vial renders only ever sit on a light panel, so the
+         white studio background knocks out cleanly on multiply.</p>
+    </div>
+    <div class="mcard">
+      <h3>Regenerating the files</h3>
+      <p>Copy and artwork both live in <code>pack.js</code>; the creative CSS lives in <code>creative.css</code>. Edit
+         either and both this page and the exported PNGs change together.</p>
+      <p>To re-export: <code>node export.mjs</code> from the <code>ads/</code> folder. It drives headless Chrome over
+         <code>export.html?id=F01</code> and writes every asset into <code>exports/</code>.</p>
+    </div>
+    <div class="mcard">
+      <h3>Before anything goes live</h3>
+      <p>Check the caption against section 03 line by line, then check every figure against the proof bank in section
+         02 &mdash; lab name, lot, and number together, or the figure comes out.</p>
+      <p>Landing page per concept: proof concepts go to <code>/coa</code>, product concepts to the PDP, education
+         concepts to the blog post. Never point a proof ad at the cart.</p>
+    </div>
+  </div>
+</div></section>
+
+<section class="sec open"><div class="wrap">
+  <div class="sh"><span class="n">07</span><h2>Open items for <i>Blake &amp; Gabi</i>.</h2></div>
+  <ul>
+    <li><b>All fifteen mockups are live now, and the Retatrutide 20 mg render was resized on the way in.</b> It arrived
+       at 1888&times;2256 and 4.8 MB while the rest of the set is 800&times;960 and about 52 KB, and the page declares
+       800&times;960 either way &mdash; so it was resampled to match. The original is still in git history if the
+       full-resolution file is needed for print. Worth exporting the next batch straight to 800&times;960.</li>
+    <li><b>The structured data on the products page was still pointing at the old stock vials.</b> All fifteen
+       <code>ItemList</code> image URLs now match what the page actually shows. Worth remembering for the next asset
+       swap: the visible <code>&lt;img&gt;</code> and the JSON-LD are two separate places, and Google reads the second one.</li>
+    <li><b>The NAD+ COA on the site is a 500 mg lot, but the SKU we sell is NAD+ 1000 mg.</b> The ad copy quotes it
+       honestly as a 500 mg lot, but a buyer landing on the product page will see a mismatch. Either publish the
+       1000 mg lot report or label that one as a reference lot.</li>
+    <li><b>Confirm we can name the labs publicly.</b> The pack names ILS Laboratories, Janoshik, Testides and Kovera
+       Labs, and that is most of the credibility. If any of those relationships shouldn't be public, say so and the
+       copy falls back to &ldquo;an ISO/IEC 17025 accredited independent lab&rdquo;.</li>
+    <li><b>Two concepts need a photograph we don't have.</b> F08 wants the actual plain shipping box, F09 wants a tight
+       crop of a real printed label. Both currently render with stand-ins.</li>
+    <li><b>Decide the channel for F04 and S04 before they ship.</b> Both are strong, both name the contaminant screen,
+       and both are marked organic-only for that reason.</li>
+  </ul>
+</div></section>
+
+<footer><div class="wrap">
+  Internal working document &mdash; Steadfast Research Group static ad pack 01.
+  <a href="../">Brand bible</a> &middot;
+  <a href="https://www.canva.com/folder/FAHIkHoxFFc">Canva brand folder</a> &middot;
+  <a href="https://steadfastresearchgroup.com/">steadfastresearchgroup.com</a>
+</div></footer>
+
+<div class="toast" id="toast">Copied</div>
+
+<script src="pack.js"></script>
+<script>
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+
+/* Matches the naming export.mjs writes, so the button always points at a real file. */
+function pngName(a, isStory){
+  return 'srg-ad01-' + a.id.toLowerCase() + '-' + a.slug + '-1080x' + (isStory ? 1920 : 1080) + '.png';
+}
+
+function card(a, isStory){
+  var chips = '<span class="chip">' + (isStory ? '1080×1920' : '1080×1080') + '</span>'
+            + '<span class="chip">' + a.palette + '</span>'
+            + (a.safe === 'paid' ? '<span class="chip paid">Paid-safe</span>'
+                                 : '<span class="chip org">Organic only</span>');
+  var score = a.score.map(function(s){ return '<i>' + s + '</i>'; }).join('');
+  var blocks = [['Purple cow', a.cow, 'cow'], ['Pain', a.pain, ''], ['Process', a.process, ''],
+                ['Proof', a.proof, ''], ['CTA', a.cta, '']]
+    .map(function(b){
+      return '<div class="blk ' + b[2] + '"><div class="k">' + b[0] + '</div><div class="v">' + b[1] + '</div></div>';
+    }).join('');
+
+  return '<div class="ad" id="' + a.id + '">'
+    + '<div class="ad-top"><span class="id">' + a.id + '</span><h3>' + a.name + '</h3>'
+    +   '<div class="chips">' + chips + '</div></div>'
+    + '<div class="ad-body">'
+    +   '<div class="ad-art">'
+    +     '<div class="stage ' + (isStory ? 'st' : 'sq') + '">' + window.SRGPACK.creative(a, isStory) + '</div>'
+    +     '<div class="artmeta">'
+    +       '<a class="btn dl" href="exports/' + pngName(a, isStory) + '" download>Download PNG</a>'
+    +       '<button class="btn" data-full>Actual size</button>'
+    +       '<a class="btn" href="export.html?id=' + a.id + '" target="_blank" rel="noopener">Open</a></div>'
+    +   '</div>'
+    +   '<div class="ad-brief">'
+    +     '<div class="score">' + score + '</div>'
+    +     '<div>' + blocks + '</div>'
+    +     '<details class="cap"><summary>Caption as posted</summary><div class="in">'
+    +       '<pre class="txt">' + esc(a.caption) + '</pre>'
+    +       '<div class="fields">'
+    +         '<div class="fld"><div class="k">Headline</div><div>' + a.fields.headline + '</div></div>'
+    +         '<div class="fld"><div class="k">Description</div><div>' + a.fields.desc + '</div></div>'
+    +         '<div class="fld"><div class="k">Button</div><div>' + a.fields.cta + '</div></div>'
+    +       '</div>'
+    +       '<div class="row-btn"><button class="btn" data-copy>Copy caption</button></div>'
+    +     '</div></details>'
+    +     '<div class="spec"><b>Art direction.</b> ' + a.spec + '</div>'
+    +   '</div>'
+    + '</div></div>';
+}
+
+document.getElementById('feedList').innerHTML =
+  window.SRGPACK.FEED.map(function(a){ return card(a, false); }).join('');
+document.getElementById('storyList').innerHTML =
+  window.SRGPACK.STORIES.map(function(a){ return card(a, true); }).join('');
+
+/* Scale each true-1080 canvas down into its card. */
+function fit(){
+  document.querySelectorAll('.stage').forEach(function(st){
+    if (st.dataset.full === '1') return;
+    var cv = st.querySelector('.cv');
+    if (cv) cv.style.transform = 'scale(' + (st.clientWidth / 1080) + ')';
+  });
+}
+addEventListener('resize', fit);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+fit();
+
+document.addEventListener('click', function(e){
+  var b = e.target.closest('[data-full]');
+  if (b){
+    var st = b.closest('.ad-art').querySelector('.stage');
+    if (st.dataset.full === '1'){
+      st.dataset.full = '0';
+      st.style.width = st.style.maxWidth = st.style.overflow = '';
+      b.classList.remove('on'); b.textContent = 'Actual size';
+    } else {
+      st.dataset.full = '1';
+      st.style.width = '1080px'; st.style.maxWidth = 'none'; st.style.overflow = 'visible';
+      st.querySelector('.cv').style.transform = 'none';
+      b.classList.add('on'); b.textContent = 'Fit to card';
+    }
+    fit();
+    return;
+  }
+  var c = e.target.closest('[data-copy]');
+  if (c){
+    var pre = c.closest('.in').querySelector('pre.txt');
+    navigator.clipboard.writeText(pre.textContent).then(function(){
+      var t = document.getElementById('toast');
+      t.classList.add('show');
+      setTimeout(function(){ t.classList.remove('show'); }, 1400);
+    });
+  }
+});
+</script>
+</body>
+</html>

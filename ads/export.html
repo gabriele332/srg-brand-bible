@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="robots" content="noindex,nofollow" />
+<title>SRG ad export</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="creative.css" />
+<style>
+  /* Export surface only: one creative, true size, nothing else on the page.
+     Headless Chrome screenshots this at the exact canvas dimensions. */
+  html,body{margin:0;padding:0;background:#fff;overflow:hidden}
+  .cv{width:1080px;height:1080px}
+  .cv--story{height:1920px}
+  #err{font:14px/1.5 system-ui;padding:24px;color:#b00}
+</style>
+</head>
+<body>
+<div id="out"></div>
+<script src="pack.js"></script>
+<script>
+  // ?id=F02 renders that one creative at true 1080. Signals readiness by
+  // setting document.title, which the export script polls before shooting.
+  var id = new URLSearchParams(location.search).get('id') || 'F01';
+  var hit = window.SRGPACK.find(id);
+  if (!hit) {
+    document.getElementById('err' ) || document.body.insertAdjacentHTML('beforeend',
+      '<div id="err">Unknown ad id: ' + id + '</div>');
+    document.title = 'SRG-ERR';
+  } else {
+    document.getElementById('out').innerHTML = window.SRGPACK.creative(hit.ad, hit.isStory);
+    var ready = function () { document.title = 'SRG-READY-' + id; };
+    if (document.fonts && document.fonts.ready) {
+      Promise.all([
+        document.fonts.ready,
+        Promise.all([].map.call(document.images, function (im) {
+          return im.complete ? 1 : new Promise(function (r) { im.onload = im.onerror = r; });
+        }))
+      ]).then(function () { requestAnimationFrame(ready); });
+    } else { addEventListener('load', ready); }
+  }
+</script>
+</body>
+</html>
