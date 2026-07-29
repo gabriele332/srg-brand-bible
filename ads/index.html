@@ -125,6 +125,10 @@
   .btn.on{border-color:var(--olive);color:var(--olive)}
   .btn.dl{border-color:rgba(138,154,107,.5);color:var(--olive)}
   .btn.dl:hover{background:var(--olive);color:#0D0D0D;border-color:var(--olive)}
+  .btn.cv-btn{border-color:rgba(140,180,255,.4);color:#8FB6EA}
+  .btn.cv-btn:hover{background:#8FB6EA;color:#0D0D0D;border-color:#8FB6EA}
+  .btn.cv-btn.warn{border-color:rgba(216,166,87,.5);color:var(--warn)}
+  .btn.cv-btn.warn:hover{background:var(--warn);color:#0D0D0D;border-color:var(--warn)}
 
   .score{display:flex;gap:6px;margin-bottom:20px;flex-wrap:wrap}
   .score i{font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);border:1px solid rgba(138,154,107,.3);border-radius:3px;padding:4px 8px}
@@ -322,8 +326,18 @@
 <section class="sec" id="feed"><div class="wrap">
   <div class="sh"><span class="n">04</span><h2>Feed ads <i>1:1</i>.</h2></div>
   <p class="sub">Ten concepts, ordered by how hard the cow hits. Each preview renders live at 1080&times;1080 from the
-     same source the PNG export uses, so what you see is what ships. <b>Download PNG</b> gives you the finished file
-     ready to upload; <b>Actual size</b> drops the preview scaling; <b>Open</b> loads the creative alone on a blank page.</p>
+     same source the exports use, so what you see is what ships. <b>Download PNG</b> is the finished file, ready to
+     upload. <b>Edit in Canva</b> opens the same creative in Blake's Canva with the text editable. <b>Actual size</b>
+     drops the preview scaling and <b>Open</b> loads the creative alone on a blank page.</p>
+  <div class="bar plain" style="margin-bottom:8px">
+    <span class="ic">CANVA</span>
+    <p>Every creative was imported from its <b>PDF</b>, not its PNG &mdash; a PNG lands in Canva as one flat picture,
+       while the PDF arrives as real text boxes you can retype. They live in
+       <a href="https://www.canva.com/folder/FAHQyTh0-Ig">Steadfast / Ad Pack 01 &mdash; Static</a>.
+       Canva re-renders type on import, so <b>the PNG stays the source of truth</b>: twelve of the fourteen land
+       essentially 1:1, and the two marked <b style="color:var(--warn)">Edit in Canva *</b> need a type and position
+       pass first. If you publish out of Canva rather than uploading the PNG, put the two side by side before it ships.</p>
+  </div>
   <div id="feedList"></div>
 </div></section>
 
@@ -354,9 +368,11 @@
     <div class="mcard">
       <h3>Regenerating the files</h3>
       <p>Copy and artwork both live in <code>pack.js</code>; the creative CSS lives in <code>creative.css</code>. Edit
-         either and both this page and the exported PNGs change together.</p>
+         either and both this page and the exports change together.</p>
       <p>To re-export: <code>node export.mjs</code> from the <code>ads/</code> folder. It drives headless Chrome over
-         <code>export.html?id=F01</code> and writes every asset into <code>exports/</code>.</p>
+         <code>export.html?id=F01</code> and writes a PNG <em>and</em> a PDF per asset into <code>exports/</code>.</p>
+      <p>Changing a creative does <b>not</b> update its Canva design &mdash; Canva holds a copy taken at import time.
+         Re-import the new PDF and swap the id in the <code>CANVA</code> map in <code>pack.js</code>.</p>
     </div>
     <div class="mcard">
       <h3>Before anything goes live</h3>
@@ -404,12 +420,19 @@
 <script>
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
 
+function canvaHint(nudge){
+  return nudge ? 'Opens editable, but needs a type and position pass'
+               : 'Editable text, imported from the PDF';
+}
+
 /* Matches the naming export.mjs writes, so the button always points at a real file. */
 function pngName(a, isStory){
   return 'srg-ad01-' + a.id.toLowerCase() + '-' + a.slug + '-1080x' + (isStory ? 1920 : 1080) + '.png';
 }
 
 function card(a, isStory){
+  var canva = window.SRGPACK.canvaUrl(a.id);
+  var nudge = !!window.SRGPACK.canvaNudge[a.id];
   var chips = '<span class="chip">' + (isStory ? '1080×1920' : '1080×1080') + '</span>'
             + '<span class="chip">' + a.palette + '</span>'
             + (a.safe === 'paid' ? '<span class="chip paid">Paid-safe</span>'
@@ -429,6 +452,9 @@ function card(a, isStory){
     +     '<div class="stage ' + (isStory ? 'st' : 'sq') + '">' + window.SRGPACK.creative(a, isStory) + '</div>'
     +     '<div class="artmeta">'
     +       '<a class="btn dl" href="exports/' + pngName(a, isStory) + '" download>Download PNG</a>'
+    +       (canva ? '<a class="btn cv-btn' + (nudge ? ' warn' : '') + '" href="' + canva + '"'
+    +         ' target="_blank" rel="noopener" title="' + canvaHint(nudge) + '">'
+    +         'Edit in Canva' + (nudge ? ' *' : '') + '</a>' : '')
     +       '<button class="btn" data-full>Actual size</button>'
     +       '<a class="btn" href="export.html?id=' + a.id + '" target="_blank" rel="noopener">Open</a></div>'
     +   '</div>'

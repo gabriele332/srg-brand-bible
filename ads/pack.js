@@ -362,8 +362,36 @@ function creative(a, isStory) {
   return '<div class="cv cv--' + a.palette + (isStory ? ' cv--story' : '') + '">' + T[a.tpl](a.art) + '</div>';
 }
 
+/* ---------------------------------------------------------------------------
+   Canva. Each creative was imported into Blake's Canva from its PDF (not its
+   PNG) so the text arrives as real text boxes you can retype, rather than one
+   flat picture. Folder: Steadfast / Ad Pack 01 — Static.
+
+   The short /d/ links Canva hands back on import rotate, so these are the
+   stable /design/<id>/edit URLs instead.
+
+   `nudge: true` marks the two creatives that need a pass after opening: Canva
+   re-renders type on import and drops the negative letter-spacing on the very
+   large figure, which widens it into the vial and shrinks the mono caption
+   under it. The PNG is always the ship-ready file — if you publish out of
+   Canva, compare it against the PNG first.
+   --------------------------------------------------------------------------- */
+var CANVA_FOLDER = 'https://www.canva.com/folder/FAHQyTh0-Ig';
+var CANVA = {
+  F01: 'DAHQyVnX7XA', F02: 'DAHQybzAlgY', F03: 'DAHQyRDGDN4', F04: 'DAHQyQUaM7I',
+  F05: 'DAHQyUzeCbY', F06: 'DAHQyVJuQ_M', F07: 'DAHQyWxdyAY', F08: 'DAHQySBe1s8',
+  F09: 'DAHQyQC91iQ', F10: 'DAHQyQvIHJA',
+  S01: 'DAHQybtCmU4', S02: 'DAHQyYhr1XQ', S03: 'DAHQyfiqyGM', S04: 'DAHQyTdZkrA'
+};
+var CANVA_NUDGE = { F02: true, S01: true };
+
+function canvaUrl(id) {
+  return CANVA[id] ? 'https://www.canva.com/design/' + CANVA[id] + '/edit' : null;
+}
+
 root.SRGPACK = {
   FEED: FEED, STORIES: STORIES, STRIP: STRIP, creative: creative,
+  canvaUrl: canvaUrl, canvaFolder: CANVA_FOLDER, canvaNudge: CANVA_NUDGE,
   all: FEED.concat(STORIES),
   find: function (id) {
     var m = this.all.filter(function (a) { return a.id === id; });
