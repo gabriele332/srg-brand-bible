@@ -50,12 +50,16 @@ var T = {
       + '</div>' + strip(a.url);
   },
 
-  /* One audited number, as large as the canvas allows. */
+  /* One audited number, as large as the canvas allows.
+     Laid out in normal block flow with the vial absolutely positioned, rather
+     than as centred flex siblings: Canva's PDF import re-anchors vertically
+     centred flex children, which collapsed the big figure and dropped the vial
+     on top of it. Block flow round-trips intact. */
   metric: function (a) {
     return '<div class="pad">'
       + '<div class="kick">' + a.kick + '</div>'
-      + '<div class="cvbody"><div class="metricrow">'
-      +   '<div style="flex:1;min-width:0">'
+      + '<div class="cvbody"><div class="metricwrap">'
+      +   '<div class="metrictext' + (a.vial ? ' has-vial' : '') + '">'
       +     (a.pre ? '<div class="bigsub" style="margin:0 0 6px">' + a.pre + '</div>' : '')
       +     '<div class="big ' + (a.bigSize || '') + ' ac">' + a.big + '</div>'
       +     '<div class="bigsub">' + a.bigsub + '</div>'

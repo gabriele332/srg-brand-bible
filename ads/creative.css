@@ -53,12 +53,15 @@
 .cv .big{font-family:var(--display);font-weight:700;letter-spacing:-.05em;line-height:.84;font-size:250px}
 .cv .big.sm{font-size:180px}
 .cv .bigsub{font-family:var(--mono);font-size:22px;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-top:14px}
-.cv .metricrow{display:flex;align-items:center;gap:44px}
-.cv .metricrow .vialbox{flex:0 0 360px;display:flex;align-items:center;justify-content:center;padding:14px}
-.cv .metricrow .vialbox img{width:100%;max-height:640px;object-fit:contain}
-.cv--story .metricrow{flex-direction:column;align-items:flex-start;gap:20px}
-.cv--story .metricrow .vialbox{flex:none;width:100%;padding:0}
-.cv--story .metricrow .vialbox img{max-height:640px}
+/* block flow + absolutely positioned vial: survives Canva's PDF import intact */
+.cv .metricwrap{position:relative}
+.cv .metrictext.has-vial{padding-right:404px}
+.cv .metricwrap .vialbox{position:absolute;right:0;top:0;bottom:0;width:360px;
+  display:flex;align-items:center;justify-content:center;padding:14px}
+.cv .metricwrap .vialbox img{width:100%;max-height:640px;object-fit:contain}
+.cv--story .metrictext.has-vial{padding-right:0}
+.cv--story .metricwrap .vialbox{position:static;width:100%;padding:34px 0 0;display:block}
+.cv--story .metricwrap .vialbox img{max-height:660px}
 .cv .strike{position:relative;display:inline-block;opacity:.42}
 .cv .strike:after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:5px;background:currentColor}
 
