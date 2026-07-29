@@ -57,6 +57,29 @@ await new Promise(r => server.listen(PORT, r));
 await rm(OUT, { recursive: true, force: true });
 await mkdir(OUT, { recursive: true });
 
+/* PDF alongside the PNG: the PNG is what gets uploaded to Meta, the PDF is what
+   Canva imports, because a PDF carries real text runs and comes in as editable
+   text boxes rather than one flat picture. */
+function toPdf(ad) {
+  const h = ad.story ? 1920 : 1080;
+  const name = `srg-ad01-${ad.id.toLowerCase()}-${ad.slug}-1080x${h}.pdf`;
+  const target = join(OUT, name);
+  const profile = join(OUT, '.q-' + ad.id);
+  const args = [
+    '--headless=new', '--disable-gpu', '--no-pdf-header-footer',
+    '--force-device-scale-factor=1',
+    `--user-data-dir=${profile}`,
+    `--print-to-pdf=${target}`,
+    '--virtual-time-budget=8000',
+    `http://127.0.0.1:${PORT}/export.html?id=${ad.id}`
+  ];
+  return new Promise((done, fail) => {
+    const p = spawn(CHROME, args, { stdio: 'ignore' });
+    p.on('exit', code => (code === 0 || existsSync(target)) ? done(name) : fail(new Error(`${ad.id} exit ${code}`)));
+    p.on('error', fail);
+  });
+}
+
 function shoot(ad) {
   const w = 1080, h = ad.story ? 1920 : 1080;
   const name = `srg-ad01-${ad.id.toLowerCase()}-${ad.slug}-${w}x${h}.png`;
@@ -84,15 +107,20 @@ const made = [];
 for (const ad of ASSETS) {
   try {
     made.push(await shoot(ad));
-    console.log('  ok   ' + made[made.length - 1]);
+    console.log('  png  ' + made[made.length - 1]);
   } catch (e) {
-    console.log('  FAIL ' + ad.id + ' — ' + e.message);
+    console.log('  FAIL png ' + ad.id + ' — ' + e.message);
+  }
+  try {
+    console.log('  pdf  ' + await toPdf(ad));
+  } catch (e) {
+    console.log('  FAIL pdf ' + ad.id + ' — ' + e.message);
   }
 }
 
 // Drop the throwaway Chrome profiles, keep only the artwork.
 for (const d of await readdir(OUT)) {
-  if (d.startsWith('.p-')) await rm(join(OUT, d), { recursive: true, force: true });
+  if (d.startsWith('.p-') || d.startsWith('.q-')) await rm(join(OUT, d), { recursive: true, force: true });
 }
 
 server.close();

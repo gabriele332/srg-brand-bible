@@ -14,6 +14,10 @@
   .cv{width:1080px;height:1080px}
   .cv--story{height:1920px}
   #err{font:14px/1.5 system-ui;padding:24px;color:#b00}
+  /* PDF export: keep the grounds and the blend-mode knockouts, and let the page
+     box match the canvas exactly so Canva imports it at the right size. */
+  .cv,.cv *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  @media print{ html,body{background:#fff} }
 </style>
 </head>
 <body>
@@ -30,6 +34,10 @@
     document.title = 'SRG-ERR';
   } else {
     document.getElementById('out').innerHTML = window.SRGPACK.creative(hit.ad, hit.isStory);
+    // Match the print page box to the canvas so a PDF export is 1:1 with the PNG.
+    var st = document.createElement('style');
+    st.textContent = '@page{size:1080px ' + (hit.isStory ? 1920 : 1080) + 'px;margin:0}';
+    document.head.appendChild(st);
     var ready = function () { document.title = 'SRG-READY-' + id; };
     if (document.fonts && document.fonts.ready) {
       Promise.all([
