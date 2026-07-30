@@ -149,7 +149,7 @@ var FEED = [
 {
   id:'F02', slug:'fill-accuracy', name:'Fill accuracy', palette:'field', tpl:'metric', safe:'paid',
   art:{ kick:'BPC-157 &middot; Report #151664', pre:'Label says <span class="strike">10 MG</span>',
-        big:'10.23', bigsub:'Milligrams measured',
+        big:'10.23', bigSize:'md', bigsub:'Milligrams measured',
         dek:'We publish both numbers. Even when the second one is lower.', vial:'srg-prod-bb10.jpg',
         url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','Screenshot-worthy','New in the brain'],
@@ -195,7 +195,7 @@ var FEED = [
 },
 {
   id:'F05', slug:'tested-twice', name:'Tested twice', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Janoshik &middot; Report #151664', hl:'The lab’s note<br>on our BPC-157:<br>&ldquo;tested twice.&rdquo;',
+  art:{ kick:'Janoshik &middot; Report #151664', hl:'The lab wrote<br>this on our<br>BPC-157 report:<br>&ldquo;tested&nbsp;twice.&rdquo;',
         dek:'One run can flatter a batch. Two runs are harder to argue with.',
         callout:['Purity, HPLC','98.767%'], vial:'srg-prod-bb10.jpg', url:'steadfastresearchgroup.com/coa' },
   score:['Says it out loud','Screenshot-worthy','New in the brain'],
@@ -242,7 +242,7 @@ var FEED = [
 },
 {
   id:'F08', slug:'boring-box', name:'The boring box', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least<br>interesting photo<br>in our library.',
+  art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least<br>interesting<br>photo in our<br>library.',
         dek:'A plain box with nothing on it. Most orders leave within one business day, cold-handled, tracked, with the tracking email sent the moment it ships.',
         vial:'srg-prod-wa10.jpg', url:'steadfastresearchgroup.com/shipping' },
   score:['Says it out loud','New in the brain'],
@@ -274,8 +274,7 @@ var FEED = [
   id:'F10', slug:'lineup-priced', name:'The lineup, priced', palette:'olive', tpl:'grid', safe:'paid',
   art:{ kick:'Fifteen SKUs &middot; prices published', hl:'No &ldquo;contact us<br>for pricing.&rdquo;',
         cells:[['srg-prod-rt10.jpg','RETATRUTIDE','10 mg &middot; $99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','10 mg &middot; $69.99'],
-               ['srg-prod-tsm5.jpg','TESAMORELIN','5 mg &middot; $49.99'],['srg-prod-bb10.jpg','BPC / TB-500','10 mg &middot; $49.99'],
-               ['srg-prod-cu50.jpg','GHK-CU','50 mg &middot; $34.99']],
+               ['srg-prod-bb10.jpg','BPC / TB-500','10 mg &middot; $49.99'],['srg-prod-cu50.jpg','GHK-CU','50 mg &middot; $34.99']],
         dek:'Every size, every price, on the page. Each lot ships with its own certificate.',
         code:'STEADFAST10 &mdash; 10% first order', url:'steadfastresearchgroup.com/products' },
   score:['Says it out loud','New in the brain'],
@@ -286,7 +285,7 @@ var FEED = [
   cta:'STEADFAST10 takes 10% off a first order &rarr; steadfastresearchgroup.com/products',
   caption:"No “contact us for pricing.” Here's the catalogue with the prices left in.\n\nGatekeeping a price list wastes a researcher's afternoon and quietly says the number depends on who's asking.\n\nFifteen SKUs. Prices on the page. Every lot ships with its own certificate of analysis.\n\nRetatrutide 10 mg — $99.99\nTirzepatide 10 mg — $69.99\nTesamorelin 5 mg — $49.99\nBPC-157 / TB-500 10 mg — $49.99\nGHK-Cu 50 mg — $34.99\n\nFree shipping over $200. STEADFAST10 takes 10% off a first order.\n\nsteadfastresearchgroup.com/products\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
   fields:{ headline:'Fifteen SKUs. Prices on the page.', desc:'STEADFAST10 for 10% off a first order.', cta:'Shop now' },
-  spec:'Olive ground, five vials in bone cells on multiply. Prices in Space Mono. Verify every figure against the live catalogue on the day it ships — this is the one asset in the pack that goes stale.'
+  spec:'Olive ground, four vials in bone cells on multiply, grid bled to the canvas edge so the glass renders as large as possible. Prices in Space Mono. Four rather than five because a cell’s width caps the product size — if a fifth SKU has to appear, it comes at the cost of every vial shrinking. Verify every figure against the live catalogue on the day it ships; this is the one asset in the pack that goes stale.'
 }
 ];
 
@@ -327,7 +326,8 @@ var STORIES = [
 {
   id:'S03', slug:'lineup-story', name:'Lineup, vertical', palette:'olive', tpl:'grid', safe:'paid',
   art:{ kick:'Prices published', hl:'The whole shelf.',
-        cells:[['srg-prod-rt10.jpg','RETATRUTIDE','$99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','$69.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
+        cells:[['srg-prod-rt10.jpg','RETATRUTIDE','$99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','$69.99'],
+               ['srg-prod-bb10.jpg','BPC / TB-500','$49.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
         dek:'Fifteen SKUs, each shipping with its own certificate of analysis.',
         code:'STEADFAST10', url:'Tap to shop' },
   score:['Says it out loud'],
@@ -338,7 +338,7 @@ var STORIES = [
   cta:'Tap to shop the lineup.',
   caption:"The whole shelf, with the prices left in. Fifteen SKUs, each shipping with its own certificate of analysis.\n\nSTEADFAST10 — 10% off a first order. Free shipping over $200.\n\nFor laboratory and research use only. Not for human consumption.",
   fields:{ headline:'—', desc:'Story asset. Sticker link to /products.', cta:'Swipe up' },
-  spec:'Three vials only in vertical — five is unreadable at story size. Rotate which three across the flight.'
+  spec:'Four vials in a 2×2 bled to the story edges, so each one renders around 520px wide — the biggest the product gets anywhere in the pack. Rotate which four across the flight.'
 },
 {
   id:'S04', slug:'full-panel-story', name:'The panel, vertical', palette:'carbon', tpl:'list', safe:'organic',

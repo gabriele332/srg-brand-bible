@@ -51,17 +51,25 @@
 
 /* --- one audited number, enormous --- */
 .cv .big{font-family:var(--display);font-weight:700;letter-spacing:-.05em;line-height:.84;font-size:250px}
+.cv .big.md{font-size:200px}
 .cv .big.sm{font-size:180px}
 .cv .bigsub{font-family:var(--mono);font-size:22px;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-top:14px}
-/* block flow + absolutely positioned vial: survives Canva's PDF import intact */
+/* block flow + absolutely positioned vial: survives Canva's PDF import intact.
+   The product renders carry ~23% empty margin each side, so the box has to run
+   wider than the glass looks and bleed past the padding to read big. */
 .cv .metricwrap{position:relative}
-.cv .metrictext.has-vial{padding-right:404px}
-.cv .metricwrap .vialbox{position:absolute;right:0;top:0;bottom:0;width:360px;
-  display:flex;align-items:center;justify-content:center;padding:14px}
-.cv .metricwrap .vialbox img{width:100%;max-height:640px;object-fit:contain}
+/* The render's glass starts about 16% into its frame, so the text has to stop
+   ~410px short of the wrap edge to clear it — not the 360 the box width suggests. */
+.cv .metrictext.has-vial{padding-right:410px}
+.cv .metricwrap .vialbox{position:absolute;right:-60px;top:0;bottom:0;width:540px;
+  display:flex;align-items:center;justify-content:center}
+.cv .metricwrap .vialbox img{width:100%;max-height:820px;object-fit:contain}
 .cv--story .metrictext.has-vial{padding-right:0}
-.cv--story .metricwrap .vialbox{position:static;width:100%;padding:34px 0 0;display:block}
-.cv--story .metricwrap .vialbox img{max-height:660px}
+.cv--story .metricwrap .vialbox{position:static;width:100%;padding:20px 0 0;display:block;
+  margin-left:-40px;margin-right:-40px}
+/* 960, not 1040: at 1040 the stack runs ~16px past the body box and a centred
+   flex splits that overflow across both ends, which collides the kick line. */
+.cv--story .metricwrap .vialbox img{width:calc(100% + 80px);max-height:960px}
 .cv .strike{position:relative;display:inline-block;opacity:.42}
 .cv .strike:after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:5px;background:currentColor}
 
@@ -91,17 +99,24 @@
 .cv .split img.vial{width:100%;max-height:520px;object-fit:contain}
 
 /* --- the lineup, prices left in --- */
-.cv .pgrid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:34px}
-.cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:8px 6px 12px;display:flex;flex-direction:column;align-items:center;gap:4px}
-.cv .pgrid .cell img{width:100%;height:190px;object-fit:contain;mix-blend-mode:multiply}
-.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:13px;letter-spacing:.06em;color:#14150F;font-weight:700}
-.cv .pgrid .cell span{font-family:var(--mono);font-size:11px;letter-spacing:.08em;color:#5a5a52}
+/* Four columns instead of five, and bled to the canvas edge: a cell's WIDTH caps
+   how big the glass can render, so fewer + wider columns is the only thing that
+   actually enlarges the product. Together that is roughly +45% on the vial. */
+.cv .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:34px -68px 0}
+.cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:10px 8px 14px;display:flex;flex-direction:column;align-items:center;gap:5px}
+.cv .pgrid .cell img{width:100%;height:280px;object-fit:contain;mix-blend-mode:multiply}
+.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:15px;letter-spacing:.06em;color:#14150F;font-weight:700}
+.cv .pgrid .cell span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#5a5a52}
 .cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:.14em;border:2px solid currentColor;padding:14px 22px;margin-top:30px}
 
-.cv .heroflex{display:flex;gap:50px;align-items:center;flex:1;min-height:0}
+.cv .heroflex{display:flex;gap:20px;align-items:center;flex:1;min-height:0}
 .cv .heroflex .txt{flex:1;min-width:0}
-.cv .heroflex .art{flex:0 0 400px;display:flex;align-items:center;justify-content:center}
-.cv .heroflex .art img{width:100%;max-height:640px;object-fit:contain}
+/* bleeds 60px past the right padding so the glass reads as large as the frame
+   allows; the headline drops to 54px because the text column narrows to suit. */
+.cv .heroflex .art{flex:0 0 480px;margin-right:-60px;display:flex;align-items:center;justify-content:center}
+.cv .heroflex .art img{width:100%;max-height:900px;object-fit:contain}
+.cv .heroflex h4.hl,.cv .heroflex h4.hl.sm{font-size:54px}
+.cv .heroflex .dek{font-size:25px}
 
 /* --- story: 250px clear top and bottom for the profile bar and tap target --- */
 .cv--story .pad{padding:150px 84px 0}
@@ -116,7 +131,13 @@
 .cv--story .heroflex .art,.cv--story .split .col-a{flex:none;width:100%}
 .cv--story .heroflex .art img{max-height:700px}
 .cv--story .stripwrap{flex-direction:column;align-items:flex-start;gap:16px}
-.cv--story .pgrid{grid-template-columns:repeat(3,1fr)}
-.cv--story .pgrid .cell img{height:260px}
+/* 2x2 bled to the story edges. The img height is capped at 420 on purpose: two
+   rows plus the kick, headline, deck and code have to clear the 250px safe zones
+   top and bottom, and a centred flex overflows BOTH ends once it runs tall. */
+.cv--story .pgrid{grid-template-columns:repeat(2,1fr);gap:18px;margin:30px -76px 0}
+.cv--story .pgrid .cell{padding:12px 10px 16px}
+.cv--story .pgrid .cell img{height:420px}
+.cv--story .pgrid .cell em{font-size:22px}
+.cv--story .pgrid .cell span{font-size:17px}
 .cv--story .docband{height:620px}
 .cv--story .cvbody{padding-bottom:40px}
