@@ -8,7 +8,7 @@
 <link rel="icon" type="image/png" href="assets/favicon.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="creative.css" />
+<link rel="stylesheet" href="creative.css?v=3" />
 <style>
   :root{
     --bg:#0D0D0D;--bg-soft:#151515;--bg-card:#121212;
@@ -112,12 +112,11 @@
   .ad-art{padding:26px;border-right:1px solid var(--line);background:#0A0A0A}
   .ad-brief{padding:28px 30px;min-width:0}
 
+  /* aspect-ratio is set inline per card from SIZE in pack.js; the canvas sizes
+     itself, so nothing here hardcodes a format. */
   .stage{position:relative;width:100%;overflow:hidden;border-radius:3px;background:#000}
-  .stage.sq{aspect-ratio:1/1}
-  .stage.st{aspect-ratio:9/16;max-width:300px}
+  .stage.st{max-width:300px}
   .stage .cv{position:absolute;top:0;left:0;transform-origin:top left}
-  .stage.sq .cv{width:1080px;height:1080px}
-  .stage.st .cv{width:1080px;height:1920px}
   .artmeta{display:flex;align-items:center;gap:10px;margin-top:14px;flex-wrap:wrap}
   .artmeta .dim{font-family:var(--mono);font-size:10px;letter-spacing:.14em;color:var(--g3)}
   .btn{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;padding:8px 13px;border:1px solid var(--line);border-radius:999px;background:none;color:var(--g1);cursor:pointer;text-decoration:none;display:inline-block}
@@ -324,8 +323,8 @@
 </div></section>
 
 <section class="sec" id="feed"><div class="wrap">
-  <div class="sh"><span class="n">04</span><h2>Feed ads <i>1:1</i>.</h2></div>
-  <p class="sub">Ten concepts, ordered by how hard the cow hits. Each preview renders live at 1080&times;1080 from the
+  <div class="sh"><span class="n">04</span><h2>Feed ads <i>4:3 portrait</i>.</h2></div>
+  <p class="sub">Ten concepts, ordered by how hard the cow hits. Each preview renders live at 1080&times;1440 from the
      same source the exports use, so what you see is what ships. <b>Download PNG</b> is the finished file, ready to
      upload. <b>Edit in Canva</b> opens the same creative in Blake's Canva with the text editable. <b>Actual size</b>
      drops the preview scaling and <b>Open</b> loads the creative alone on a blank page.</p>
@@ -352,8 +351,9 @@
   <div class="method" style="margin-top:40px">
     <div class="mcard">
       <h3>Sizes &amp; safe areas</h3>
-      <p>Feed 1080&times;1080. Story 1080&times;1920 with 250px clear at top and bottom for the profile bar and the tap
-         target. Export PNG for anything carrying a chromatogram or a document, JPG q90 for vial-only art.</p>
+      <p>Feed 1080&times;1440 portrait &mdash; it takes more of the screen on the way past than a square does. Story
+         1080&times;1920 with 250px clear at top and bottom for the profile bar and the tap target. Export PNG for
+         anything carrying a chromatogram or a document, JPG q90 for vial-only art.</p>
       <p>The footer strip is not optional and does not scale below 15px at 1080. It lives inside the artwork rather than
          the caption, because Meta truncates captions and never crops pixels.</p>
     </div>
@@ -416,7 +416,7 @@
 
 <div class="toast" id="toast">Copied</div>
 
-<script src="pack.js"></script>
+<script src="pack.js?v=3"></script>
 <script>
 function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
 
@@ -427,13 +427,16 @@ function canvaHint(nudge){
 
 /* Matches the naming export.mjs writes, so the button always points at a real file. */
 function pngName(a, isStory){
-  return 'srg-ad01-' + a.id.toLowerCase() + '-' + a.slug + '-1080x' + (isStory ? 1920 : 1080) + '.png';
+  var s = window.SRGPACK.sizeOf(isStory);
+  return 'srg-ad01-' + a.id.toLowerCase() + '-' + a.slug + '-' + s[0] + 'x' + s[1] + '.png';
 }
 
 function card(a, isStory){
   var canva = window.SRGPACK.canvaUrl(a.id);
   var nudge = !!window.SRGPACK.canvaNudge[a.id];
-  var chips = '<span class="chip">' + (isStory ? '1080×1920' : '1080×1080') + '</span>'
+  var sz = window.SRGPACK.sizeOf(isStory);
+  var dim = sz[0] + '×' + sz[1];
+  var chips = '<span class="chip">' + dim + '</span>'
             + '<span class="chip">' + a.palette + '</span>'
             + (a.safe === 'paid' ? '<span class="chip paid">Paid-safe</span>'
                                  : '<span class="chip org">Organic only</span>');
@@ -449,14 +452,16 @@ function card(a, isStory){
     +   '<div class="chips">' + chips + '</div></div>'
     + '<div class="ad-body">'
     +   '<div class="ad-art">'
-    +     '<div class="stage ' + (isStory ? 'st' : 'sq') + '">' + window.SRGPACK.creative(a, isStory) + '</div>'
+    +     '<div class="stage ' + (isStory ? 'st' : 'sq') + '" style="aspect-ratio:' + sz[0] + '/' + sz[1] + '">'
+    +       window.SRGPACK.creative(a, isStory) + '</div>'
     +     '<div class="artmeta">'
     +       '<a class="btn dl" href="exports/' + pngName(a, isStory) + '" download>Download PNG</a>'
     +       (canva ? '<a class="btn cv-btn' + (nudge ? ' warn' : '') + '" href="' + canva + '"'
     +         ' target="_blank" rel="noopener" title="' + canvaHint(nudge) + '">'
     +         'Edit in Canva' + (nudge ? ' *' : '') + '</a>' : '')
     +       '<button class="btn" data-full>Actual size</button>'
-    +       '<a class="btn" href="export.html?id=' + a.id + '" target="_blank" rel="noopener">Open</a></div>'
+    +       '<a class="btn" href="export.html?id=' + a.id + '" target="_blank" rel="noopener">Open</a>'
+    +       '<span class="dim">' + dim + '</span></div>'
     +   '</div>'
     +   '<div class="ad-brief">'
     +     '<div class="score">' + score + '</div>'

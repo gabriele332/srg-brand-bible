@@ -54,22 +54,18 @@
 .cv .big.md{font-size:200px}
 .cv .big.sm{font-size:180px}
 .cv .bigsub{font-family:var(--mono);font-size:22px;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-top:14px}
-/* block flow + absolutely positioned vial: survives Canva's PDF import intact.
-   The product renders carry ~23% empty margin each side, so the box has to run
-   wider than the glass looks and bleed past the padding to read big. */
+/* Both formats are portrait, so the figure stacks above the product rather than
+   sitting beside it: the number gets the full width back and the render gets the
+   full column instead of a 540px slot. Block flow throughout, which is also what
+   survives Canva's PDF import intact.
+   The renders carry ~23% empty margin each side, hence the 40px negative margins
+   — the glass has to be pushed out to the edges to read big. */
 .cv .metricwrap{position:relative}
-/* The render's glass starts about 16% into its frame, so the text has to stop
-   ~410px short of the wrap edge to clear it — not the 360 the box width suggests. */
-.cv .metrictext.has-vial{padding-right:410px}
-.cv .metricwrap .vialbox{position:absolute;right:-60px;top:0;bottom:0;width:540px;
-  display:flex;align-items:center;justify-content:center}
-.cv .metricwrap .vialbox img{width:100%;max-height:820px;object-fit:contain}
-.cv--story .metrictext.has-vial{padding-right:0}
-.cv--story .metricwrap .vialbox{position:static;width:100%;padding:20px 0 0;display:block;
-  margin-left:-40px;margin-right:-40px}
-/* 960, not 1040: at 1040 the stack runs ~16px past the body box and a centred
-   flex splits that overflow across both ends, which collides the kick line. */
-.cv--story .metricwrap .vialbox img{width:calc(100% + 80px);max-height:960px}
+.cv .metricwrap .vialbox{width:100%;padding:16px 0 0;display:block;margin-left:-40px;margin-right:-40px}
+.cv .metricwrap .vialbox img{width:calc(100% + 80px);max-height:760px;object-fit:contain}
+/* 960, not more: a centred flex splits any overflow across BOTH ends, so running
+   tall collides the kick line at the top rather than just spilling downward. */
+.cv--story .metricwrap .vialbox img{max-height:960px}
 .cv .strike{position:relative;display:inline-block;opacity:.42}
 .cv .strike:after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:5px;background:currentColor}
 
@@ -80,7 +76,11 @@
        also keeps the contaminant rows out of frame, so a paid creative never
        carries a word that trips policy review. Per-ad `docTop` nudges which
        band of the page lands in the window. --- */
-.cv .docband{flex:none;height:370px;position:relative;overflow:hidden;border-bottom:2px solid #8A9A6B;background:#fff}
+/* Height is per-ad (`docH`), not a shared constant. On the Retatrutide report the
+   contaminant summary bar sits at ~545px of the original page, i.e. ~392px once
+   scaled — so that band must stay under it or a paid-safe creative starts
+   carrying a word that trips policy review. */
+.cv .docband{flex:none;height:390px;position:relative;overflow:hidden;border-bottom:2px solid #8A9A6B;background:#fff}
 .cv .docband img{position:absolute;width:100%;left:0;top:0}
 .cv .callout{display:inline-flex;flex-direction:column;gap:6px;border:2px solid currentColor;padding:18px 24px;margin-top:34px;align-self:flex-start}
 .cv .callout .cl-k{font-family:var(--mono);font-size:14px;letter-spacing:.24em;text-transform:uppercase;opacity:.7}
@@ -99,24 +99,23 @@
 .cv .split img.vial{width:100%;max-height:520px;object-fit:contain}
 
 /* --- the lineup, prices left in --- */
-/* Four columns instead of five, and bled to the canvas edge: a cell's WIDTH caps
-   how big the glass can render, so fewer + wider columns is the only thing that
-   actually enlarges the product. Together that is roughly +45% on the vial. */
-.cv .pgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:34px -68px 0}
-.cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:10px 8px 14px;display:flex;flex-direction:column;align-items:center;gap:5px}
-.cv .pgrid .cell img{width:100%;height:280px;object-fit:contain;mix-blend-mode:multiply}
-.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:15px;letter-spacing:.06em;color:#14150F;font-weight:700}
-.cv .pgrid .cell span{font-family:var(--mono);font-size:12px;letter-spacing:.08em;color:#5a5a52}
+/* 2x2 bled to the canvas edge. A cell's WIDTH caps how big the glass can render,
+   so fewer + wider columns is the only lever that actually enlarges the product;
+   portrait has the height to spend on a second row. */
+.cv .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:30px -68px 0}
+.cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:12px 10px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
+.cv .pgrid .cell img{width:100%;height:340px;object-fit:contain;mix-blend-mode:multiply}
+.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:19px;letter-spacing:.06em;color:#14150F;font-weight:700}
+.cv .pgrid .cell span{font-family:var(--mono);font-size:15px;letter-spacing:.08em;color:#5a5a52}
 .cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:.14em;border:2px solid currentColor;padding:14px 22px;margin-top:30px}
 
-.cv .heroflex{display:flex;gap:20px;align-items:center;flex:1;min-height:0}
-.cv .heroflex .txt{flex:1;min-width:0}
-/* bleeds 60px past the right padding so the glass reads as large as the frame
-   allows; the headline drops to 54px because the text column narrows to suit. */
-.cv .heroflex .art{flex:0 0 480px;margin-right:-60px;display:flex;align-items:center;justify-content:center}
-.cv .heroflex .art img{width:100%;max-height:900px;object-fit:contain}
-.cv .heroflex h4.hl,.cv .heroflex h4.hl.sm{font-size:54px}
-.cv .heroflex .dek{font-size:25px}
+/* Stacked for portrait: the headline keeps its full measure and the render gets
+   the whole column, instead of the two fighting over one 1080px width. */
+.cv .heroflex{display:flex;flex-direction:column;gap:20px;flex:1;min-height:0}
+.cv .heroflex .txt{width:100%}
+.cv .heroflex .art{width:100%;margin:0 -40px;display:block}
+.cv .heroflex .art img{width:calc(100% + 80px);max-height:700px;object-fit:contain}
+.cv--story .heroflex .art img{max-height:900px}
 
 /* --- story: 250px clear top and bottom for the profile bar and tap target --- */
 .cv--story .pad{padding:150px 84px 0}

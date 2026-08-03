@@ -14,6 +14,10 @@
 
 var M = 'assets/mockups/', C = 'assets/coa/';
 
+/* Canvas sizes, in one place. The preview page, the export surface and the PNG
+   and PDF writers all read these, so a format change can't half-apply. */
+var SIZE = { feed: [1080, 1440], story: [1080, 1920] };
+
 /* The compliance strip. Burned into the artwork, not left to the caption,
    because Meta truncates captions and never crops pixels. */
 var STRIP = 'For laboratory and research use only. Not for human consumption. '
@@ -37,7 +41,8 @@ var T = {
 
   /* A real lot report, held as a legible band across the top of the frame. */
   doc: function (a) {
-    return '<div class="docband"><img src="' + C + a.doc + '" alt=""'
+    return '<div class="docband"' + (a.docH ? ' style="height:' + a.docH + 'px"' : '') + '>'
+      +   '<img src="' + C + a.doc + '" alt=""'
       +   (a.docTop ? ' style="top:' + a.docTop + 'px"' : '') + '/></div>'
       + '<div class="pad">'
       +   '<div class="kick">' + a.kick + '</div>'
@@ -133,9 +138,9 @@ var T = {
 var FEED = [
 {
   id:'F01', slug:'the-receipt', name:'The receipt', palette:'carbon', tpl:'doc', safe:'paid',
-  art:{ doc:'retatrutide.jpg', docTop:0, kick:'Lot HLX-SOP-RT20-2PEP',
+  art:{ doc:'retatrutide.jpg', docTop:0, docH:380, kick:'Lot HLX-SOP-RT20-2PEP',
         hl:'Most ads show<br>the vial.<br>This one shows<br>the paperwork.',
-        hlSize:'sm', callout:['Peptide purity, HPLC','98.76%'], url:'steadfastresearchgroup.com/coa' },
+        callout:['Peptide purity, HPLC','98.76%'], url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','Screenshot-worthy','New in the brain'],
   cow:'This ad is a lab report. We put the document in the creative and the vial nowhere.',
   pain:'In research supply, &ldquo;99%+ pure&rdquo; is a font choice. It appears on the artwork, never on a document anybody can open.',
@@ -149,7 +154,7 @@ var FEED = [
 {
   id:'F02', slug:'fill-accuracy', name:'Fill accuracy', palette:'field', tpl:'metric', safe:'paid',
   art:{ kick:'BPC-157 &middot; Report #151664', pre:'Label says <span class="strike">10 MG</span>',
-        big:'10.23', bigSize:'md', bigsub:'Milligrams measured',
+        big:'10.23', bigsub:'Milligrams measured',
         dek:'We publish both numbers. Even when the second one is lower.', vial:'srg-prod-bb10.jpg',
         url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','Screenshot-worthy','New in the brain'],
@@ -195,7 +200,7 @@ var FEED = [
 },
 {
   id:'F05', slug:'tested-twice', name:'Tested twice', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Janoshik &middot; Report #151664', hl:'The lab wrote<br>this on our<br>BPC-157 report:<br>&ldquo;tested&nbsp;twice.&rdquo;',
+  art:{ kick:'Janoshik &middot; Report #151664', hl:'The lab’s note on our<br>BPC-157: &ldquo;tested&nbsp;twice.&rdquo;',
         dek:'One run can flatter a batch. Two runs are harder to argue with.',
         callout:['Purity, HPLC','98.767%'], vial:'srg-prod-bb10.jpg', url:'steadfastresearchgroup.com/coa' },
   score:['Says it out loud','Screenshot-worthy','New in the brain'],
@@ -210,9 +215,9 @@ var FEED = [
 },
 {
   id:'F06', slug:'spot-a-fake-coa', name:'Spot a fake COA', palette:'olive', tpl:'doc', safe:'paid',
-  art:{ doc:'ghk-cu.jpg', docTop:-45, kick:'Free guide, no email gate',
+  art:{ doc:'ghk-cu.jpg', docTop:-45, docH:520, kick:'Free guide, no email gate',
         hl:'We published<br>the guide that<br>catches a faked<br>certificate.',
-        hlSize:'sm', dek:'Including, in principle, one of ours. Six checks, five minutes.',
+        dek:'Including, in principle, one of ours. Six checks, five minutes.',
         url:'steadfastresearchgroup.com/blog' },
   score:['Stops the scroll','Says it out loud','Would share','New in the brain'],
   cow:'We wrote the guide that teaches you to catch a forged certificate &mdash; a guide that works on us too.',
@@ -242,7 +247,7 @@ var FEED = [
 },
 {
   id:'F08', slug:'boring-box', name:'The boring box', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least<br>interesting<br>photo in our<br>library.',
+  art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least interesting<br>photo in our library.',
         dek:'A plain box with nothing on it. Most orders leave within one business day, cold-handled, tracked, with the tracking email sent the moment it ships.',
         vial:'srg-prod-wa10.jpg', url:'steadfastresearchgroup.com/shipping' },
   score:['Says it out loud','New in the brain'],
@@ -357,10 +362,14 @@ var STORIES = [
 }
 ];
 
-/* Build one creative element's markup. */
+/* Build one creative element's markup, sized from SIZE so the preview and the
+   exported file can never disagree about the format. */
 function creative(a, isStory) {
-  return '<div class="cv cv--' + a.palette + (isStory ? ' cv--story' : '') + '">' + T[a.tpl](a.art) + '</div>';
+  var s = isStory ? SIZE.story : SIZE.feed;
+  return '<div class="cv cv--' + a.palette + (isStory ? ' cv--story' : '') + '"'
+    + ' style="width:' + s[0] + 'px;height:' + s[1] + 'px">' + T[a.tpl](a.art) + '</div>';
 }
+function sizeOf(isStory) { return isStory ? SIZE.story : SIZE.feed; }
 
 /* ---------------------------------------------------------------------------
    Canva. Each creative was imported into Blake's Canva from its PDF (not its
@@ -391,6 +400,7 @@ function canvaUrl(id) {
 
 root.SRGPACK = {
   FEED: FEED, STORIES: STORIES, STRIP: STRIP, creative: creative,
+  SIZE: SIZE, sizeOf: sizeOf,
   canvaUrl: canvaUrl, canvaFolder: CANVA_FOLDER, canvaNudge: CANVA_NUDGE,
   all: FEED.concat(STORIES),
   find: function (id) {

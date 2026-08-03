@@ -61,8 +61,8 @@ await mkdir(OUT, { recursive: true });
    Canva imports, because a PDF carries real text runs and comes in as editable
    text boxes rather than one flat picture. */
 function toPdf(ad) {
-  const h = ad.story ? 1920 : 1080;
-  const name = `srg-ad01-${ad.id.toLowerCase()}-${ad.slug}-1080x${h}.pdf`;
+  const [w, h] = PACK.sizeOf(ad.story);
+  const name = `srg-ad01-${ad.id.toLowerCase()}-${ad.slug}-${w}x${h}.pdf`;
   const target = join(OUT, name);
   const profile = join(OUT, '.q-' + ad.id);
   const args = [
@@ -81,7 +81,7 @@ function toPdf(ad) {
 }
 
 function shoot(ad) {
-  const w = 1080, h = ad.story ? 1920 : 1080;
+  const [w, h] = PACK.sizeOf(ad.story);
   const name = `srg-ad01-${ad.id.toLowerCase()}-${ad.slug}-${w}x${h}.png`;
   const target = join(OUT, name);
   // A per-asset profile dir keeps parallel-safe state and stops Chrome

@@ -10,9 +10,8 @@
 <style>
   /* Export surface only: one creative, true size, nothing else on the page.
      Headless Chrome screenshots this at the exact canvas dimensions. */
+  /* The canvas sizes itself from SIZE in pack.js — nothing here hardcodes a format. */
   html,body{margin:0;padding:0;background:#fff;overflow:hidden}
-  .cv{width:1080px;height:1080px}
-  .cv--story{height:1920px}
   #err{font:14px/1.5 system-ui;padding:24px;color:#b00}
   /* PDF export: keep the grounds and the blend-mode knockouts, and let the page
      box match the canvas exactly so Canva imports it at the right size. */
@@ -35,8 +34,9 @@
   } else {
     document.getElementById('out').innerHTML = window.SRGPACK.creative(hit.ad, hit.isStory);
     // Match the print page box to the canvas so a PDF export is 1:1 with the PNG.
+    var sz = window.SRGPACK.sizeOf(hit.isStory);
     var st = document.createElement('style');
-    st.textContent = '@page{size:1080px ' + (hit.isStory ? 1920 : 1080) + 'px;margin:0}';
+    st.textContent = '@page{size:' + sz[0] + 'px ' + sz[1] + 'px;margin:0}';
     document.head.appendChild(st);
     var ready = function () { document.title = 'SRG-READY-' + id; };
     if (document.fonts && document.fonts.ready) {
