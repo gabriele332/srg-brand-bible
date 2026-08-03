@@ -1,8 +1,13 @@
 /* ==========================================================================
-   Steadfast Research Group — static ad creative system.
-   Every creative draws on a true 1080px canvas: 1080x1080 feed, 1080x1920
-   story. Shared by index.html (scaled previews) and export.html (PNG export),
-   so a preview and an exported file can never drift apart.
+   Steadfast Research Group — static ad creative system, v2 "poster".
+
+   Rebuilt to the visual language of the reference ads (Sunday, Enhanced,
+   Brello, Onyx, Aura) rather than an editorial page: centred composition,
+   brand mark at the top, ONE poster-scale headline, the product huge and
+   OVERLAPPING the type, an atmospheric gradient ground instead of a flat
+   fill, and a single tiny legal line at the foot.
+
+   Canvas: true 1080px wide (1440 feed / 1920 story), scaled by consumers.
    ========================================================================== */
 .cv{
   --display:"Space Grotesk",sans-serif;
@@ -13,137 +18,119 @@
 }
 .cv *{box-sizing:border-box}
 
-/* --- the three brand grounds, straight from the brand bible --- */
-.cv--carbon{background:#0D0D0D;color:#fff}
-.cv--carbon .ac{color:#8A9A6B}
-.cv--field{background:#EFEDE6;color:#14150F}
+/* --- grounds: gradients with a little air and light, not flat fills --- */
+.cv--carbon{background:radial-gradient(130% 95% at 50% 28%,#26282400 0%,#0D0D0D 100%),
+  linear-gradient(180deg,#232522 0%,#101010 60%,#0B0B0B 100%);color:#fff}
+.cv--carbon .ac{color:#A8B98A}
+.cv--field{background:linear-gradient(175deg,#F7F5EE 0%,#EDE9DC 52%,#DCD6C3 100%);color:#14150F}
 .cv--field .ac{color:#5E6E48}
-.cv--olive{background:#414B37;color:#F2F1EA}
+.cv--olive{background:linear-gradient(175deg,#535F46 0%,#414B37 55%,#323A2A 100%);color:#F2F1EA}
 .cv--olive .ac{color:#C7D3AF}
 
-/* Reference standard (Sunday / Enhanced / Onyx): ONE big headline, the product,
-   at most one supporting line, a tiny disclaimer. Fewer elements, all larger —
-   nothing on the canvas below 23px except the legal line. */
-.cv .pad{padding:76px 76px 0;flex:1;display:flex;flex-direction:column;min-height:0}
-.cv .cvbody{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;padding-bottom:24px}
-.cv .kick{font-family:var(--mono);font-size:23px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;flex:none}
-.cv h4.hl{font-family:var(--display);font-weight:600;letter-spacing:-.028em;line-height:.98;font-size:96px;margin:28px 0 0;text-transform:uppercase}
-.cv h4.hl.sm{font-size:76px}
-.cv h4.hl.lg{font-size:118px}
-.cv .dek{font-family:var(--body);font-weight:300;font-size:31px;line-height:1.4;margin:30px 0 0;max-width:880px;opacity:.92}
+/* --- frame: centred, poster --- */
+.cv .pad{padding:70px 76px 0;flex:1;display:flex;flex-direction:column;align-items:center;
+  text-align:center;min-height:0}
+.cv .cvbody{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  min-height:0;padding-bottom:20px;width:100%}
+
+/* brand mark, top centre, like every reference */
+.cv .topmark{flex:none;display:flex;flex-direction:column;align-items:center;gap:12px}
+.cv .topmark img{width:54px;height:54px;object-fit:contain}
+.cv .topmark b{font-family:var(--display);font-weight:600;font-size:25px;letter-spacing:.3em;
+  margin-right:-.3em}
+.cv .topmark small{display:block;font-family:var(--mono);font-size:12px;letter-spacing:.42em;
+  margin-right:-.42em;opacity:.55;margin-top:2px}
+.cv--field .topmark img{filter:invert(1)}
+
+/* the lot / report line — only present where it IS the proof */
+.cv .kick{font-family:var(--mono);font-size:23px;letter-spacing:.26em;text-transform:uppercase;
+  opacity:.65;flex:none;margin-top:26px}
+
+/* the one headline */
+.cv h4.hl{font-family:var(--display);font-weight:700;letter-spacing:-.03em;line-height:.96;
+  font-size:126px;margin:0;text-transform:uppercase;position:relative;z-index:1}
+.cv h4.hl.sm{font-size:100px}
+.cv h4.hl.lg{font-size:152px}
+.cv h4.hl i{font-style:italic;font-weight:600}
+
+/* the one supporting line */
+.cv .dek{font-family:var(--body);font-weight:300;font-size:34px;line-height:1.38;margin:30px 0 0;
+  max-width:880px;opacity:.92}
 .cv .dek b{font-weight:600}
 
-.cv .mark{display:flex;align-items:center;gap:18px}
-.cv .mark img{width:52px;height:52px;object-fit:contain}
-.cv .mark span{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:.2em}
-.cv .mark small{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.32em;opacity:.6;margin-top:3px}
-.cv--field .mark img{filter:invert(1)}
+/* --- the product, huge and overlapping the type. The renders are white-bg
+       JPGs on multiply. CRITICAL: position/z-index go on the IMG, never on the
+       wrapper — a positioned wrapper with z-index becomes a stacking context,
+       which isolates the blend and the JPG renders as a white rectangle. The
+       img blending against the page backdrop is what makes the white vanish
+       AND lets the headline show through the empty part of the frame, with the
+       dark cap genuinely covering it — the Enhanced/Brello depth effect. --- */
+.cv .art{width:100%;display:flex;justify-content:center;flex:none}
+.cv .art img{mix-blend-mode:multiply;object-fit:contain;width:auto;position:relative;z-index:2}
+.cv .art.lap{margin-top:-64px}
+.cv .art img{max-height:600px;max-width:940px}
 
-/* --- mandatory footer strip. Still not optional — but ONE line of legal plus
-       the mark, like the reference ads, instead of a three-row block. The full
-       long-form disclaimer lives in the caption. --- */
-.cv .strip{flex:none;padding:24px 76px 30px;border-top:1px solid currentColor;margin-top:auto}
-.cv .strip .dl{font-family:var(--body);font-weight:300;font-size:17px;line-height:1.35;letter-spacing:.01em;opacity:.6;white-space:nowrap}
-.cv .strip .url{font-family:var(--mono);font-size:21px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;opacity:.95}
-.cv .stripwrap{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
-
-/* --- product renders are white-background studio JPGs: multiply knocks the
-       white out, so vials only ever sit on a light panel --- */
-.cv .vial{mix-blend-mode:multiply}
-.cv--carbon .vialbox,.cv--olive .vialbox{background:#EFEDE6;border-radius:4px}
-
-/* --- one audited number, enormous --- */
-.cv .big{font-family:var(--display);font-weight:700;letter-spacing:-.05em;line-height:.84;font-size:250px}
-.cv .big.md{font-size:200px}
-.cv .big.sm{font-size:180px}
-.cv .bigsub{font-family:var(--mono);font-size:27px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;margin-top:16px}
-/* Both formats are portrait, so the figure stacks above the product rather than
-   sitting beside it: the number gets the full width back and the render gets the
-   full column instead of a 540px slot. Block flow throughout, which is also what
-   survives Canva's PDF import intact.
-   The renders carry ~23% empty margin each side, hence the 40px negative margins
-   — the glass has to be pushed out to the edges to read big. */
-.cv .metricwrap{position:relative}
-.cv .metricwrap .vialbox{width:100%;padding:16px 0 0;display:block;margin-left:-40px;margin-right:-40px}
-.cv .metricwrap .vialbox img{width:calc(100% + 80px);max-height:690px;object-fit:contain}
-/* 960, not more: a centred flex splits any overflow across BOTH ends, so running
-   tall collides the kick line at the top rather than just spilling downward. */
-.cv--story .metricwrap .vialbox img{max-height:960px}
+/* one audited number, poster scale */
+.cv .big{font-family:var(--display);font-weight:700;letter-spacing:-.05em;line-height:.84;
+  font-size:300px;position:relative;z-index:1}
+.cv .big.sm{font-size:210px}
+.cv .bigsub{font-family:var(--mono);font-size:28px;letter-spacing:.24em;text-transform:uppercase;
+  opacity:.75;margin-top:18px}
 .cv .strike{position:relative;display:inline-block;opacity:.42}
 .cv .strike:after{content:"";position:absolute;left:-4px;right:-4px;top:52%;height:5px;background:currentColor}
 
-/* --- lot report as a band across the top of the frame.
-       Deliberately NOT a full-bleed wash: the letterhead, lab address, lot
-       number and analysis dates have to stay legible, because the document
-       being real is the entire concept. Cropping to the head of the report
-       also keeps the contaminant rows out of frame, so a paid creative never
-       carries a word that trips policy review. Per-ad `docTop` nudges which
-       band of the page lands in the window. --- */
-/* Height is per-ad (`docH`), not a shared constant. On the Retatrutide report the
-   contaminant summary bar sits at ~545px of the original page, i.e. ~392px once
-   scaled — so that band must stay under it or a paid-safe creative starts
-   carrying a word that trips policy review. */
-.cv .docband{flex:none;height:390px;position:relative;overflow:hidden;border-bottom:2px solid #8A9A6B;background:#fff}
-.cv .docband img{position:absolute;width:100%;left:0;top:0}
-.cv .callout{display:inline-flex;flex-direction:column;gap:8px;border:2px solid currentColor;padding:22px 30px;margin-top:36px;align-self:flex-start}
+/* purity box / promo chip, centred */
+.cv .callout{display:inline-flex;flex-direction:column;gap:8px;border:2px solid currentColor;
+  padding:22px 34px;margin-top:34px;align-self:center}
 .cv .callout .cl-k{font-family:var(--mono);font-size:18px;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
 .cv .callout .cl-v{font-family:var(--display);font-weight:600;font-size:60px;letter-spacing:-.02em;line-height:1}
+.cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:42px;letter-spacing:.14em;
+  border:2px solid currentColor;padding:18px 30px;margin-top:36px}
 
-/* --- what got tested --- */
-.cv .checks{margin:36px 0 0;padding:0;list-style:none;column-count:2;column-gap:48px}
-.cv .checks li{font-family:var(--body);font-weight:300;font-size:30px;line-height:1.3;padding:16px 0 16px 48px;position:relative;border-top:1px solid rgba(128,128,128,.34);break-inside:avoid}
+/* two products side by side, Sunday-style — replaces the catalogue grid.
+   Same stacking rule as .art: z-index on the img only, or the blend isolates. */
+.cv .duo{display:flex;gap:56px;justify-content:center;align-items:flex-end;margin-top:8px}
+.cv .duo .d{display:flex;flex-direction:column;align-items:center}
+.cv .duo img{height:560px;object-fit:contain;mix-blend-mode:multiply;position:relative;z-index:2}
+.cv .duo em{font-style:normal;font-family:var(--mono);font-size:27px;letter-spacing:.08em;font-weight:700;margin-top:6px}
+.cv .duo span{font-family:var(--mono);font-size:22px;letter-spacing:.08em;opacity:.6;margin-top:6px}
+.cv .duo.lap{margin-top:-56px}
+
+/* what got tested — the one data-forward layout, kept but centred in frame */
+.cv .checks{margin:40px auto 0;padding:0;list-style:none;column-count:2;column-gap:52px;
+  max-width:880px;text-align:left}
+.cv .checks li{font-family:var(--body);font-weight:300;font-size:30px;line-height:1.3;
+  padding:16px 0 16px 48px;position:relative;border-top:1px solid rgba(128,128,128,.34);break-inside:avoid}
 .cv .checks li:before{content:"\2713";position:absolute;left:0;top:16px;font-family:var(--mono);font-size:25px}
 .cv .checks li.hi{font-weight:600}
 .cv .checks li.hi:before{font-weight:700}
 
-.cv .split{display:flex;gap:52px;align-items:center;flex:1;min-height:0}
-.cv .split .col-a{flex:0 0 340px;display:flex;align-items:center;justify-content:center}
-.cv .split .col-b{flex:1;min-width:0}
-.cv .split img.vial{width:100%;max-height:520px;object-fit:contain}
+/* a real lot report as a band across the top (F01/F06 only — the document IS
+   that concept's design). Height is per-ad: on the Retatrutide report the
+   contaminant row sits ~392px in, and a paid-safe creative must not show it. */
+.cv .docband{flex:none;height:390px;position:relative;overflow:hidden;
+  border-bottom:2px solid #8A9A6B;background:#fff}
+.cv .docband img{position:absolute;width:100%;left:0;top:0}
 
-/* --- the lineup, prices left in --- */
-/* 2x2 bled to the canvas edge. A cell's WIDTH caps how big the glass can render,
-   so fewer + wider columns is the only lever that actually enlarges the product;
-   portrait has the height to spend on a second row. */
-.cv .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:30px -68px 0}
-.cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:12px 10px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
-/* 250, not 340: two rows + the larger type + the code chip have to clear the
-   strip, and the centred cvbody pushes overflow through the kick line above. */
-.cv .pgrid .cell img{width:100%;height:250px;object-fit:contain;mix-blend-mode:multiply}
-.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:23px;letter-spacing:.06em;color:#14150F;font-weight:700}
-.cv .pgrid .cell span{font-family:var(--mono);font-size:19px;letter-spacing:.08em;color:#5a5a52}
-.cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:42px;letter-spacing:.14em;border:2px solid currentColor;padding:18px 28px;margin-top:34px}
+/* --- foot: one tiny legal line, centred, no furniture --- */
+.cv .strip{flex:none;padding:26px 76px 44px;text-align:center;margin-top:auto}
+.cv .strip .url{font-family:var(--mono);font-size:22px;letter-spacing:.2em;text-transform:uppercase;
+  margin-bottom:14px;opacity:.9}
+.cv .strip .dl{font-family:var(--body);font-weight:300;font-size:17px;line-height:1.35;
+  letter-spacing:.01em;opacity:.55;white-space:nowrap}
 
-/* Stacked for portrait: the headline keeps its full measure and the render gets
-   the whole column, instead of the two fighting over one 1080px width. */
-.cv .heroflex{display:flex;flex-direction:column;gap:20px;flex:1;min-height:0}
-.cv .heroflex .txt{width:100%}
-.cv .heroflex .art{width:100%;margin:0 -40px;display:block}
-.cv .heroflex .art img{width:calc(100% + 80px);max-height:640px;object-fit:contain}
-.cv--story .heroflex .art img{max-height:900px}
-
-/* --- story: 250px clear top and bottom for the profile bar and tap target --- */
+/* ---------------- story (1080x1920): 250px clear top and bottom ------------- */
 .cv--story .pad{padding:150px 84px 0}
-.cv--story h4.hl{font-size:108px}
-.cv--story h4.hl.sm{font-size:86px}
-.cv--story h4.hl.lg{font-size:124px}
-.cv--story .dek{font-size:36px;margin-top:36px}
-.cv--story .strip{padding:28px 84px 150px}
+.cv--story h4.hl{font-size:138px}
+.cv--story h4.hl.sm{font-size:110px}
+.cv--story h4.hl.lg{font-size:164px}
+.cv--story .dek{font-size:38px;margin-top:34px}
+.cv--story .big{font-size:330px}
+.cv--story .art img{max-height:860px}
+.cv--story .duo img{height:640px}
+.cv--story .duo{gap:44px}
+.cv--story .checks{column-count:1;max-width:820px}
+.cv--story .strip{padding:28px 84px 160px}
 .cv--story .strip .dl{font-size:19px}
-.cv--story .strip .url{font-size:24px}
-.cv--story .big{font-size:270px}
-.cv--story .checks{column-count:1}
-.cv--story .heroflex,.cv--story .split{flex-direction:column;gap:44px}
-.cv--story .heroflex .art,.cv--story .split .col-a{flex:none;width:100%}
-.cv--story .heroflex .art img{max-height:700px}
-.cv--story .stripwrap{flex-direction:column;align-items:flex-start;gap:16px}
-/* 2x2 bled to the story edges. The img height is capped at 420 on purpose: two
-   rows plus the kick, headline, deck and code have to clear the 250px safe zones
-   top and bottom, and a centred flex overflows BOTH ends once it runs tall. */
-.cv--story .pgrid{grid-template-columns:repeat(2,1fr);gap:18px;margin:30px -76px 0}
-.cv--story .pgrid .cell{padding:12px 10px 16px}
-.cv--story .pgrid .cell img{height:420px}
-.cv--story .pgrid .cell em{font-size:22px}
-.cv--story .pgrid .cell span{font-size:17px}
+.cv--story .strip .url{font-size:25px}
 .cv--story .docband{height:620px}
-.cv--story .cvbody{padding-bottom:40px}

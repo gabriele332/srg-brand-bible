@@ -25,14 +25,16 @@ var SIZE = { feed: [1080, 1440], story: [1080, 1920] };
    ("not a drug… diagnose, treat, cure, or prevent") stays in every caption. */
 var STRIP = 'For laboratory and research use only. Not for human consumption.';
 
-function mark() {
-  return '<div class="mark"><img src="assets/flag-white.png" alt=""/>'
-       + '<span>STEADFAST<small>RESEARCH GROUP</small></span></div>';
+/* Brand mark, top centre — where every reference ad carries it. */
+function topmark() {
+  return '<div class="topmark"><img src="assets/flag-white.png" alt=""/>'
+       + '<span><b>STEADFAST</b><small>RESEARCH GROUP</small></span></div>';
 }
+/* Foot: URL + one tiny legal line, centred, nothing else. */
 function strip(url) {
   return '<div class="strip">'
        + (url ? '<div class="url">' + url + '</div>' : '')
-       + '<div class="stripwrap"><div class="dl">' + STRIP + '</div><div>' + mark() + '</div></div>'
+       + '<div class="dl">' + STRIP + '</div>'
        + '</div>';
 }
 
@@ -41,15 +43,16 @@ function strip(url) {
    ------------------------------------------------------------------------- */
 var T = {
 
-  /* A real lot report, held as a legible band across the top of the frame. */
+  /* A real lot report, held as a legible band across the top of the frame.
+     The one layout that keeps the document as its design — that IS the cow. */
   doc: function (a) {
     return '<div class="docband"' + (a.docH ? ' style="height:' + a.docH + 'px"' : '') + '>'
       +   '<img src="' + C + a.doc + '" alt=""'
       +   (a.docTop ? ' style="top:' + a.docTop + 'px"' : '') + '/></div>'
       + '<div class="pad">'
-      +   '<div class="kick">' + a.kick + '</div>'
+      +   (a.kick ? '<div class="kick" style="margin-top:0">' + a.kick + '</div>' : '')
       +   '<div class="cvbody">'
-      +     '<h4 class="hl ' + (a.hlSize || '') + '">' + a.hl + '</h4>'
+      +     '<h4 class="hl ' + (a.hlSize || 'sm') + '">' + a.hl + '</h4>'
       +     (a.dek ? '<div class="dek">' + a.dek + '</div>' : '')
       +     (a.callout ? '<div class="callout"><span class="cl-k">' + a.callout[0] + '</span>'
       +       '<span class="cl-v ac">' + a.callout[1] + '</span></div>' : '')
@@ -57,38 +60,33 @@ var T = {
       + '</div>' + strip(a.url);
   },
 
-  /* One audited number, as large as the canvas allows.
-     Laid out in normal block flow with the vial absolutely positioned, rather
-     than as centred flex siblings: Canva's PDF import re-anchors vertically
-     centred flex children, which collapsed the big figure and dropped the vial
-     on top of it. Block flow round-trips intact. */
+  /* One audited number at poster scale, the product overlapping it from below. */
   metric: function (a) {
     return '<div class="pad">'
-      + '<div class="kick">' + a.kick + '</div>'
-      + '<div class="cvbody"><div class="metricwrap">'
-      +   '<div class="metrictext' + (a.vial ? ' has-vial' : '') + '">'
-      +     (a.pre ? '<div class="bigsub" style="margin:0 0 6px">' + a.pre + '</div>' : '')
-      +     '<div class="big ' + (a.bigSize || '') + ' ac">' + a.big + '</div>'
-      +     '<div class="bigsub">' + a.bigsub + '</div>'
-      +     (a.dek ? '<div class="dek" style="font-size:24px;margin-top:26px">' + a.dek + '</div>' : '')
-      +   '</div>'
-      +   (a.vial ? '<div class="vialbox"><img class="vial" src="' + M + a.vial + '" alt=""/></div>' : '')
-      + '</div></div></div>' + strip(a.url);
+      + topmark()
+      + (a.kick ? '<div class="kick">' + a.kick + '</div>' : '')
+      + '<div class="cvbody">'
+      +   (a.pre ? '<div class="bigsub" style="margin:0 0 8px">' + a.pre + '</div>' : '')
+      +   '<div class="big ' + (a.bigSize || '') + ' ac">' + a.big + '</div>'
+      +   '<div class="bigsub">' + a.bigsub + '</div>'
+      +   (a.vial ? '<div class="art lap"><img src="' + M + a.vial + '" alt=""/></div>' : '')
+      +   (a.dek ? '<div class="dek" style="margin-top:14px">' + a.dek + '</div>' : '')
+      + '</div></div>' + strip(a.url);
   },
 
-  /* Vial hero — the category's own format, with a fact where the adjective goes. */
+  /* Poster hero: headline, then the product crossing its baseline — the
+     Enhanced / Brello move, with the dark cap doing the overlapping. */
   hero: function (a) {
     return '<div class="pad">'
-      + '<div class="kick">' + a.kick + '</div>'
-      + '<div class="cvbody"><div class="heroflex">'
-      +   '<div class="txt">'
-      +     '<h4 class="hl ' + (a.hlSize || 'sm') + '">' + a.hl + '</h4>'
-      +     (a.dek ? '<div class="dek">' + a.dek + '</div>' : '')
-      +     (a.callout ? '<div class="callout"><span class="cl-k">' + a.callout[0] + '</span>'
-      +       '<span class="cl-v ac">' + a.callout[1] + '</span></div>' : '')
-      +   '</div>'
-      +   '<div class="art">' + (a.vial ? '<img class="vial" src="' + M + a.vial + '" alt=""/>' : '') + '</div>'
-      + '</div></div></div>' + strip(a.url);
+      + topmark()
+      + (a.kick ? '<div class="kick">' + a.kick + '</div>' : '')
+      + '<div class="cvbody">'
+      +   '<h4 class="hl ' + (a.hlSize || 'sm') + '">' + a.hl + '</h4>'
+      +   (a.vial ? '<div class="art lap"><img src="' + M + a.vial + '" alt=""/></div>' : '')
+      +   (a.dek ? '<div class="dek" style="margin-top:12px">' + a.dek + '</div>' : '')
+      +   (a.callout ? '<div class="callout"><span class="cl-k">' + a.callout[0] + '</span>'
+      +     '<span class="cl-v ac">' + a.callout[1] + '</span></div>' : '')
+      + '</div></div>' + strip(a.url);
   },
 
   /* What actually got tested. A leading * marks the emphasised line. */
@@ -98,38 +96,38 @@ var T = {
       return '<li' + (hi ? ' class="hi ac"' : '') + '>' + (hi ? t.slice(1) : t) + '</li>';
     }).join('');
     return '<div class="pad">'
-      + '<div class="kick">' + a.kick + '</div>'
+      + (a.kick ? '<div class="kick" style="margin-top:0">' + a.kick + '</div>' : '')
       + '<div class="cvbody">'
       +   '<h4 class="hl ' + (a.hlSize || 'sm') + '">' + a.hl + '</h4>'
       +   '<ul class="checks">' + li + '</ul>'
-      +   (a.dek ? '<div class="dek" style="font-size:23px;margin-top:26px">' + a.dek + '</div>' : '')
+      +   (a.dek ? '<div class="dek">' + a.dek + '</div>' : '')
       + '</div></div>' + strip(a.url);
   },
 
-  /* Type only. Cheapest to make, usually the most forwarded. */
+  /* Type only, poster scale. */
   text: function (a) {
     return '<div class="pad">'
-      + '<div class="kick">' + a.kick + '</div>'
+      + topmark()
+      + (a.kick ? '<div class="kick">' + a.kick + '</div>' : '')
       + '<div class="cvbody">'
-      +   '<h4 class="hl ' + (a.hlSize || 'lg') + '" style="margin:0">' + a.hl + '</h4>'
+      +   '<h4 class="hl ' + (a.hlSize || 'lg') + '">' + a.hl + '</h4>'
       +   (a.dek ? '<div class="dek">' + a.dek + '</div>' : '')
       +   (a.code ? '<div class="code ac">' + a.code + '</div>' : '')
       + '</div></div>' + strip(a.url);
   },
 
-  /* The shelf, with the prices left in. */
-  grid: function (a) {
-    var cells = a.cells.map(function (c) {
-      return '<div class="cell"><img src="' + M + c[0] + '" alt=""/>'
+  /* Two products side by side, Sunday-style, crossing the headline baseline. */
+  duo: function (a) {
+    var d = a.cells.map(function (c) {
+      return '<div class="d"><img src="' + M + c[0] + '" alt=""/>'
            + '<em>' + c[1] + '</em><span>' + c[2] + '</span></div>';
     }).join('');
     return '<div class="pad">'
-      + '<div class="kick">' + a.kick + '</div>'
+      + topmark()
       + '<div class="cvbody">'
       +   '<h4 class="hl sm">' + a.hl + '</h4>'
-      +   '<div class="pgrid">' + cells + '</div>'
-      +   (a.dek ? '<div class="dek" style="font-size:23px;margin-top:30px">' + a.dek + '</div>' : '')
-      +   (a.code ? '<div class="code ac" style="margin-top:22px">' + a.code + '</div>' : '')
+      +   '<div class="duo lap">' + d + '</div>'
+      +   (a.code ? '<div class="code ac">' + a.code + '</div>' : '')
       + '</div></div>' + strip(a.url);
   }
 };
@@ -171,7 +169,7 @@ var FEED = [
 },
 {
   id:'F03', slug:'labs-we-dont-own', name:'Labs we don’t own', palette:'olive', tpl:'text', safe:'paid',
-  art:{ kick:'Independent testing', hl:'We send our lots<br>to four labs<br>we don’t own.', hlSize:'',
+  art:{ hl:'We send our lots<br>to four labs<br>we don’t own.', hlSize:'sm',
         dek:'ILS Laboratories &middot; Janoshik &middot; Testides &middot; Kovera Labs. Different labs, different methods, same requirement.',
         url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','New in the brain'],
@@ -202,8 +200,8 @@ var FEED = [
 },
 {
   id:'F05', slug:'tested-twice', name:'Tested twice', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Janoshik &middot; Report #151664', hl:'The lab’s note on our<br>BPC-157: &ldquo;tested&nbsp;twice.&rdquo;',
-        dek:'One run can flatter a batch. Two runs are harder to argue with.',
+  art:{ kick:'Janoshik &middot; Report #151664', hl:'&ldquo;Tested<br>twice.&rdquo;',
+        dek:'The lab&rsquo;s own note on our BPC-157. One run can flatter a batch.',
         callout:['Purity, HPLC','98.767%'], vial:'srg-prod-bb10.jpg', url:'steadfastresearchgroup.com/coa' },
   score:['Says it out loud','Screenshot-worthy','New in the brain'],
   cow:'The most persuasive line on our BPC-157 report was written by the lab, not by us: sample was tested twice.',
@@ -217,9 +215,9 @@ var FEED = [
 },
 {
   id:'F06', slug:'spot-a-fake-coa', name:'Spot a fake COA', palette:'olive', tpl:'doc', safe:'paid',
-  art:{ doc:'ghk-cu.jpg', docTop:-45, docH:520, kick:'Free guide, no email gate',
-        hl:'We published<br>the guide that<br>catches a faked<br>certificate.',
-        dek:'Including, in principle, one of ours. Six checks, five minutes.',
+  art:{ doc:'ghk-cu.jpg', docTop:-45, docH:520,
+        hl:'The guide that<br>catches a fake COA.',
+        dek:'Six checks, five minutes. It works on ours too.',
         url:'steadfastresearchgroup.com/blog' },
   score:['Stops the scroll','Says it out loud','Would share','New in the brain'],
   cow:'We wrote the guide that teaches you to catch a forged certificate &mdash; a guide that works on us too.',
@@ -233,7 +231,7 @@ var FEED = [
 },
 {
   id:'F07', slug:'bench-tool', name:'The bench tool', palette:'carbon', tpl:'metric', safe:'paid',
-  art:{ kick:'Free tool, no signup', pre:'50 mg vial, 2 mL solvent',
+  art:{ pre:'50 mg vial, 2 mL solvent',
         big:'25', bigsub:'Milligrams per mL, in the vial', bigSize:'sm',
         dek:'Vial mg and solvent volume in, mg/mL out. Free, no email.',
         url:'steadfastresearchgroup.com/tools' },
@@ -249,7 +247,7 @@ var FEED = [
 },
 {
   id:'F08', slug:'boring-box', name:'The boring box', palette:'field', tpl:'hero', safe:'paid',
-  art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least interesting<br>photo in our library.',
+  art:{ hl:'The boring box.', hlSize:'sm',
         dek:'Cold-handled, unbranded, tracked. Most orders out within one business day.',
         vial:'srg-prod-wa10.jpg', url:'steadfastresearchgroup.com/shipping' },
   score:['Says it out loud','New in the brain'],
@@ -264,7 +262,7 @@ var FEED = [
 },
 {
   id:'F09', slug:'ruo-is-the-spec', name:'RUO is the spec', palette:'carbon', tpl:'text', safe:'paid',
-  art:{ kick:'What’s on the label', hl:'Not for human<br>consumption.',
+  art:{ hl:'Not for human<br>consumption.', hlSize:'sm',
         dek:'Printed on the front of every vial we make. Not small print — the specification.',
         url:'steadfastresearchgroup.com/blog' },
   score:['Stops the scroll','New in the brain'],
@@ -278,10 +276,9 @@ var FEED = [
   spec:'NEEDS PHOTOGRAPHY — wants a tight crop of a real printed label with the compliance lines legible. Type-only until we have it. Also the single best asset to have in the account when a reviewer is deciding what kind of advertiser we are.'
 },
 {
-  id:'F10', slug:'lineup-priced', name:'The lineup, priced', palette:'olive', tpl:'grid', safe:'paid',
-  art:{ kick:'Fifteen SKUs &middot; prices published', hl:'No &ldquo;contact us<br>for pricing.&rdquo;',
-        cells:[['srg-prod-rt10.jpg','RETATRUTIDE','10 mg &middot; $99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','10 mg &middot; $69.99'],
-               ['srg-prod-bb10.jpg','BPC / TB-500','10 mg &middot; $49.99'],['srg-prod-cu50.jpg','GHK-CU','50 mg &middot; $34.99']],
+  id:'F10', slug:'lineup-priced', name:'The lineup, priced', palette:'field', tpl:'duo', safe:'paid',
+  art:{ hl:'No &ldquo;contact us<br>for pricing.&rdquo;',
+        cells:[['srg-prod-rt10.jpg','RETATRUTIDE','10 mg &middot; $99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','10 mg &middot; $69.99']],
         code:'STEADFAST10 &middot; 10% OFF', url:'steadfastresearchgroup.com/products' },
   score:['Says it out loud','New in the brain'],
   cow:'The whole catalogue with the prices left in, in a category that hides them behind a form.',
@@ -316,7 +313,7 @@ var STORIES = [
 },
 {
   id:'S02', slug:'calculator-story', name:'Calculator, vertical', palette:'carbon', tpl:'text', safe:'paid',
-  art:{ kick:'Free &middot; no email', hl:'mg/mL,<br>solved.',
+  art:{ hl:'mg/mL,<br>solved.',
         dek:'Enter the vial’s mg and your solvent volume. Get the concentration for that vial. No signup, no gate.',
         code:'/tools', url:'Tap for the tool' },
   score:['Would share'],
@@ -330,11 +327,9 @@ var STORIES = [
   spec:'Carbon, type only, headline centred in the middle third so the sticker clears it.'
 },
 {
-  id:'S03', slug:'lineup-story', name:'Lineup, vertical', palette:'olive', tpl:'grid', safe:'paid',
-  art:{ kick:'Prices published', hl:'The whole shelf.',
-        cells:[['srg-prod-rt10.jpg','RETATRUTIDE','$99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','$69.99'],
-               ['srg-prod-bb10.jpg','BPC / TB-500','$49.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
-        dek:'Each lot ships with its own certificate.',
+  id:'S03', slug:'lineup-story', name:'Lineup, vertical', palette:'field', tpl:'duo', safe:'paid',
+  art:{ hl:'The whole shelf.',
+        cells:[['srg-prod-bb10.jpg','BPC / TB-500','$49.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
         code:'STEADFAST10', url:'Tap to shop' },
   score:['Says it out loud'],
   cow:'Prices visible in a story, in a category that hides them.',
