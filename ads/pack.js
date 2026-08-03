@@ -19,9 +19,11 @@ var M = 'assets/mockups/', C = 'assets/coa/';
 var SIZE = { feed: [1080, 1440], story: [1080, 1920] };
 
 /* The compliance strip. Burned into the artwork, not left to the caption,
-   because Meta truncates captions and never crops pixels. */
-var STRIP = 'For laboratory and research use only. Not for human consumption. '
-          + 'Not a drug and not intended to diagnose, treat, cure, or prevent any disease.';
+   because Meta truncates captions and never crops pixels. The on-canvas line is
+   the SHORT form — the exact wording printed on every vial label — so it fits
+   one line at 17px like the reference ads. The full long-form disclaimer
+   ("not a drug… diagnose, treat, cure, or prevent") stays in every caption. */
+var STRIP = 'For laboratory and research use only. Not for human consumption.';
 
 function mark() {
   return '<div class="mark"><img src="assets/flag-white.png" alt=""/>'
@@ -186,7 +188,7 @@ var FEED = [
   id:'F04', slug:'the-full-panel', name:'The full panel', palette:'carbon', tpl:'list', safe:'organic',
   art:{ kick:'One lot. Ten lines.', hl:'Purity is one line<br>on the report.',
         items:['Peptide purity, HPLC','Identity, HPLC-RTM','Net peptide content','Arsenic','Cadmium','Lead','Mercury','Chromium','*Contaminant screen','Sterility, PCR'],
-        dek:'Every line above came back pass or not detected on lot HLX-SOP-RT20-2PEP.',
+        dek:'Every line: pass or not detected.',
         url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','Screenshot-worthy','New in the brain'],
   cow:'One line on our Retatrutide lot report is a contaminant screen most suppliers would rather you never thought about. We would rather you knew it was there.',
@@ -233,7 +235,7 @@ var FEED = [
   id:'F07', slug:'bench-tool', name:'The bench tool', palette:'carbon', tpl:'metric', safe:'paid',
   art:{ kick:'Free tool, no signup', pre:'50 mg vial, 2 mL solvent',
         big:'25', bigsub:'Milligrams per mL, in the vial', bigSize:'sm',
-        dek:'Concentration math for the vial in front of you. Free, no email, no account.',
+        dek:'Vial mg and solvent volume in, mg/mL out. Free, no email.',
         url:'steadfastresearchgroup.com/tools' },
   score:['Would share','New in the brain'],
   cow:'A free bench calculator with no email gate, from the company that sells the thing you’re measuring.',
@@ -248,7 +250,7 @@ var FEED = [
 {
   id:'F08', slug:'boring-box', name:'The boring box', palette:'field', tpl:'hero', safe:'paid',
   art:{ kick:'Cold-handled &middot; unbranded &middot; tracked', hl:'The least interesting<br>photo in our library.',
-        dek:'A plain box with nothing on it. Most orders leave within one business day, cold-handled, tracked, with the tracking email sent the moment it ships.',
+        dek:'Cold-handled, unbranded, tracked. Most orders out within one business day.',
         vial:'srg-prod-wa10.jpg', url:'steadfastresearchgroup.com/shipping' },
   score:['Says it out loud','New in the brain'],
   cow:'We built an ad around the packaging, because the packaging says nothing at all. That is the feature.',
@@ -263,7 +265,7 @@ var FEED = [
 {
   id:'F09', slug:'ruo-is-the-spec', name:'RUO is the spec', palette:'carbon', tpl:'text', safe:'paid',
   art:{ kick:'What’s on the label', hl:'Not for human<br>consumption.',
-        dek:'The least marketable sentence in the world, printed on the front of every vial we make. It isn’t small print. It’s the specification.',
+        dek:'Printed on the front of every vial we make. Not small print — the specification.',
         url:'steadfastresearchgroup.com/blog' },
   score:['Stops the scroll','New in the brain'],
   cow:'An ad whose headline is the disclaimer. We put the least sellable sentence available on the front of the creative.',
@@ -280,8 +282,7 @@ var FEED = [
   art:{ kick:'Fifteen SKUs &middot; prices published', hl:'No &ldquo;contact us<br>for pricing.&rdquo;',
         cells:[['srg-prod-rt10.jpg','RETATRUTIDE','10 mg &middot; $99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','10 mg &middot; $69.99'],
                ['srg-prod-bb10.jpg','BPC / TB-500','10 mg &middot; $49.99'],['srg-prod-cu50.jpg','GHK-CU','50 mg &middot; $34.99']],
-        dek:'Every size, every price, on the page. Each lot ships with its own certificate.',
-        code:'STEADFAST10 &mdash; 10% first order', url:'steadfastresearchgroup.com/products' },
+        code:'STEADFAST10 &middot; 10% OFF', url:'steadfastresearchgroup.com/products' },
   score:['Says it out loud','New in the brain'],
   cow:'The whole catalogue with the prices left in, in a category that hides them behind a form.',
   pain:'&ldquo;Contact us for pricing&rdquo; wastes a researcher’s afternoon and tells them the price depends on who is asking.',
@@ -333,7 +334,7 @@ var STORIES = [
   art:{ kick:'Prices published', hl:'The whole shelf.',
         cells:[['srg-prod-rt10.jpg','RETATRUTIDE','$99.99'],['srg-prod-tr10.jpg','TIRZEPATIDE','$69.99'],
                ['srg-prod-bb10.jpg','BPC / TB-500','$49.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
-        dek:'Fifteen SKUs, each shipping with its own certificate of analysis.',
+        dek:'Each lot ships with its own certificate.',
         code:'STEADFAST10', url:'Tap to shop' },
   score:['Says it out loud'],
   cow:'Prices visible in a story, in a category that hides them.',

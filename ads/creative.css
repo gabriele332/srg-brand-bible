@@ -21,27 +21,30 @@
 .cv--olive{background:#414B37;color:#F2F1EA}
 .cv--olive .ac{color:#C7D3AF}
 
+/* Reference standard (Sunday / Enhanced / Onyx): ONE big headline, the product,
+   at most one supporting line, a tiny disclaimer. Fewer elements, all larger —
+   nothing on the canvas below 23px except the legal line. */
 .cv .pad{padding:76px 76px 0;flex:1;display:flex;flex-direction:column;min-height:0}
-/* Everything below the kick line is centred in the space left over, so no
-   creative ends up with the composition stranded at the top of the frame. */
 .cv .cvbody{flex:1;display:flex;flex-direction:column;justify-content:center;min-height:0;padding-bottom:24px}
-.cv .kick{font-family:var(--mono);font-size:20px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;flex:none}
-.cv h4.hl{font-family:var(--display);font-weight:600;letter-spacing:-.028em;line-height:.98;font-size:82px;margin:28px 0 0;text-transform:uppercase}
-.cv h4.hl.sm{font-size:64px}
-.cv h4.hl.lg{font-size:104px}
-.cv .dek{font-family:var(--body);font-weight:300;font-size:27px;line-height:1.42;margin:30px 0 0;max-width:820px;opacity:.9}
+.cv .kick{font-family:var(--mono);font-size:23px;letter-spacing:.3em;text-transform:uppercase;opacity:.72;flex:none}
+.cv h4.hl{font-family:var(--display);font-weight:600;letter-spacing:-.028em;line-height:.98;font-size:96px;margin:28px 0 0;text-transform:uppercase}
+.cv h4.hl.sm{font-size:76px}
+.cv h4.hl.lg{font-size:118px}
+.cv .dek{font-family:var(--body);font-weight:300;font-size:31px;line-height:1.4;margin:30px 0 0;max-width:880px;opacity:.92}
 .cv .dek b{font-weight:600}
 
-.cv .mark{display:flex;align-items:center;gap:16px}
-.cv .mark img{width:44px;height:44px;object-fit:contain}
-.cv .mark span{font-family:var(--display);font-weight:600;font-size:22px;letter-spacing:.2em}
-.cv .mark small{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.34em;opacity:.6;margin-top:3px}
+.cv .mark{display:flex;align-items:center;gap:18px}
+.cv .mark img{width:52px;height:52px;object-fit:contain}
+.cv .mark span{font-family:var(--display);font-weight:600;font-size:26px;letter-spacing:.2em}
+.cv .mark small{display:block;font-family:var(--mono);font-size:13px;letter-spacing:.32em;opacity:.6;margin-top:3px}
 .cv--field .mark img{filter:invert(1)}
 
-/* --- mandatory footer strip. Not optional, not below 15px at 1080. --- */
-.cv .strip{flex:none;padding:22px 76px 26px;border-top:1px solid currentColor;margin-top:auto}
-.cv .strip .dl{font-family:var(--body);font-weight:300;font-size:15px;line-height:1.42;letter-spacing:.005em;opacity:.55;max-width:900px}
-.cv .strip .url{font-family:var(--mono);font-size:17px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:12px;opacity:.9}
+/* --- mandatory footer strip. Still not optional — but ONE line of legal plus
+       the mark, like the reference ads, instead of a three-row block. The full
+       long-form disclaimer lives in the caption. --- */
+.cv .strip{flex:none;padding:24px 76px 30px;border-top:1px solid currentColor;margin-top:auto}
+.cv .strip .dl{font-family:var(--body);font-weight:300;font-size:17px;line-height:1.35;letter-spacing:.01em;opacity:.6;white-space:nowrap}
+.cv .strip .url{font-family:var(--mono);font-size:21px;letter-spacing:.18em;text-transform:uppercase;margin-bottom:10px;opacity:.95}
 .cv .stripwrap{display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
 
 /* --- product renders are white-background studio JPGs: multiply knocks the
@@ -53,7 +56,7 @@
 .cv .big{font-family:var(--display);font-weight:700;letter-spacing:-.05em;line-height:.84;font-size:250px}
 .cv .big.md{font-size:200px}
 .cv .big.sm{font-size:180px}
-.cv .bigsub{font-family:var(--mono);font-size:22px;letter-spacing:.26em;text-transform:uppercase;opacity:.7;margin-top:14px}
+.cv .bigsub{font-family:var(--mono);font-size:27px;letter-spacing:.24em;text-transform:uppercase;opacity:.75;margin-top:16px}
 /* Both formats are portrait, so the figure stacks above the product rather than
    sitting beside it: the number gets the full width back and the render gets the
    full column instead of a 540px slot. Block flow throughout, which is also what
@@ -62,7 +65,7 @@
    — the glass has to be pushed out to the edges to read big. */
 .cv .metricwrap{position:relative}
 .cv .metricwrap .vialbox{width:100%;padding:16px 0 0;display:block;margin-left:-40px;margin-right:-40px}
-.cv .metricwrap .vialbox img{width:calc(100% + 80px);max-height:760px;object-fit:contain}
+.cv .metricwrap .vialbox img{width:calc(100% + 80px);max-height:690px;object-fit:contain}
 /* 960, not more: a centred flex splits any overflow across BOTH ends, so running
    tall collides the kick line at the top rather than just spilling downward. */
 .cv--story .metricwrap .vialbox img{max-height:960px}
@@ -82,14 +85,14 @@
    carrying a word that trips policy review. */
 .cv .docband{flex:none;height:390px;position:relative;overflow:hidden;border-bottom:2px solid #8A9A6B;background:#fff}
 .cv .docband img{position:absolute;width:100%;left:0;top:0}
-.cv .callout{display:inline-flex;flex-direction:column;gap:6px;border:2px solid currentColor;padding:18px 24px;margin-top:34px;align-self:flex-start}
-.cv .callout .cl-k{font-family:var(--mono);font-size:14px;letter-spacing:.24em;text-transform:uppercase;opacity:.7}
-.cv .callout .cl-v{font-family:var(--display);font-weight:600;font-size:46px;letter-spacing:-.02em;line-height:1}
+.cv .callout{display:inline-flex;flex-direction:column;gap:8px;border:2px solid currentColor;padding:22px 30px;margin-top:36px;align-self:flex-start}
+.cv .callout .cl-k{font-family:var(--mono);font-size:18px;letter-spacing:.22em;text-transform:uppercase;opacity:.75}
+.cv .callout .cl-v{font-family:var(--display);font-weight:600;font-size:60px;letter-spacing:-.02em;line-height:1}
 
 /* --- what got tested --- */
-.cv .checks{margin:34px 0 0;padding:0;list-style:none;column-count:2;column-gap:44px}
-.cv .checks li{font-family:var(--body);font-weight:300;font-size:24px;line-height:1.3;padding:13px 0 13px 40px;position:relative;border-top:1px solid rgba(128,128,128,.34);break-inside:avoid}
-.cv .checks li:before{content:"\2713";position:absolute;left:0;top:13px;font-family:var(--mono);font-size:20px}
+.cv .checks{margin:36px 0 0;padding:0;list-style:none;column-count:2;column-gap:48px}
+.cv .checks li{font-family:var(--body);font-weight:300;font-size:30px;line-height:1.3;padding:16px 0 16px 48px;position:relative;border-top:1px solid rgba(128,128,128,.34);break-inside:avoid}
+.cv .checks li:before{content:"\2713";position:absolute;left:0;top:16px;font-family:var(--mono);font-size:25px}
 .cv .checks li.hi{font-weight:600}
 .cv .checks li.hi:before{font-weight:700}
 
@@ -104,26 +107,30 @@
    portrait has the height to spend on a second row. */
 .cv .pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:30px -68px 0}
 .cv .pgrid .cell{background:#EFEDE6;border-radius:3px;padding:12px 10px 16px;display:flex;flex-direction:column;align-items:center;gap:6px}
-.cv .pgrid .cell img{width:100%;height:340px;object-fit:contain;mix-blend-mode:multiply}
-.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:19px;letter-spacing:.06em;color:#14150F;font-weight:700}
-.cv .pgrid .cell span{font-family:var(--mono);font-size:15px;letter-spacing:.08em;color:#5a5a52}
-.cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:34px;letter-spacing:.14em;border:2px solid currentColor;padding:14px 22px;margin-top:30px}
+/* 250, not 340: two rows + the larger type + the code chip have to clear the
+   strip, and the centred cvbody pushes overflow through the kick line above. */
+.cv .pgrid .cell img{width:100%;height:250px;object-fit:contain;mix-blend-mode:multiply}
+.cv .pgrid .cell em{font-style:normal;font-family:var(--mono);font-size:23px;letter-spacing:.06em;color:#14150F;font-weight:700}
+.cv .pgrid .cell span{font-family:var(--mono);font-size:19px;letter-spacing:.08em;color:#5a5a52}
+.cv .code{display:inline-block;font-family:var(--mono);font-weight:700;font-size:42px;letter-spacing:.14em;border:2px solid currentColor;padding:18px 28px;margin-top:34px}
 
 /* Stacked for portrait: the headline keeps its full measure and the render gets
    the whole column, instead of the two fighting over one 1080px width. */
 .cv .heroflex{display:flex;flex-direction:column;gap:20px;flex:1;min-height:0}
 .cv .heroflex .txt{width:100%}
 .cv .heroflex .art{width:100%;margin:0 -40px;display:block}
-.cv .heroflex .art img{width:calc(100% + 80px);max-height:700px;object-fit:contain}
+.cv .heroflex .art img{width:calc(100% + 80px);max-height:640px;object-fit:contain}
 .cv--story .heroflex .art img{max-height:900px}
 
 /* --- story: 250px clear top and bottom for the profile bar and tap target --- */
 .cv--story .pad{padding:150px 84px 0}
-.cv--story h4.hl{font-size:94px}
-.cv--story h4.hl.sm{font-size:74px}
-.cv--story h4.hl.lg{font-size:110px}
-.cv--story .dek{font-size:32px;margin-top:36px}
-.cv--story .strip{padding:26px 84px 150px}
+.cv--story h4.hl{font-size:108px}
+.cv--story h4.hl.sm{font-size:86px}
+.cv--story h4.hl.lg{font-size:124px}
+.cv--story .dek{font-size:36px;margin-top:36px}
+.cv--story .strip{padding:28px 84px 150px}
+.cv--story .strip .dl{font-size:19px}
+.cv--story .strip .url{font-size:24px}
 .cv--story .big{font-size:270px}
 .cv--story .checks{column-count:1}
 .cv--story .heroflex,.cv--story .split{flex-direction:column;gap:44px}
