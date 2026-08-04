@@ -43,6 +43,13 @@ function strip(url) {
    ------------------------------------------------------------------------- */
 var T = {
 
+  /* Canva-sourced art: the export PNG IS the creative (used when a design
+     was reworked directly in Canva and the HTML recreation is retired). */
+  img: function (a) {
+    return '<img src="' + a.img + '" alt="" style="width:100%;height:100%;object-fit:cover;display:block">';
+  },
+
+
   /* A real lot report, held as a legible band across the top of the frame.
      The one layout that keeps the document as its design — that IS the cow. */
   doc: function (a) {
@@ -168,8 +175,8 @@ var FEED = [
   spec:'Field ground. The struck-through label figure sits small above a 250px measured number in olive. Vial right, on its own bone panel, multiply blend so the studio white drops out. This is the flagship — build the story cut and the paid cut from the same file.'
 },
 {
-  id:'F03', slug:'labs-we-dont-own', name:'Labs we don’t own', palette:'olive', tpl:'text', safe:'paid',
-  art:{ hl:'We send our lots<br>to four labs<br>we don’t own.', hlSize:'sm',
+  id:'F03', slug:'labs-we-dont-own', name:'Labs we don’t own', palette:'olive', tpl:'img', safe:'paid',
+  art:{ img:'exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png', hl:'We send our lots<br>to four labs<br>we don’t own.', hlSize:'sm',
         dek:'ILS Laboratories &middot; Janoshik &middot; Testides &middot; Kovera Labs. Different labs, different methods, same requirement.',
         url:'steadfastresearchgroup.com/coa' },
   score:['Stops the scroll','Says it out loud','New in the brain'],
