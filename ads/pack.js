@@ -383,10 +383,10 @@ function sizeOf(isStory) { return isStory ? SIZE.story : SIZE.feed; }
    --------------------------------------------------------------------------- */
 var CANVA_FOLDER = 'https://www.canva.com/folder/FAHQyTh0-Ig';
 var CANVA = {
-  F01: 'DAHRRrHUJn8', F02: 'DAHRRlerkBA', F03: 'DAHRRvxAYQA', F04: 'DAHRRuHrSIs',
-  F05: 'DAHRRlQGKlA', F06: 'DAHRRvwnVWw', F07: 'DAHRRrOZJNw', F08: 'DAHRRiHxAPQ',
-  F09: 'DAHRRg1ozf8', F10: 'DAHRRj4SRG8',
-  S01: 'DAHRRigOIFA', S02: 'DAHRRpHaxeU', S03: 'DAHRRnWnHD0', S04: 'DAHRRpSE83c'
+  F01: 'DAHRR_7HJtM', F02: 'DAHRR9PmIpo', F03: 'DAHRR-SBtY0', F04: 'DAHRR4M7dWs',
+  F05: 'DAHRR2EOkZE', F06: 'DAHRR880YK4', F07: 'DAHRR39KFEg', F08: 'DAHRR_-v41s',
+  F09: 'DAHRR7BGGm8', F10: 'DAHRR51k55Q',
+  S01: 'DAHRR91yj8Y', S02: 'DAHRR1zu87g', S03: 'DAHRR3Ws008', S04: 'DAHRRyAYoEw'
 };
 var CANVA_NUDGE = { F02: true, S01: true };
 
