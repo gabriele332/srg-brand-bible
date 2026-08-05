@@ -235,18 +235,18 @@ var FEED = [
      reference — kept LAST in the feed so it is always easy to find. The
      exported PNG is the creative (tpl:'img'); the Canva design is the source
      of truth and this page never regenerates it. */
-  id:'R06', slug:'labs-we-dont-own', name:'Labs we don’t own — photo build', palette:'field', tpl:'img', safe:'paid',
-  basedOn:'Ageless Vitality photo style &middot; built by Gabi in Canva',
+  id:'R06', slug:'labs-we-dont-own', name:'Premium reagents — photo build', palette:'field', tpl:'img', safe:'paid',
+  basedOn:'Ageless Vitality &mdash; &ldquo;Premium reagents. Compromise-free.&rdquo; &middot; built by Gabi in Canva',
   art:{ img:'exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png' },
   score:['Stops the scroll','Screenshot-worthy'],
   cow:'Canva-authored photo build &mdash; the one card on this page whose source of truth is Canva, not pack.js.',
   pain:'&mdash;',
   process:'&mdash;',
-  proof:'ILS Laboratories &middot; Janoshik &middot; Testides &middot; Kovera Labs.',
+  proof:'Code STEADFAST10, 10% off.',
   cta:'steadfastresearchgroup.com',
-  caption:"We send our lots to four labs we don't own.\n\nILS Laboratories · Janoshik · Testides · Kovera Labs. Different labs, different methods, same requirement.\n\nsteadfastresearchgroup.com\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
-  fields:{ headline:'Four labs. None of them ours.', desc:'Independent testing, every lot.', cta:'Learn more' },
-  spec:'EDIT IN CANVA ONLY — changes to pack.js do not touch this one. After editing, export the PNG from Canva over exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png and commit (or ask the desktop session to pull it from Canva). Blake&rsquo;s notes still open: the verbiage should move to the Ageless reference lines, and the vial shows the generic PEPTIDE 5 MG label where he asked for the BPC label.'
+  caption:"Premium reagents. Compromise-free.\n\nGet professional-grade research materials shipped directly to your lab. Securely packaged in cold-chain ready vials.\n\n10% off sitewide — use code STEADFAST10.\n\nsteadfastresearchgroup.com\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
+  fields:{ headline:'Premium reagents. Compromise-free.', desc:'10% off sitewide — code STEADFAST10.', cta:'Shop now' },
+  spec:'EDIT IN CANVA ONLY — changes to pack.js do not touch this one. After editing, ask the desktop session to pull the PNG from Canva (or export it over exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png and commit). Blake&rsquo;s note still open: the vial shows the generic PEPTIDE 5 MG label where he asked for the BPC label — swap srg-label-bb10.png onto the render in Canva.'
 }
 ];
 
