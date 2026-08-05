@@ -164,6 +164,14 @@
   .toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--olive);color:#0D0D0D;font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;padding:12px 22px;border-radius:999px;opacity:0;transition:.22s;pointer-events:none;z-index:99}
   .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
+  /* floating exit for actual-size mode — Esc works too */
+  #fullExit{position:fixed;top:18px;right:18px;z-index:999;display:none;align-items:center;gap:10px;
+    background:var(--olive);color:#0D0D0D;font-family:var(--mono);font-size:12px;letter-spacing:.14em;
+    text-transform:uppercase;padding:13px 20px;border-radius:999px;border:none;cursor:pointer;
+    box-shadow:0 6px 24px rgba(0,0,0,.5)}
+  #fullExit b{font-size:15px;font-weight:700}
+  #fullExit.show{display:flex}
+
   @media(max-width:1000px){
     .ad-body{grid-template-columns:1fr}
     .ad-art{border-right:0;border-bottom:1px solid var(--line)}
@@ -423,6 +431,7 @@
 </div></footer>
 
 <div class="toast" id="toast">Copied</div>
+<button id="fullExit" title="Exit actual size (Esc)"><b>&#10005;</b> Exit actual size</button>
 
 <script src="pack.js?v=5"></script>
 <script>
@@ -506,19 +515,45 @@ addEventListener('resize', fit);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 fit();
 
+/* Actual-size mode was hard to leave — the only way out was noticing the
+   toggle had renamed itself to "Fit to card". Now a fixed ✕ follows you and
+   Esc always exits. */
+function setFull(st, btn, on){
+  if (on){
+    st.dataset.full = '1';
+    st.style.width = '1080px'; st.style.maxWidth = 'none'; st.style.overflow = 'visible';
+    st.querySelector('.cv').style.transform = 'none';
+    btn.classList.add('on'); btn.textContent = 'Fit to card';
+  } else {
+    st.dataset.full = '0';
+    st.style.width = st.style.maxWidth = st.style.overflow = '';
+    btn.classList.remove('on'); btn.textContent = 'Actual size';
+  }
+}
+function exitAllFull(){
+  document.querySelectorAll('.stage[data-full="1"]').forEach(function(st){
+    // 'button[data-full]' — the stage itself also carries a data-full attribute,
+    // and a bare [data-full] lookup grabs it and clobbers the creative markup
+    setFull(st, st.closest('.ad-art').querySelector('button[data-full]'), false);
+  });
+  document.getElementById('fullExit').classList.remove('show');
+  fit();
+}
+document.getElementById('fullExit').addEventListener('click', exitAllFull);
+document.addEventListener('keydown', function(e){ if (e.key === 'Escape') exitAllFull(); });
+
 document.addEventListener('click', function(e){
   var b = e.target.closest('[data-full]');
   if (b){
     var st = b.closest('.ad-art').querySelector('.stage');
-    if (st.dataset.full === '1'){
-      st.dataset.full = '0';
-      st.style.width = st.style.maxWidth = st.style.overflow = '';
-      b.classList.remove('on'); b.textContent = 'Actual size';
-    } else {
-      st.dataset.full = '1';
-      st.style.width = '1080px'; st.style.maxWidth = 'none'; st.style.overflow = 'visible';
-      st.querySelector('.cv').style.transform = 'none';
-      b.classList.add('on'); b.textContent = 'Fit to card';
+    var turningOn = st.dataset.full !== '1';
+    // one creative at actual size at a time — several at once means several
+    // screens of horizontal scroll and no idea where you are
+    exitAllFull();
+    if (turningOn){
+      setFull(st, b, true);
+      document.getElementById('fullExit').classList.add('show');
+      st.scrollIntoView({ block: 'nearest' });
     }
     fit();
     return;
