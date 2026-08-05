@@ -54,7 +54,9 @@ const server = createServer(async (req, res) => {
 });
 await new Promise(r => server.listen(PORT, r));
 
-await rm(OUT, { recursive: true, force: true });
+// Overwrite per-asset, never wipe the folder: exports/ also holds Canva-authored
+// files (Gabi exports edited designs back here for the `img` template) that this
+// script cannot regenerate. A wipe here destroyed hand-made work once already.
 await mkdir(OUT, { recursive: true });
 
 /* PDF alongside the PNG: the PNG is what gets uploaded to Meta, the PDF is what

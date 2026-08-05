@@ -104,6 +104,7 @@
   .ad-top{display:flex;align-items:center;gap:14px;padding:18px 24px;border-bottom:1px solid var(--line);flex-wrap:wrap}
   .ad-top .id{font-family:var(--mono);font-size:11.5px;letter-spacing:.18em;color:var(--olive)}
   .ad-top h3{font-size:19px;font-weight:500;letter-spacing:-.01em}
+  .ad-top .based{font-family:var(--mono);font-size:10px;letter-spacing:.06em;color:var(--g3);border-left:2px solid var(--line);padding-left:12px}
   .chips{margin-left:auto;display:flex;gap:7px;flex-wrap:wrap}
   .chip{font-family:var(--mono);font-size:9.5px;letter-spacing:.14em;text-transform:uppercase;padding:5px 10px;border:1px solid var(--line);border-radius:999px;color:var(--g2);white-space:nowrap}
   .chip.paid{border-color:rgba(138,154,107,.4);color:var(--ok)}
@@ -202,7 +203,7 @@
   <div class="metaline">
     <span>Client <b>Steadfast Research Group</b></span>
     <span>Format <b>Static &middot; IG + FB</b></span>
-    <span>Assets <b>10 feed &middot; 4 stories</b></span>
+    <span>Assets <b>5 feed + 1 in Canva &middot; 4 stories</b></span>
     <span>Built <b>28 Jul 2026</b></span>
     <span>Status <b>Draft for Blake</b></span>
   </div>
@@ -326,10 +327,11 @@
 
 <section class="sec" id="feed"><div class="wrap">
   <div class="sh"><span class="n">04</span><h2>Feed ads <i>4:3 portrait</i>.</h2></div>
-  <p class="sub">Ten concepts, ordered by how hard the cow hits. Each preview renders live at 1080&times;1440 from the
-     same source the exports use, so what you see is what ships. <b>Download PNG</b> is the finished file, ready to
-     upload. <b>Edit in Canva</b> opens the same creative in Blake's Canva with the text editable. <b>Actual size</b>
-     drops the preview scaling and <b>Open</b> loads the creative alone on a blank page.</p>
+  <p class="sub">One post per reference ad Blake approved &mdash; those are <b>running, compliant ads</b>, so the
+     verbiage stays as close to each source as our research-use framing allows. That was the brief: mirror what
+     already survives Meta review. The sixth reference (Ageless Vitality &ldquo;Premium reagents&rdquo;) is Gabi's,
+     built directly in Canva. <b>Download PNG</b> is the finished file; <b>Edit in Canva</b> opens the editable
+     version; <b>Actual size</b> drops the preview scaling.</p>
   <div class="bar plain" style="margin-bottom:8px">
     <span class="ic">CANVA</span>
     <p>Every creative was imported from its <b>PDF</b>, not its PNG &mdash; a PNG lands in Canva as one flat picture,
@@ -404,8 +406,11 @@
        copy falls back to &ldquo;an ISO/IEC 17025 accredited independent lab&rdquo;.</li>
     <li><b>Two concepts need a photograph we don't have.</b> F08 wants the actual plain shipping box, F09 wants a tight
        crop of a real printed label. Both currently render with stand-ins.</li>
-    <li><b>Decide the channel for F04 and S04 before they ship.</b> Both are strong, both name the contaminant screen,
-       and both are marked organic-only for that reason.</li>
+    <li><b>Decide the channel for S04 before it ships.</b> It names the contaminant screen in the caption and is
+       marked organic-only for that reason.</li>
+    <li><b>R03 says &ldquo;10% off sitewide&rdquo;, but STEADFAST10 is configured in checkout as a first-order code.</b>
+       Blake asked for 10% sitewide to mirror the Onyx ad; either the code becomes sitewide in checkout or the ad
+       copy gains &ldquo;on your first order&rdquo;. One of the two has to move before this runs.</li>
   </ul>
 </div></section>
 
@@ -451,6 +456,7 @@ function card(a, isStory){
 
   return '<div class="ad" id="' + a.id + '">'
     + '<div class="ad-top"><span class="id">' + a.id + '</span><h3>' + a.name + '</h3>'
+    +   (a.basedOn ? '<span class="based">' + a.basedOn + '</span>' : '')
     +   '<div class="chips">' + chips + '</div></div>'
     + '<div class="ad-body">'
     +   '<div class="ad-art">'
