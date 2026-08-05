@@ -151,9 +151,9 @@ var T = {
    ------------------------------------------------------------------------- */
 var FEED = [
 {
-  id:'R01', slug:'real-peptides', name:'Real peptides', palette:'field', tpl:'hero', safe:'paid',
+  id:'R01', slug:'real-peptides', name:'Real peptides', palette:'field', tpl:'img', safe:'paid',
   basedOn:'Enhanced — “REAL PEPTIDES / No gray market. No compromise.”',
-  art:{ hl:'Real<br>peptides.',
+  art:{ img:'exports/srg-ad01-r01-real-peptides-1080x1440.png', hl:'Real<br>peptides.',
         dek:'No gray market. No compromise.',
         vial:'srg-prod-bb10.jpg', url:'steadfastresearchgroup.com' },
   score:['Stops the scroll','Says it out loud'],
@@ -167,9 +167,9 @@ var FEED = [
   spec:'Modeled on the Enhanced ad: cream ground, giant headline, vial crossing the type. BPC blend vial per Blake&rsquo;s note to lead with the BPC label.'
 },
 {
-  id:'R02', slug:'uncompromising-purity', name:'Uncompromising purity', palette:'field', tpl:'duo', safe:'paid',
+  id:'R02', slug:'uncompromising-purity', name:'Uncompromising purity', palette:'field', tpl:'img', safe:'paid',
   basedOn:'Sunday — “Uncompromising Purity” two-vial hero',
-  art:{ hl:'Uncompromising<br>purity.',
+  art:{ img:'exports/srg-ad01-r02-uncompromising-purity-1080x1440.png', hl:'Uncompromising<br>purity.',
         cells:[['srg-prod-bb10.jpg','BPC-157 / TB-500',''],['srg-prod-cu50.jpg','GHK-CU','']],
         url:'steadfastresearchgroup.com' },
   score:['Stops the scroll','Screenshot-worthy'],
@@ -183,9 +183,9 @@ var FEED = [
   spec:'Modeled on the Sunday ad: two vials leaning together under a two-word headline. Names only under the glass, no prices — Sunday keeps it quiet.'
 },
 {
-  id:'R03', slug:'ten-off-sitewide', name:'10% off sitewide', palette:'carbon', tpl:'text', safe:'paid',
+  id:'R03', slug:'ten-off-sitewide', name:'10% off sitewide', palette:'carbon', tpl:'img', safe:'paid',
   basedOn:'Onyx Research — “20% OFF SITEWIDE / USE ONYX20”',
-  art:{ hl:'10% off<br>sitewide.',
+  art:{ img:'exports/srg-ad01-r03-ten-off-sitewide-1080x1440.png', hl:'10% off<br>sitewide.',
         dek:'High-quality research compounds. Fast, secure shipping across the U.S.',
         code:'USE STEADFAST10', url:'steadfastresearchgroup.com/products' },
   score:['Says it out loud'],
@@ -199,9 +199,9 @@ var FEED = [
   spec:'Modeled on the Onyx ad: dark ground, offer as the headline, code in a chip. Caption opens on Onyx&rsquo;s own &ldquo;Research, sourced right&rdquo; cadence.'
 },
 {
-  id:'R04', slug:'tirzepatide-price', name:'Tirzepatide, priced', palette:'field', tpl:'hero', safe:'paid',
+  id:'R04', slug:'tirzepatide-price', name:'Tirzepatide, priced', palette:'field', tpl:'img', safe:'paid',
   basedOn:'Brello — compound name huge + “plan starting at $166/month”',
-  art:{ hl:'Tirzepatide',
+  art:{ img:'exports/srg-ad01-r04-tirzepatide-price-1080x1440.png', hl:'Tirzepatide',
         dek:'Starting at $69.99. Lyophilized, COA included.',
         vial:'srg-prod-tr10.jpg', url:'steadfastresearchgroup.com/products/tirzepatide' },
   score:['Stops the scroll'],
@@ -215,9 +215,9 @@ var FEED = [
   spec:'Modeled on the Brello ad: compound name as the headline with the vial crossing it, price as the supporting line. RUO framing replaces Brello&rsquo;s telehealth plan language.'
 },
 {
-  id:'R05', slug:'quality-consistency', name:'Quality meets consistency', palette:'field', tpl:'hero', safe:'paid',
+  id:'R05', slug:'quality-consistency', name:'Quality meets consistency', palette:'field', tpl:'img', safe:'paid',
   basedOn:'Alpha Omega Peptide — “Where Quality Meets Consistency”',
-  art:{ hl:'Where quality<br>meets consistency.', hlSize:'sm',
+  art:{ img:'exports/srg-ad01-r05-quality-consistency-1080x1440.png', hl:'Where quality<br>meets consistency.', hlSize:'sm',
         dek:'Research peptides with a certificate of analysis on every lot.',
         vial:'srg-prod-hgh10.jpg', url:'steadfastresearchgroup.com' },
   score:['Says it out loud'],
@@ -255,8 +255,8 @@ var FEED = [
    ------------------------------------------------------------------------- */
 var STORIES = [
 {
-  id:'S01', slug:'fill-accuracy-story', name:'Fill accuracy, vertical', palette:'field', tpl:'metric', safe:'paid',
-  art:{ kick:'BPC-157 &middot; #151664', pre:'Label says <span class="strike">10 MG</span>', big:'10.23',
+  id:'S01', slug:'fill-accuracy-story', name:'Fill accuracy, vertical', palette:'field', tpl:'img', safe:'paid',
+  art:{ img:'exports/srg-ad01-s01-fill-accuracy-story-1080x1920.png', kick:'BPC-157 &middot; #151664', pre:'Label says <span class="strike">10 MG</span>', big:'10.23',
         bigsub:'Milligrams measured', dek:'We publish both. Even when the second number is lower.',
         vial:'srg-prod-bb10.jpg', url:'Swipe up &middot; /coa' },
   score:['Stops the scroll','Screenshot-worthy','New in the brain'],
@@ -270,8 +270,8 @@ var STORIES = [
   spec:'Same file as F02, recut vertical. Keep the 250px clear zones; the sticker link sits over the lower one, never over the footer strip.'
 },
 {
-  id:'S02', slug:'calculator-story', name:'Calculator, vertical', palette:'carbon', tpl:'text', safe:'paid',
-  art:{ hl:'mg/mL,<br>solved.',
+  id:'S02', slug:'calculator-story', name:'Calculator, vertical', palette:'carbon', tpl:'img', safe:'paid',
+  art:{ img:'exports/srg-ad01-s02-calculator-story-1080x1920.png', hl:'mg/mL,<br>solved.',
         dek:'Enter the vial’s mg and your solvent volume. Get the concentration for that vial. No signup, no gate.',
         code:'/tools', url:'Tap for the tool' },
   score:['Would share'],
@@ -285,8 +285,8 @@ var STORIES = [
   spec:'Carbon, type only, headline centred in the middle third so the sticker clears it.'
 },
 {
-  id:'S03', slug:'lineup-story', name:'Lineup, vertical', palette:'field', tpl:'duo', safe:'paid',
-  art:{ hl:'The whole shelf.',
+  id:'S03', slug:'lineup-story', name:'Lineup, vertical', palette:'field', tpl:'img', safe:'paid',
+  art:{ img:'exports/srg-ad01-s03-lineup-story-1080x1920.png', hl:'The whole shelf.',
         cells:[['srg-prod-bb10.jpg','BPC / TB-500','$49.99'],['srg-prod-cu50.jpg','GHK-CU','$34.99']],
         code:'STEADFAST10', url:'Tap to shop' },
   score:['Says it out loud'],
@@ -300,8 +300,8 @@ var STORIES = [
   spec:'Four vials in a 2×2 bled to the story edges, so each one renders around 520px wide — the biggest the product gets anywhere in the pack. Rotate which four across the flight.'
 },
 {
-  id:'S04', slug:'full-panel-story', name:'The panel, vertical', palette:'carbon', tpl:'list', safe:'organic',
-  art:{ kick:'One lot, ten lines', hl:'Purity is<br>one line.',
+  id:'S04', slug:'full-panel-story', name:'The panel, vertical', palette:'carbon', tpl:'img', safe:'organic',
+  art:{ img:'exports/srg-ad01-s04-full-panel-story-1080x1920.png', kick:'One lot, ten lines', hl:'Purity is<br>one line.',
         items:['Purity, HPLC','Identity','Net content','Arsenic','Cadmium','Lead','Mercury','Chromium','*Contaminant screen','Sterility, PCR'],
         url:'Tap for the report' },
   score:['Stops the scroll','Screenshot-worthy','New in the brain'],
