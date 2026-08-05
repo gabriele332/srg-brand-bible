@@ -448,6 +448,13 @@ function pngName(a, isStory){
   return 'srg-ad01-' + a.id.toLowerCase() + '-' + a.slug + '-' + s[0] + 'x' + s[1] + '.png';
 }
 
+function socHtml(a){
+  if(!a.socials) return '';
+  var order=[['ig','Instagram'],['fb','Facebook'],['tt','TikTok'],['th','Threads'],['x','X'],['li','LinkedIn'],['yt','YouTube']];
+  return order.map(function(p){ var t=a.socials[p[0]]; if(!t) return '';
+    return '<div class="fld"><div class="k">'+p[1]+'</div><pre class="txt">'+esc(t)+'</pre></div>'; }).join('');
+}
+
 function card(a, isStory){
   var canva = window.SRGPACK.canvaUrl(a.id);
   var nudge = !!window.SRGPACK.canvaNudge[a.id];
@@ -484,7 +491,7 @@ function card(a, isStory){
     +   '<div class="ad-brief">'
     +     '<div class="score">' + score + '</div>'
     +     '<div>' + blocks + '</div>'
-    +     '<details class="cap"><summary>Caption as posted</summary><div class="in">'
+    +     '<details class="cap"><summary>Captions — all platforms</summary><div class="in">'
     +       '<pre class="txt">' + esc(a.caption) + '</pre>'
     +       '<div class="fields">'
     +         '<div class="fld"><div class="k">Headline</div><div>' + a.fields.headline + '</div></div>'
