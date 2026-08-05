@@ -39,7 +39,10 @@ const sandbox = { window: {} };
 new Function('window', packSrc)(sandbox.window);
 const PACK = sandbox.window.SRGPACK;
 const ASSETS = PACK.FEED.map(a => ({ ...a, story: false }))
-  .concat(PACK.STORIES.map(a => ({ ...a, story: true })));
+  .concat(PACK.STORIES.map(a => ({ ...a, story: true })))
+  // tpl:'img' creatives are authored in Canva; their PNG in exports/ IS the
+  // master copy here. Screenshotting them would just re-encode that file.
+  .filter(a => a.tpl !== 'img');
 
 const server = createServer(async (req, res) => {
   const path = decodeURIComponent(req.url.split('?')[0]);

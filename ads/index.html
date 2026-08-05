@@ -203,7 +203,7 @@
   <div class="metaline">
     <span>Client <b>Steadfast Research Group</b></span>
     <span>Format <b>Static &middot; IG + FB</b></span>
-    <span>Assets <b>5 feed + 1 in Canva &middot; 4 stories</b></span>
+    <span>Assets <b>6 feed &middot; 4 stories</b></span>
     <span>Built <b>28 Jul 2026</b></span>
     <span>Status <b>Draft for Blake</b></span>
   </div>
@@ -329,9 +329,10 @@
   <div class="sh"><span class="n">04</span><h2>Feed ads <i>4:3 portrait</i>.</h2></div>
   <p class="sub">One post per reference ad Blake approved &mdash; those are <b>running, compliant ads</b>, so the
      verbiage stays as close to each source as our research-use framing allows. That was the brief: mirror what
-     already survives Meta review. The sixth reference (Ageless Vitality &ldquo;Premium reagents&rdquo;) is Gabi's,
-     built directly in Canva. <b>Download PNG</b> is the finished file; <b>Edit in Canva</b> opens the editable
-     version; <b>Actual size</b> drops the preview scaling.</p>
+     already survives Meta review. R06 is Gabi's, built directly in Canva on the Ageless photo style &mdash; for that
+     one, <b>Canva is the master</b>: edit there, export the PNG back over its file in <code>exports/</code>, commit.
+     <b>Download PNG</b> is the finished file; <b>Edit in Canva</b> opens the editable version; <b>Actual size</b>
+     drops the preview scaling.</p>
   <div class="bar plain" style="margin-bottom:8px">
     <span class="ic">CANVA</span>
     <p>Every creative was imported from its <b>PDF</b>, not its PNG &mdash; a PNG lands in Canva as one flat picture,
@@ -463,7 +464,7 @@ function card(a, isStory){
     +     '<div class="stage ' + (isStory ? 'st' : 'sq') + '" style="aspect-ratio:' + sz[0] + '/' + sz[1] + '">'
     +       window.SRGPACK.creative(a, isStory) + '</div>'
     +     '<div class="artmeta">'
-    +       '<a class="btn dl" href="exports/' + pngName(a, isStory) + '" download>Download PNG</a>'
+    +       '<a class="btn dl" href="' + (a.art.img || 'exports/' + pngName(a, isStory)) + '" download>Download PNG</a>'
     +       (canva ? '<a class="btn cv-btn' + (nudge ? ' warn' : '') + '" href="' + canva + '"'
     +         ' target="_blank" rel="noopener" title="' + canvaHint(nudge) + '">'
     +         'Edit in Canva' + (nudge ? ' *' : '') + '</a>' : '')
