@@ -215,23 +215,6 @@ var FEED = [
   spec:'Modeled on the Brello ad: compound name as the headline with the vial crossing it, price as the supporting line. RUO framing replaces Brello&rsquo;s telehealth plan language.'
 },
 {
-  /* Gabi's, built directly in Canva on the photo style of the Ageless
-     reference. The exported PNG is the creative (tpl:'img'); the Canva design
-     is the source of truth and this page never regenerates it. */
-  id:'R06', slug:'labs-we-dont-own', name:'Labs we don’t own — photo build', palette:'field', tpl:'img', safe:'paid',
-  basedOn:'Ageless Vitality photo style &middot; built by Gabi in Canva',
-  art:{ img:'exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png' },
-  score:['Stops the scroll','Screenshot-worthy'],
-  cow:'Canva-authored photo build &mdash; the one card on this page whose source of truth is Canva, not pack.js.',
-  pain:'&mdash;',
-  process:'&mdash;',
-  proof:'ILS Laboratories &middot; Janoshik &middot; Testides &middot; Kovera Labs.',
-  cta:'steadfastresearchgroup.com',
-  caption:"We send our lots to four labs we don't own.\n\nILS Laboratories · Janoshik · Testides · Kovera Labs. Different labs, different methods, same requirement.\n\nsteadfastresearchgroup.com\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
-  fields:{ headline:'Four labs. None of them ours.', desc:'Independent testing, every lot.', cta:'Learn more' },
-  spec:'EDIT IN CANVA ONLY — changes to pack.js do not touch this one. After editing, export the PNG from Canva over exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png and commit. Blake&rsquo;s note still open: the vial on it shows the generic PEPTIDE 5 MG label and he asked for the BPC label.'
-},
-{
   id:'R05', slug:'quality-consistency', name:'Quality meets consistency', palette:'field', tpl:'hero', safe:'paid',
   basedOn:'Alpha Omega Peptide — “Where Quality Meets Consistency”',
   art:{ hl:'Where quality<br>meets consistency.', hlSize:'sm',
@@ -246,6 +229,24 @@ var FEED = [
   caption:"Where quality meets consistency.\n\nSteadfast delivers research peptides with batch documentation on every order — tested independently, shipped fast.\n\nsteadfastresearchgroup.com\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
   fields:{ headline:'Where quality meets consistency', desc:'COA on every lot.', cta:'Shop now' },
   spec:'Modeled on the Alpha Omega carousel card: clean light ground, one calm claim, vial centred. Slots into a carousel the same way theirs does.'
+},
+{
+  /* Gabi's, built directly in Canva on the photo style of the Ageless
+     reference — kept LAST in the feed so it is always easy to find. The
+     exported PNG is the creative (tpl:'img'); the Canva design is the source
+     of truth and this page never regenerates it. */
+  id:'R06', slug:'labs-we-dont-own', name:'Labs we don’t own — photo build', palette:'field', tpl:'img', safe:'paid',
+  basedOn:'Ageless Vitality photo style &middot; built by Gabi in Canva',
+  art:{ img:'exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png' },
+  score:['Stops the scroll','Screenshot-worthy'],
+  cow:'Canva-authored photo build &mdash; the one card on this page whose source of truth is Canva, not pack.js.',
+  pain:'&mdash;',
+  process:'&mdash;',
+  proof:'ILS Laboratories &middot; Janoshik &middot; Testides &middot; Kovera Labs.',
+  cta:'steadfastresearchgroup.com',
+  caption:"We send our lots to four labs we don't own.\n\nILS Laboratories · Janoshik · Testides · Kovera Labs. Different labs, different methods, same requirement.\n\nsteadfastresearchgroup.com\n\nFor laboratory and research use only. Not for human consumption. Not a drug and not intended to diagnose, treat, cure, or prevent any disease.",
+  fields:{ headline:'Four labs. None of them ours.', desc:'Independent testing, every lot.', cta:'Learn more' },
+  spec:'EDIT IN CANVA ONLY — changes to pack.js do not touch this one. After editing, export the PNG from Canva over exports/srg-ad01-f03-labs-we-dont-own-1080x1440.png and commit (or ask the desktop session to pull it from Canva). Blake&rsquo;s notes still open: the verbiage should move to the Ageless reference lines, and the vial shows the generic PEPTIDE 5 MG label where he asked for the BPC label.'
 }
 ];
 
