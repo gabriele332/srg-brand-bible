@@ -348,6 +348,8 @@
   .soccard .scap a{color:var(--sage);text-decoration:none;white-space:nowrap}
   .soccard .scap a:hover{text-decoration:underline}
   .socwide{grid-column:1/-1}
+  .soc3{grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}
+  .socsub{margin:34px 0 0;font-family:var(--mono);font-size:11px;letter-spacing:.22em;text-transform:uppercase;color:var(--gray-2);font-weight:500}
   .biobox{margin-top:26px;background:#111;border:1px solid var(--line);border-radius:4px;padding:22px 24px}
   .biobox .bk{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--gray-2);margin-bottom:10px}
   .biobox p{margin:0;font-size:15.5px;line-height:1.65;color:var(--ink,#E8E8E8)}
@@ -853,25 +855,72 @@
 <section id="social"><div class="wrap reveal">
   <div class="sh"><span class="n">06c</span><span class="ey">Social Media Kit</span></div>
   <h2>The profiles, <i>dressed</i>.</h2>
-  <p class="lead">Everything the accounts need on day one - profile picture, highlight covers and platform headers, all pulled from the same system. Black base, white flag, Grotesk. Download and upload as-is.</p>
+  <p class="lead">Everything the accounts need on day one - profile pictures, highlight covers and platform headers in the three brand colorways. Black is the default; sage and white are there when the platform calls for it. Download and upload as-is.</p>
 
   <div class="biobox"><div class="bk">Bio &middot; all platforms &middot; copy as-is</div>
-  <p>Advancing scientific research with reliable, trustworthy, and accurately tested peptides. Documented batch by batch. For laboratory research use only.</p></div>
+  <p>Advancing scientific research with reliable, trustworthy, and accurately tested peptides. Documented batch by batch. For laboratory research use only.<br/>&#128279; steadfastresearchgroup.com</p>
+  <p style="margin-top:10px;font-size:12.5px;color:#8a929b">Link field on every platform: <b>https://steadfastresearchgroup.com/</b></p></div>
 
+  <h3 class="socsub">Profile pictures &middot; five combinations</h3>
   <div class="socgrid">
-    <div class="soccard"><img src="assets/social/srg-profile-picture.png" alt="Profile picture" loading="lazy" /><div class="scap"><span>Profile picture &middot; 1080&times;1080</span><a href="assets/social/srg-profile-picture.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-flag.png" alt="Highlight &middot; About" loading="lazy" /><div class="scap"><span>Highlight &middot; About &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-flag.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-vial.png" alt="Highlight &middot; Products" loading="lazy" /><div class="scap"><span>Highlight &middot; Products &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-vial.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-flask.png" alt="Highlight &middot; Testing" loading="lazy" /><div class="scap"><span>Highlight &middot; Testing &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-flask.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coa.png" alt="Highlight &middot; COA" loading="lazy" /><div class="scap"><span>Highlight &middot; COA &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-coa.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coldchain.png" alt="Highlight &middot; Shipping" loading="lazy" /><div class="scap"><span>Highlight &middot; Shipping &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-coldchain.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-verified.png" alt="Highlight &middot; Verified" loading="lazy" /><div class="scap"><span>Highlight &middot; Verified &middot; 1080&times;1080</span><a href="assets/social/srg-highlight-verified.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-white-on-black.png" alt="White on black" loading="lazy" /><div class="scap"><span>White on black &middot; default</span><a href="assets/social/srg-profile-white-on-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-white-on-sage.png" alt="White on sage" loading="lazy" /><div class="scap"><span>White on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-white-on-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-black-on-sage.png" alt="Black on sage" loading="lazy" /><div class="scap"><span>Black on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-black-on-white.png" alt="Black on white" loading="lazy" /><div class="scap"><span>Black on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-sage-on-white.png" alt="Sage on white" loading="lazy" /><div class="scap"><span>Sage on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-sage-on-white.png" download>PNG</a></div></div>
   </div>
+
+  <h3 class="socsub">Instagram highlight covers &middot; black</h3>
   <div class="socgrid">
-    <div class="soccard socwide"><img src="assets/social/srg-facebook-cover.png" alt="Facebook cover" loading="lazy" /><div class="scap"><span>Facebook cover &middot; 820&times;312 &middot; @2x</span><a href="assets/social/srg-facebook-cover.png" download>PNG</a></div></div>
-    <div class="soccard socwide"><img src="assets/social/srg-linkedin-banner.png" alt="LinkedIn banner" loading="lazy" /><div class="scap"><span>LinkedIn banner &middot; 1584&times;396 &middot; @2x</span><a href="assets/social/srg-linkedin-banner.png" download>PNG</a></div></div>
-    <div class="soccard socwide"><img src="assets/social/srg-x-header.png" alt="X header" loading="lazy" /><div class="scap"><span>X header &middot; 1500&times;500 &middot; @2x</span><a href="assets/social/srg-x-header.png" download>PNG</a></div></div>
-    <div class="soccard socwide"><img src="assets/social/srg-youtube-banner.png" alt="YouTube banner" loading="lazy" /><div class="scap"><span>YouTube banner &middot; 2560&times;1440 &middot; safe-area centered</span><a href="assets/social/srg-youtube-banner.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-black.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-black.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-black.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-black.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-black.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; cold chain</span><a href="assets/social/srg-highlight-coldchain-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-black.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-black.png" download>PNG</a></div></div>
+  </div>
+  <h3 class="socsub">Instagram highlight covers &middot; sage</h3>
+  <div class="socgrid">
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-sage.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-sage.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-sage.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-sage.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-sage.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; cold chain</span><a href="assets/social/srg-highlight-coldchain-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-sage.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-sage.png" download>PNG</a></div></div>
+  </div>
+  <h3 class="socsub">Instagram highlight covers &middot; white</h3>
+  <div class="socgrid">
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-white.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-white.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-white.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-white.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-white.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; cold chain</span><a href="assets/social/srg-highlight-coldchain-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-white.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-white.png" download>PNG</a></div></div>
+  </div>
+
+  <h3 class="socsub">Facebook cover &middot; 820&times;312 @2x</h3>
+  <div class="socgrid soc3">
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-black.png" alt="Black" loading="lazy" /><div class="scap"><span>Black &middot; default</span><a href="assets/social/srg-facebook-cover-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-sage.png" alt="Sage" loading="lazy" /><div class="scap"><span>Sage &middot; </span><a href="assets/social/srg-facebook-cover-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-white.png" alt="White" loading="lazy" /><div class="scap"><span>White &middot; </span><a href="assets/social/srg-facebook-cover-white.png" download>PNG</a></div></div>
+  </div>
+  <h3 class="socsub">LinkedIn banner &middot; 1584&times;396 @2x</h3>
+  <div class="socgrid soc3">
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-black.png" alt="Black" loading="lazy" /><div class="scap"><span>Black &middot; default</span><a href="assets/social/srg-linkedin-banner-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-sage.png" alt="Sage" loading="lazy" /><div class="scap"><span>Sage &middot; </span><a href="assets/social/srg-linkedin-banner-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-white.png" alt="White" loading="lazy" /><div class="scap"><span>White &middot; </span><a href="assets/social/srg-linkedin-banner-white.png" download>PNG</a></div></div>
+  </div>
+  <h3 class="socsub">X header &middot; 1500&times;500 @2x</h3>
+  <div class="socgrid soc3">
+    <div class="soccard"><img src="assets/social/srg-x-header-black.png" alt="Black" loading="lazy" /><div class="scap"><span>Black &middot; default</span><a href="assets/social/srg-x-header-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-x-header-sage.png" alt="Sage" loading="lazy" /><div class="scap"><span>Sage &middot; </span><a href="assets/social/srg-x-header-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-x-header-white.png" alt="White" loading="lazy" /><div class="scap"><span>White &middot; </span><a href="assets/social/srg-x-header-white.png" download>PNG</a></div></div>
+  </div>
+  <h3 class="socsub">YouTube banner &middot; 2560&times;1440 &middot; safe-area centered</h3>
+  <div class="socgrid soc3">
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-black.png" alt="Black" loading="lazy" /><div class="scap"><span>Black &middot; default</span><a href="assets/social/srg-youtube-banner-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-sage.png" alt="Sage" loading="lazy" /><div class="scap"><span>Sage &middot; </span><a href="assets/social/srg-youtube-banner-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-white.png" alt="White" loading="lazy" /><div class="scap"><span>White &middot; </span><a href="assets/social/srg-youtube-banner-white.png" download>PNG</a></div></div>
   </div>
 </div></section>
 
