@@ -34,21 +34,19 @@
 const FLAG_WHITE = '/assets/logos-grotesk/srg-grotesk-white-icon.png';
 const FLAG_BLACK = '/assets/logos-grotesk/srg-grotesk-black-icon.png';
 
-/* colorway recipes — text + scrim tuned per photo */
-/* safeShift: framing for the YouTube banner, whose text MUST sit in the
-   centred safe area — the photo's vial has to move out of the middle there,
-   or the lockup lands on top of the product. object-position can't do it
-   (these photos fill by width, so X has no slack); a translate+scale can. */
+/* v2 "cutout" (Gabi, 2026-08-07): flat brand grounds and the PRODUCT as a
+   floating cutout accent — no scene photography. Sources are exclusively the
+   Blake-approved Drive mockups (the srg-prod set). The mockups are white-bg
+   JPGs: multiply makes the white vanish on the sage and bone grounds; on
+   carbon the vial sits inside a bone disc bleeding off the edge, because
+   multiply keeps only pixels darker than the ground. */
 const WAYS = {
-  black: { photo:'/assets/social-src/range-duo.jpg',  pos:'62% 40%', fg:'#FFFFFF', flag:FLAG_WHITE,
-           safeShift:'transform:translateX(-27%) scale(1.6);transform-origin:center',
-           scrim:'linear-gradient(90deg, rgba(10,10,10,.86) 0%, rgba(10,10,10,.55) 34%, rgba(10,10,10,0) 62%)' },
-  sage:  { photo:'/assets/social-src/lab-olive.jpg',  pos:'68% 30%', fg:'#FFFFFF', flag:FLAG_WHITE,
-           safeShift:'transform:translateX(29%) scale(1.64);transform-origin:center',
-           scrim:'linear-gradient(90deg, rgba(35,42,28,.88) 0%, rgba(35,42,28,.58) 36%, rgba(35,42,28,0) 64%)' },
-  white: { photo:'/assets/social-src/range-grid.jpg', pos:'50% 32%', fg:'#14150F', flag:FLAG_BLACK,
-           safeShift:'',
-           scrim:'linear-gradient(90deg, rgba(245,243,236,.94) 0%, rgba(245,243,236,.72) 34%, rgba(245,243,236,.06) 62%)' }
+  black: { bg:'radial-gradient(120% 160% at 24% 30%, #1D1F1B 0%, #0D0D0D 68%)',
+           fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-bb10.jpg', disc:'#F2EFE6' },
+  sage:  { bg:'linear-gradient(115deg, #8F9A7D 0%, #869274 52%, #75816A 100%)',
+           fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-tr10.jpg', disc:null },
+  white: { bg:'linear-gradient(115deg, #F8F6EF 0%, #F2EFE6 55%, #E6E1D2 100%)',
+           fg:'#14150F', flag:FLAG_BLACK, vial:'/assets/social-src/srg-prod-tsm5.jpg', disc:null }
 };
 
 /* platform canvases — EXACT dimensions of the files being replaced */
@@ -72,11 +70,21 @@ function header(p, wname) {
        width:${safeW}px;height:${safeH}px;margin:auto;`
     : `padding-left:${p.pad}px;max-width:${Math.round(p.w * 0.52)}px;`;
 
-  c.innerHTML = `
-    <img class="ph" src="${w.photo}" style="object-position:${w.pos};${p.safe ? w.safeShift : ''}" />
-    <div class="scrim" style="background:${p.safe
-      ? 'radial-gradient(64% 48% at 50% 50%, ' + (wname==='white' ? 'rgba(245,243,236,.96)' : 'rgba(12,12,12,.88)') + ' 0%, ' + (wname==='white' ? 'rgba(245,243,236,.68)' : 'rgba(12,12,12,.55)') + ' 62%, rgba(0,0,0,0) 100%)'
-      : w.scrim}"></div>
+  c.style.background = w.bg;
+
+  /* the product: a cutout accent on the right, tilted by the render itself,
+     bleeding off the edge so it reads as a design detail, not a catalog shot */
+  const vh = Math.round(p.h * (p.safe ? 0.98 : 1.34));
+  const vialRight = p.safe ? '4%' : '5%';
+  const vialTop = Math.round(p.h * (p.safe ? 0.16 : -0.14));
+  const discSize = Math.round(vh * 1.18);
+  const art = (w.disc
+    ? `<div style="position:absolute;right:-${Math.round(discSize * 0.22)}px;top:50%;transform:translateY(-50%);
+         width:${discSize}px;height:${discSize}px;border-radius:50%;background:${w.disc};overflow:hidden;">
+         <img src="${w.vial}" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:${Math.round(vh * 0.92)}px;mix-blend-mode:multiply;" /></div>`
+    : `<img src="${w.vial}" style="position:absolute;right:${vialRight};top:${vialTop}px;height:${vh}px;mix-blend-mode:multiply;" />`);
+
+  c.innerHTML = art + `
     <div class="lk" style="color:${w.fg};${inner}">
       <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${w.flag});${p.safe ? 'background-position:center;' : ''}"></div>
       <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.28)}px">STEADFAST</b>
