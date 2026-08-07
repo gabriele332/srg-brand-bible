@@ -23,6 +23,12 @@
   .ey{font-family:var(--mono);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--olive)}
 
   header.nav{position:sticky;top:0;z-index:50;background:rgba(13,13,13,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-soft)}
+  /* Anchor targets clear the 60px sticky nav instead of hiding under it. */
+  section[id]{scroll-margin-top:76px}
+  /* The label sheets are 1440x1720 lazy-loaded images with no reserved height —
+     without this, deep links that land past them (#social, #voice, #ads) get
+     pushed off-target when the images load and grow the page above the anchor. */
+  img[src*="labels-products"]{aspect-ratio:1440/1720;height:auto}
   .nav-in{display:flex;align-items:center;gap:20px;height:60px;max-width:1120px;margin:0 auto;padding:0 34px}
   .nav-in .bd{display:flex;align-items:center;gap:11px;font-family:var(--display);font-weight:600;letter-spacing:.06em;text-decoration:none}
   .nav-in .bd .m{width:30px;height:27px;background-image:var(--flag-white)}
@@ -1045,5 +1051,19 @@
         }).catch(function(){});
       });
     });
+  })();
+</script>
+<script>
+  // Deep links (#social, #ads, ...) were landing short of their section: the
+  // page grows after the browser's initial anchor jump (lazy images, font
+  // swap), pushing the target down. Re-anchor once everything above has
+  // loaded, and once more after a settle tick for the stragglers.
+  (function(){
+    if(!location.hash) return;
+    function again(){
+      var t=document.getElementById(location.hash.slice(1));
+      if(t) t.scrollIntoView();
+    }
+    addEventListener('load',function(){ again(); setTimeout(again,400); });
   })();
 </script>
