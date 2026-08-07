@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SRG social header compositor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+  /* Renders ONE asset at true pixel size, chosen by ?id=. export via
+     node assets/social-src/make-headers.mjs — Blake's ask (2026-08-07):
+     the platform headers should carry the product photography from the
+     website rather than flat typographic grounds. */
+  html,body{margin:0;padding:0;background:#fff;overflow:hidden}
+  #c{position:relative;overflow:hidden;font-family:"Space Grotesk",sans-serif;display:flex}
+  #c img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  #c .scrim{position:absolute;inset:0}
+
+  /* lockup block */
+  .lk{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center}
+  .lk .flag{background-repeat:no-repeat;background-size:contain;background-position:left center}
+  .lk b{font-weight:700;letter-spacing:.24em;line-height:1}
+  .lk small{display:block;font-family:"Space Mono",monospace;letter-spacing:.42em;opacity:.75;font-weight:400}
+  .lk .tag{font-family:"Inter",sans-serif;font-weight:300;opacity:.92}
+  .lk .ruo{font-family:"Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
+
+  /* highlight cover (1440x1440): plain ground + one stroked icon */
+  .hl{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .hl svg{width:34%;height:34%}
+</style>
+</head>
+<body>
+<div id="c"></div>
+<script>
+const FLAG_WHITE = '/assets/logos-grotesk/srg-grotesk-white-icon.png';
+const FLAG_BLACK = '/assets/logos-grotesk/srg-grotesk-black-icon.png';
+
+/* colorway recipes — text + scrim tuned per photo */
+/* safeShift: framing for the YouTube banner, whose text MUST sit in the
+   centred safe area — the photo's vial has to move out of the middle there,
+   or the lockup lands on top of the product. object-position can't do it
+   (these photos fill by width, so X has no slack); a translate+scale can. */
+const WAYS = {
+  black: { photo:'/assets/social-src/range-duo.jpg',  pos:'62% 40%', fg:'#FFFFFF', flag:FLAG_WHITE,
+           safeShift:'transform:translateX(-27%) scale(1.6);transform-origin:center',
+           scrim:'linear-gradient(90deg, rgba(10,10,10,.86) 0%, rgba(10,10,10,.55) 34%, rgba(10,10,10,0) 62%)' },
+  sage:  { photo:'/assets/social-src/lab-olive.jpg',  pos:'68% 30%', fg:'#FFFFFF', flag:FLAG_WHITE,
+           safeShift:'transform:translateX(29%) scale(1.64);transform-origin:center',
+           scrim:'linear-gradient(90deg, rgba(35,42,28,.88) 0%, rgba(35,42,28,.58) 36%, rgba(35,42,28,0) 64%)' },
+  white: { photo:'/assets/social-src/range-grid.jpg', pos:'50% 32%', fg:'#14150F', flag:FLAG_BLACK,
+           safeShift:'',
+           scrim:'linear-gradient(90deg, rgba(245,243,236,.94) 0%, rgba(245,243,236,.72) 34%, rgba(245,243,236,.06) 62%)' }
+};
+
+/* platform canvases — EXACT dimensions of the files being replaced */
+const PLATFORMS = {
+  fb:  { w:2187, h:832,  pad:120, flagH:110, brand:74,  sub:26, tag:40, ruo:22 },
+  li:  { w:4224, h:1056, pad:200, flagH:140, brand:96,  sub:34, tag:52, ruo:28 },
+  x:   { w:4000, h:1333, pad:220, flagH:150, brand:104, sub:36, tag:56, ruo:30 },
+  yt:  { w:3413, h:1920, pad:0,   flagH:130, brand:88,  sub:32, tag:48, ruo:26, safe:true }
+};
+
+function header(p, wname) {
+  const w = WAYS[wname];
+  const c = document.getElementById('c');
+  c.style.width = p.w + 'px'; c.style.height = p.h + 'px';
+
+  /* YouTube shows only the centered safe area on desktop — everything
+     readable lives inside it, centred; the photo still fills the canvas. */
+  const safeW = Math.round(p.w * 0.604), safeH = Math.round(p.h * 0.294);
+  const inner = p.safe
+    ? `display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
+       width:${safeW}px;height:${safeH}px;margin:auto;`
+    : `padding-left:${p.pad}px;max-width:${Math.round(p.w * 0.52)}px;`;
+
+  c.innerHTML = `
+    <img class="ph" src="${w.photo}" style="object-position:${w.pos};${p.safe ? w.safeShift : ''}" />
+    <div class="scrim" style="background:${p.safe
+      ? 'radial-gradient(64% 48% at 50% 50%, ' + (wname==='white' ? 'rgba(245,243,236,.96)' : 'rgba(12,12,12,.88)') + ' 0%, ' + (wname==='white' ? 'rgba(245,243,236,.68)' : 'rgba(12,12,12,.55)') + ' 62%, rgba(0,0,0,0) 100%)'
+      : w.scrim}"></div>
+    <div class="lk" style="color:${w.fg};${inner}">
+      <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${w.flag});${p.safe ? 'background-position:center;' : ''}"></div>
+      <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.28)}px">STEADFAST</b>
+      <small style="font-size:${p.sub}px;margin-top:12px">RESEARCH GROUP</small>
+      <div class="tag" style="font-size:${p.tag}px;margin-top:${Math.round(p.tag * 0.9)}px">Documented batch by batch.</div>
+      <div class="ruo" style="font-size:${p.ruo}px;margin-top:${Math.round(p.ruo * 0.8)}px">For laboratory research use only</div>
+    </div>`;
+}
+
+/* Shipping highlight: parcel icon replaces the snowflake — a snowflake reads
+   as a cold-shipping claim, and Shayne's ruling is that nothing ships cold. */
+const HL_GROUNDS = { black:{bg:'#141414', fg:'#FFFFFF'}, sage:{bg:'#869274', fg:'#FFFFFF'}, white:{bg:'#F4F2EC', fg:'#141414'} };
+function highlight(wname) {
+  const g = HL_GROUNDS[wname];
+  const c = document.getElementById('c');
+  c.style.width = '1440px'; c.style.height = '1440px'; c.style.background = g.bg;
+  c.innerHTML = `<div class="hl">
+    <svg viewBox="0 0 100 100" fill="none" stroke="${g.fg}" stroke-width="4.6" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M50 14 88 32v36L50 86 12 68V32Z"/>
+      <path d="M12 32l38 18 38-18M50 50v36"/>
+      <path d="M31 23l38 18v14"/>
+    </svg></div>`;
+}
+
+const q = new URLSearchParams(location.search);
+const id = q.get('id') || 'fb-black';           // e.g. fb-black | yt-sage | hl-white
+const [kind, way] = id.split('-');
+if (kind === 'hl') highlight(way); else header(PLATFORMS[kind], way);
+
+const ready = () => { document.title = 'SHOT-READY-' + id; };
+Promise.all([document.fonts.ready,
+  Promise.all([...document.images].map(im => im.complete ? 1 : new Promise(r => { im.onload = im.onerror = r; })))
+]).then(() => requestAnimationFrame(ready));
+</script>
+</body>
+</html>
