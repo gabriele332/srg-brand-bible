@@ -22,22 +22,20 @@
   #l{width:144px;height:72px;overflow:hidden;position:relative;
      font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;
      align-items:center;justify-content:center;text-align:center}
-  /* Sized so the whole stack holds a ~1.5mm safe margin top and bottom —
+  /* Sized so the whole stack holds a ~1.2mm safe margin top and bottom —
      the first cut of this file overflowed the 72px and touched the trim.
-     The flag sits INLINE with the wordmark (Gabi wants the logo on the label;
-     Jessica flagged that a stacked flag doesn't fit 0.75in) — at ~2.1mm tall
-     the outline may fill in on press, which the PEPTIDE test print will
-     answer. No vector flag exists in the kit; the icon is the brand PNG. */
-  #l .brandrow{display:flex;align-items:center;justify-content:center;gap:3px;line-height:1}
-  #l .brandrow img{height:8px;width:auto;display:block}
-  #l .brand{font-weight:700;font-size:7.5px;letter-spacing:.24em;margin-right:-.24em;line-height:1}
-  #l .rg{font-weight:500;font-size:4px;letter-spacing:.5em;margin-right:-.5em;line-height:1;margin-top:1.5px;opacity:.92}
-  #l .name{font-weight:700;font-size:9.5px;letter-spacing:.04em;line-height:1;margin-top:2.5px;white-space:nowrap}
-  #l .mg{display:inline-block;font-weight:700;font-size:6.5px;line-height:1;padding:1.2px 4.5px;margin-top:2px}
+     The brand block is the HORIZONTAL lockup asset from the logo kit,
+     verbatim (Gabi, 2026-08-11: "exatamente essa logo" — the kit's third
+     option). It packs flag + STEADFAST + RESEARCH GROUP into one artwork;
+     at 19mm wide the RESEARCH GROUP subline is ~0.4mm tall, which only the
+     PEPTIDE press test can judge. */
+  #l .lockup{width:72px;height:auto;display:block;margin:0 auto}
+  #l .name{font-weight:700;font-size:8.5px;letter-spacing:.04em;line-height:1;margin-top:2px;white-space:nowrap}
+  #l .mg{display:inline-block;font-weight:700;font-size:6px;line-height:1;padding:1.1px 4px;margin-top:1.8px}
   /* Jessica: compliance larger and more bold. Panel art ran these at ~4% of
-     label width in weight 500; here they are 4.5% width and weight 700 —
+     label width in weight 500; here they are ~4.3% width and weight 700 —
      the block owns roughly a third of the label's height. */
-  #l .c{font-weight:700;font-size:5.2px;letter-spacing:.05em;line-height:1.45;margin-top:2px}
+  #l .c{font-weight:700;font-size:4.9px;letter-spacing:.05em;line-height:1.38;margin-top:1.8px}
 </style>
 </head>
 <body>
@@ -64,16 +62,17 @@ const q = new URLSearchParams(location.search);
 const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
 const [name, mg] = SKUS[sku], w = WAYS[way];
 
-const flag = way === 'white'
-  ? '/assets/logos-grotesk/srg-grotesk-black-icon.png'
-  : '/assets/logos-grotesk/srg-grotesk-white-icon.png';
+/* the kit's horizontal lockup, verbatim — white art on the dark colorways,
+   black art on the light one */
+const lockup = way === 'white'
+  ? '/assets/logos-grotesk/srg-grotesk-black-horizontal.png'
+  : '/assets/logos-grotesk/srg-grotesk-white-horizontal.png';
 
 const l = document.getElementById('l');
 l.style.background = w.bg;
 l.style.color = w.fg;
 l.innerHTML =
-  '<div class="brandrow"><img src="' + flag + '" alt=""/><div class="brand">STEADFAST</div></div>' +
-  '<div class="rg">RESEARCH GROUP</div>' +
+  '<img class="lockup" src="' + lockup + '" alt="Steadfast Research Group"/>' +
   '<div class="name">' + name + '</div>' +
   '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg + '">' + mg + '</div>' +
   '<div class="c">LYOPHILIZED POWDER<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
