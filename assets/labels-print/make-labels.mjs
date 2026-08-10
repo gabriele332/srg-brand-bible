@@ -23,7 +23,7 @@ const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => existsSync(p));
 
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png' };
-const SKUS = ['rt10','rt20','rt30','tr10','tr20','tr30','tsm5','tsm10','bb10','kpv10','cp10','cu50','nj1000','hgh10','wa10'];
+const SKUS = ['rt10','rt20','rt30','tr10','tr20','tr30','tsm5','tsm10','bb10','kpv10','cp10','cu50','nj1000','hgh10','wa10','peptide'];
 const WAYS = ['black','green','white'];
 
 const server = createServer(async (req, res) => {
