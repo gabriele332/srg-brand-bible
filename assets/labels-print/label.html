@@ -19,27 +19,24 @@
      ========================================================================== */
   @page{size:1.5in 0.75in;margin:0}
   html,body{margin:0;padding:0}
-  /* BAC Water is the one odd size — Jessica: 2.5in x 1in for the 10ml bottle.
-     The layout composes at 180x72 logical px and zooms 4/3, which fills the
-     96px height exactly and gives the wider bottle extra side breathing room. */
-  #l{width:144px;height:72px;overflow:hidden;position:relative;
+  /* Every dimension that depends on the dieline is set inline from JS as a
+     computed pixel value — NO zoom and NO transform. Chrome's print pipeline
+     treats zoom differently from screen, which mis-centered the strength box
+     on the 2.5x1in BAC Water; plain computed layout renders identically on
+     screen and in the PDF, so what the check screenshot shows is what prints. */
+  #l{overflow:hidden;position:relative;
      font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;
      align-items:center;justify-content:center;text-align:center}
-  body.bacwater #l{width:180px;height:72px;zoom:1.33333}
-  /* Sized so the whole stack holds a ~1.2mm safe margin top and bottom —
-     the first cut of this file overflowed the 72px and touched the trim.
-     The brand block is the HORIZONTAL lockup asset from the logo kit,
-     verbatim (Gabi, 2026-08-11: "exatamente essa logo" — the kit's third
-     option). It packs flag + STEADFAST + RESEARCH GROUP into one artwork;
-     at 19mm wide the RESEARCH GROUP subline is ~0.4mm tall, which only the
-     PEPTIDE press test can judge. */
-  #l .lockup{width:72px;height:auto;display:block;margin:0 auto}
-  #l .name{font-weight:700;font-size:8.5px;letter-spacing:.04em;line-height:1;margin-top:2px;white-space:nowrap}
-  #l .mg{display:inline-block;font-weight:700;font-size:6px;line-height:1;padding:1.1px 4px;margin-top:1.8px}
-  /* Jessica: compliance larger and more bold. Panel art ran these at ~4% of
-     label width in weight 500; here they are ~4.3% width and weight 700 —
-     the block owns roughly a third of the label's height. */
-  #l .c{font-weight:700;font-size:4.9px;letter-spacing:.05em;line-height:1.38;margin-top:1.8px}
+  /* Brand block: the kit's HORIZONTAL lockup asset, verbatim (Gabi:
+     "exatamente essa logo" — the kit's third option). At 19mm wide the
+     RESEARCH GROUP subline is ~0.4mm tall; the PEPTIDE press test judges it. */
+  #l .lockup{height:auto;display:block;margin:0 auto}
+  #l .name{font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap}
+  /* Strength box centering: fixed height with matching line-height — padding
+     maths under scaling is what let the figure drift off the box's centre. */
+  #l .mg{display:inline-block;font-weight:700}
+  /* Jessica: compliance larger and more bold — weight 700, ~⅓ of label height. */
+  #l .c{font-weight:700;letter-spacing:.05em}
 </style>
 </head>
 <body>
@@ -66,14 +63,17 @@ const q = new URLSearchParams(location.search);
 const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
 const [name, mg] = SKUS[sku], w = WAYS[way];
 
-/* BAC Water prints at 2.5in x 1in (Jessica, 2026-08-11) — swap the page box
-   and the layout class; everything else shares the 1.5x0.75 dieline. */
-if (sku === 'wa10') {
-  document.body.classList.add('bacwater');
+/* BAC Water prints at 2.5in x 1in (Jessica, 2026-08-11); everything else is
+   1.5in x 0.75in. S scales every layout value off the 72px-tall base design. */
+const isBac = sku === 'wa10';
+const CANVAS = isBac ? [240, 96] : [144, 72];
+const S = CANVAS[1] / 72;
+if (isBac) {
   const st = document.createElement('style');
   st.textContent = '@page{size:2.5in 1in;margin:0}';
   document.head.appendChild(st);
 }
+const px = v => (v * S).toFixed(2) + 'px';
 
 /* the kit's horizontal lockup, verbatim — white art on the dark colorways,
    black art on the light one */
@@ -82,21 +82,29 @@ const lockup = way === 'white'
   : '/assets/logos-grotesk/srg-grotesk-white-horizontal.png';
 
 const l = document.getElementById('l');
+l.style.width = CANVAS[0] + 'px';
+l.style.height = CANVAS[1] + 'px';
 l.style.background = w.bg;
 l.style.color = w.fg;
 l.innerHTML =
-  '<img class="lockup" src="' + lockup + '" alt="Steadfast Research Group"/>' +
-  '<div class="name">' + name + '</div>' +
-  '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg + '">' + mg + '</div>' +
+  '<img class="lockup" src="' + lockup + '" alt="Steadfast Research Group" style="width:' + px(72) + '"/>' +
+  '<div class="name" style="font-size:' + px(8.5) + ';margin-top:' + px(2) + '"></div>' +
+  '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg +
+    ';font-size:' + px(6) + ';height:' + px(8.6) + ';line-height:' + px(8.6) +
+    ';padding:0 ' + px(4) + ';margin-top:' + px(1.8) + '">' + mg + '</div>' +
   /* first compliance line matches the panel art: BAC water is a liquid, not
      a lyophilized powder */
-  '<div class="c">' + (sku === 'wa10' ? 'BACTERIOSTATIC WATER' : 'LYOPHILIZED POWDER') +
+  '<div class="c" style="font-size:' + px(4.9) + ';line-height:1.38;margin-top:' + px(1.8) + '">' +
+  (isBac ? 'BACTERIOSTATIC WATER' : 'LYOPHILIZED POWDER') +
   '<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
 
-/* long names shrink to fit inside the 2mm safe zone (129px usable) */
+/* long names shrink to fit inside the safe zone (~90% of canvas width) */
 const nameEl = l.querySelector('.name');
-let size = 9.5;
-while (nameEl.scrollWidth > 129 && size > 6) {
+nameEl.textContent = name;
+const maxW = CANVAS[0] * 0.9;
+let size = 8.5 * S;
+nameEl.style.fontSize = size + 'px';
+while (nameEl.scrollWidth > maxW && size > 6 * S) {
   size -= 0.5;
   nameEl.style.fontSize = size + 'px';
 }
