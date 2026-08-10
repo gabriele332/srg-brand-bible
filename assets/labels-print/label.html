@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SRG print label compositor</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  /* ==========================================================================
+     Print label at Jessica's confirmed dieline (Slack 2026-08-11):
+     1.5in x 0.75in, one size for every vial. Her three revisions applied:
+       - vector PDF output (this page is printed to PDF, type stays live)
+       - the three compliance lines LARGER and BOLDER than the panel art
+       - no flag at the very top: at 0.75in tall the old centered stack with
+         an 8mm flag doesn't fit. The wordmark carries the brand; the flag
+         stays on the cap emboss and the back of the wrap.
+     Chrome maps 96 CSS px = 1in, so the artboard is exactly 144x72px and
+     @page emits a true 1.5x0.75in PDF with the art flooded to the edge.
+     ========================================================================== */
+  @page{size:1.5in 0.75in;margin:0}
+  html,body{margin:0;padding:0}
+  #l{width:144px;height:72px;overflow:hidden;position:relative;
+     font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;
+     align-items:center;justify-content:center;text-align:center}
+  /* Sized so the whole stack holds a ~1.5mm safe margin top and bottom —
+     the first cut of this file overflowed the 72px and touched the trim. */
+  #l .brand{font-weight:700;font-size:7.5px;letter-spacing:.24em;margin-right:-.24em;line-height:1}
+  #l .rg{font-weight:500;font-size:4px;letter-spacing:.5em;margin-right:-.5em;line-height:1;margin-top:1.5px;opacity:.92}
+  #l .name{font-weight:700;font-size:9.5px;letter-spacing:.04em;line-height:1;margin-top:2.5px;white-space:nowrap}
+  #l .mg{display:inline-block;font-weight:700;font-size:6.5px;line-height:1;padding:1.2px 4.5px;margin-top:2px}
+  /* Jessica: compliance larger and more bold. Panel art ran these at ~4% of
+     label width in weight 500; here they are 4.5% width and weight 700 —
+     the block owns roughly a third of the label's height. */
+  #l .c{font-weight:700;font-size:5.2px;letter-spacing:.05em;line-height:1.45;margin-top:2px}
+</style>
+</head>
+<body>
+<div id="l"></div>
+<script>
+const SKUS = {
+  rt10:  ['RETATRUTIDE', '10 MG'],  rt20: ['RETATRUTIDE', '20 MG'], rt30: ['RETATRUTIDE', '30 MG'],
+  tr10:  ['TIRZEPATIDE', '10 MG'],  tr20: ['TIRZEPATIDE', '20 MG'], tr30: ['TIRZEPATIDE', '30 MG'],
+  tsm5:  ['TESAMORELIN', '5 MG'],   tsm10:['TESAMORELIN', '10 MG'],
+  bb10:  ['BPC157/TB500', '10 MG'], kpv10:['KPV', '10 MG'],
+  cp10:  ['CJC1295/IPAMORELIN', '10 MG'], cu50: ['GHK-CU', '50 MG'],
+  nj1000:['NAD+', '1000 MG'], hgh10:['HGH', '10 IU'], wa10: ['BAC WATER', '10 ML']
+};
+/* colorways match the three label sets on the bible page */
+const WAYS = {
+  black: { bg:'#141414', fg:'#FFFFFF', boxBg:'#FFFFFF', boxFg:'#141414' },
+  green: { bg:'#869274', fg:'#FFFFFF', boxBg:'#FFFFFF', boxFg:'#869274' },
+  white: { bg:'#F4F1E8', fg:'#23271F', boxBg:'#23271F', boxFg:'#F4F1E8' }
+};
+
+const q = new URLSearchParams(location.search);
+const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
+const [name, mg] = SKUS[sku], w = WAYS[way];
+
+const l = document.getElementById('l');
+l.style.background = w.bg;
+l.style.color = w.fg;
+l.innerHTML =
+  '<div class="brand">STEADFAST</div>' +
+  '<div class="rg">RESEARCH GROUP</div>' +
+  '<div class="name">' + name + '</div>' +
+  '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg + '">' + mg + '</div>' +
+  '<div class="c">LYOPHILIZED POWDER<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
+
+/* long names shrink to fit inside the 2mm safe zone (129px usable) */
+const nameEl = l.querySelector('.name');
+let size = 9.5;
+while (nameEl.scrollWidth > 129 && size > 6) {
+  size -= 0.5;
+  nameEl.style.fontSize = size + 'px';
+}
+
+document.fonts.ready.then(() => requestAnimationFrame(() => {
+  document.title = 'SHOT-READY-' + sku + '-' + way;
+}));
+</script>
+</body>
+</html>
