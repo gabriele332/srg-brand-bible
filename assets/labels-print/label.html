@@ -19,9 +19,13 @@
      ========================================================================== */
   @page{size:1.5in 0.75in;margin:0}
   html,body{margin:0;padding:0}
+  /* BAC Water is the one odd size — Jessica: 2.5in x 1in for the 10ml bottle.
+     The layout composes at 180x72 logical px and zooms 4/3, which fills the
+     96px height exactly and gives the wider bottle extra side breathing room. */
   #l{width:144px;height:72px;overflow:hidden;position:relative;
      font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;
      align-items:center;justify-content:center;text-align:center}
+  body.bacwater #l{width:180px;height:72px;zoom:1.33333}
   /* Sized so the whole stack holds a ~1.2mm safe margin top and bottom —
      the first cut of this file overflowed the 72px and touched the trim.
      The brand block is the HORIZONTAL lockup asset from the logo kit,
@@ -62,6 +66,15 @@ const q = new URLSearchParams(location.search);
 const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
 const [name, mg] = SKUS[sku], w = WAYS[way];
 
+/* BAC Water prints at 2.5in x 1in (Jessica, 2026-08-11) — swap the page box
+   and the layout class; everything else shares the 1.5x0.75 dieline. */
+if (sku === 'wa10') {
+  document.body.classList.add('bacwater');
+  const st = document.createElement('style');
+  st.textContent = '@page{size:2.5in 1in;margin:0}';
+  document.head.appendChild(st);
+}
+
 /* the kit's horizontal lockup, verbatim — white art on the dark colorways,
    black art on the light one */
 const lockup = way === 'white'
@@ -75,7 +88,10 @@ l.innerHTML =
   '<img class="lockup" src="' + lockup + '" alt="Steadfast Research Group"/>' +
   '<div class="name">' + name + '</div>' +
   '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg + '">' + mg + '</div>' +
-  '<div class="c">LYOPHILIZED POWDER<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
+  /* first compliance line matches the panel art: BAC water is a liquid, not
+     a lyophilized powder */
+  '<div class="c">' + (sku === 'wa10' ? 'BACTERIOSTATIC WATER' : 'LYOPHILIZED POWDER') +
+  '<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
 
 /* long names shrink to fit inside the 2mm safe zone (129px usable) */
 const nameEl = l.querySelector('.name');
