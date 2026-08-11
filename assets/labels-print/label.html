@@ -27,10 +27,15 @@
   #l{overflow:hidden;position:relative;
      font-family:'Space Grotesk',sans-serif;display:flex;flex-direction:column;
      align-items:center;justify-content:center;text-align:center}
-  /* Brand block: the kit's HORIZONTAL lockup asset, verbatim (Gabi:
-     "exatamente essa logo" — the kit's third option). At 19mm wide the
-     RESEARCH GROUP subline is ~0.4mm tall; the PEPTIDE press test judges it. */
-  #l .lockup{height:auto;display:block;margin:0 auto}
+  /* Brand block: rebuilt at the PANEL ART's proportions (srg-label-*.svg:
+     STEADFAST 33 / RESEARCH GROUP 14, ~42%) after Jessica's press test —
+     the kit lockup's subline printed too small to read (Slack 2026-08-11,
+     "the text under Steadfast is still small"). Flag = the kit icon asset
+     verbatim; type = live Space Grotesk, same as the panel art. */
+  #l .brand{display:flex;align-items:center;justify-content:center}
+  #l .brand img{width:auto;display:block}
+  #l .brand .words{text-align:left}
+  #l .brand div{line-height:1}
   #l .name{font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap}
   /* Strength box centering: fixed height with matching line-height — padding
      maths under scaling is what let the figure drift off the box's centre. */
@@ -75,12 +80,12 @@ if (isBac) {
 }
 const px = v => (v * S).toFixed(2) + 'px';
 
-/* the kit's horizontal lockup, PRE-FLATTENED against this colorway's ground
-   (flatten-lockup.mjs). The kit PNGs are transparent RGBA, and Chrome embeds
-   those into the PDF as image + /SMask — Jessica's print software rendered
-   that mask as a bounding box around the logo. An opaque RGB image on the
-   matching ground prints identically and emits no mask at all. */
-const lockup = '/assets/labels-print/lockup-flat-' + way + '.png';
+/* the kit's flag icon, verbatim — white art on the dark colorways, black art
+   on the light one. Transparency is fine here: the whole label is flattened
+   into one screenshot before it ever reaches a PDF. */
+const flag = way === 'white'
+  ? '/assets/logos-grotesk/srg-grotesk-black-icon.png'
+  : '/assets/logos-grotesk/srg-grotesk-white-icon.png';
 
 const l = document.getElementById('l');
 l.style.width = CANVAS[0] + 'px';
@@ -88,7 +93,13 @@ l.style.height = CANVAS[1] + 'px';
 l.style.background = w.bg;
 l.style.color = w.fg;
 l.innerHTML =
-  '<img class="lockup" src="' + lockup + '" alt="Steadfast Research Group" style="width:' + px(72) + '"/>' +
+  '<div class="brand" style="gap:' + px(2.5) + '">' +
+    '<img src="' + flag + '" alt="" style="height:' + px(15) + '"/>' +
+    '<div class="words">' +
+      '<div style="font-weight:700;font-size:' + px(10) + ';letter-spacing:.03em">STEADFAST</div>' +
+      '<div style="font-weight:500;font-size:' + px(4.2) + ';letter-spacing:' + px(1.82) + ';margin-top:' + px(1.4) + '">RESEARCH GROUP</div>' +
+    '</div>' +
+  '</div>' +
   '<div class="name" style="font-size:' + px(8.5) + ';margin-top:' + px(2) + '"></div>' +
   '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg +
     ';font-size:' + px(6) + ';height:' + px(8.6) + ';line-height:' + px(8.6) +
