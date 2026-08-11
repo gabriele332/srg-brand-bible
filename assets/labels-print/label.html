@@ -75,11 +75,12 @@ if (isBac) {
 }
 const px = v => (v * S).toFixed(2) + 'px';
 
-/* the kit's horizontal lockup, verbatim — white art on the dark colorways,
-   black art on the light one */
-const lockup = way === 'white'
-  ? '/assets/logos-grotesk/srg-grotesk-black-horizontal.png'
-  : '/assets/logos-grotesk/srg-grotesk-white-horizontal.png';
+/* the kit's horizontal lockup, PRE-FLATTENED against this colorway's ground
+   (flatten-lockup.mjs). The kit PNGs are transparent RGBA, and Chrome embeds
+   those into the PDF as image + /SMask — Jessica's print software rendered
+   that mask as a bounding box around the logo. An opaque RGB image on the
+   matching ground prints identically and emits no mask at all. */
+const lockup = '/assets/labels-print/lockup-flat-' + way + '.png';
 
 const l = document.getElementById('l');
 l.style.width = CANVAS[0] + 'px';
