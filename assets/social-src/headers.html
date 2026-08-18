@@ -7,20 +7,24 @@
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@300;400&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
   /* ==========================================================================
-     v3 "serif" (2026-08 rebrand, women-30 audience): light bone / sage / ink
-     grounds, Lora serif wordmark (flag unchanged), product cutout accent.
-     Three styles per platform, matching the shipped filenames:
-       photo     - bone ground, product cutout right       (light hero)
-       watermark - ink ground, huge low-opacity flag right (dark option)
-       cutout    - sage ground, product cutout right       (brand green)
+     v4 (2026-08-18, Gabi): the three ORIGINAL carbon designs restored exactly
+     as shipped — same grounds, layouts, tagline and compliance type. The ONLY
+     change from v3's mistake is reverting the redesign; the only change from
+     the original is the wordmark itself: Lora serif "Steadfast" + tracked
+     RESEARCH GROUP, per the rebrand. Everything else stays as Blake approved.
+       photo     - blurred product scene behind a centered lockup
+       watermark - carbon ground, giant flag outline right, centered lockup
+       cutout    - carbon ground, lockup left, two vial cutouts right
      ========================================================================== */
   html,body{margin:0;padding:0}
-  #c{position:relative;overflow:hidden;font-family:"Lora",Georgia,serif;display:flex}
-  .lk{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center}
-  .lk .flag{background-size:contain;background-repeat:no-repeat;background-position:left center}
+  #c{position:relative;overflow:hidden;font-family:"Lora",Georgia,serif;display:flex;background:#141414}
+  .lk{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center;color:#FFFFFF}
+  .lk.center{align-items:center;text-align:center;width:100%}
+  .lk .flag{background-size:contain;background-repeat:no-repeat}
   .lk b{font-weight:600;letter-spacing:.005em;line-height:1}
-  .lk small{display:block;font-family:"Lora",Georgia,serif;font-weight:500;letter-spacing:.42em;opacity:.8}
-  .lk .tag{font-family:"Lora",Georgia,serif;font-weight:500;font-style:italic;opacity:.92}
+  .lk .rule{background:#FFFFFF;height:2px;opacity:.9}
+  .lk small{display:block;font-family:"Lora",Georgia,serif;font-weight:500;letter-spacing:.42em;opacity:.92}
+  .lk .tag{font-family:"Inter",sans-serif;font-weight:300;opacity:.92;color:#C9CDD4}
   .lk .ruo{font-family:"Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
   .hl{display:grid;place-items:center;width:100%;height:100%}
   .hl svg{width:34%;height:34%}
@@ -30,62 +34,71 @@
 <div id="c"></div>
 <script>
 const FLAG_WHITE = '/assets/logos-grotesk/srg-grotesk-white-icon.png';
-const FLAG_BLACK = '/assets/logos-grotesk/srg-grotesk-black-icon.png';
-
-const STYLES = {
-  photo:     { bg:'linear-gradient(115deg, #F8F6EF 0%, #F4F1E8 55%, #E9E4D4 100%)',
-               fg:'#23271F', flag:FLAG_BLACK, vial:'/assets/social-src/srg-prod-tsm5.jpg', wm:null },
-  watermark: { bg:'radial-gradient(120% 160% at 24% 30%, #2B3025 0%, #23271F 68%)',
-               fg:'#F4F1E8', flag:FLAG_WHITE, vial:null, wm:FLAG_WHITE },
-  cutout:    { bg:'linear-gradient(115deg, #93A07E 0%, #869274 52%, #75816A 100%)',
-               fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-tr10.jpg', wm:null }
-};
+const VIAL_BLACK = '/assets/social-src/vial-black.png';
+const VIAL_OLIVE = '/assets/social-src/vial-olive.png';
 
 /* platform canvases — EXACT dimensions of the files being replaced */
 const PLATFORMS = {
-  fb:  { w:2187, h:832,  pad:120, flagH:110, brand:84,  sub:26, tag:42, ruo:22 },
-  li:  { w:4224, h:1056, pad:200, flagH:140, brand:108, sub:34, tag:56, ruo:28 },
-  x:   { w:4000, h:1333, pad:220, flagH:150, brand:118, sub:36, tag:60, ruo:30 },
-  yt:  { w:3413, h:1920, pad:0,   flagH:130, brand:98,  sub:32, tag:52, ruo:26, safe:true }
+  fb:  { w:2187, h:832,  pad:120, flagH:110, brand:84,  sub:26, tag:40, ruo:22 },
+  li:  { w:4224, h:1056, pad:200, flagH:140, brand:106, sub:34, tag:52, ruo:28 },
+  x:   { w:4000, h:1333, pad:220, flagH:150, brand:116, sub:36, tag:56, ruo:30 },
+  yt:  { w:3413, h:1920, pad:0,   flagH:130, brand:96,  sub:32, tag:48, ruo:26, safe:true }
 };
 
+function lockup(p, centered) {
+  const flagAlign = centered ? 'background-position:center;' : 'background-position:left center;';
+  const ruleW = Math.round(p.brand * 5.4);
+  return `
+    <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${FLAG_WHITE});${flagAlign}"></div>
+    <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.30)}px">Steadfast</b>
+    <div class="rule" style="width:${ruleW}px;margin-top:${Math.round(p.brand * 0.42)}px"></div>
+    <small style="font-size:${p.sub}px;margin-top:${Math.round(p.sub * 0.72)}px">RESEARCH GROUP</small>
+    <div class="tag" style="font-size:${p.tag}px;margin-top:${Math.round(p.tag * 0.9)}px">Documented batch by batch.</div>
+    <div class="ruo" style="font-size:${p.ruo}px;margin-top:${Math.round(p.ruo * 0.8)}px">For laboratory research use only</div>`;
+}
+
 function header(p, sname) {
-  const s = STYLES[sname];
   const c = document.getElementById('c');
   c.style.width = p.w + 'px'; c.style.height = p.h + 'px';
 
   const safeW = Math.round(p.w * 0.604), safeH = Math.round(p.h * 0.294);
-  const inner = p.safe
-    ? `display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
-       width:${safeW}px;height:${safeH}px;margin:auto;`
-    : `padding-left:${p.pad}px;max-width:${Math.round(p.w * 0.52)}px;`;
+  const centerBox = p.safe
+    ? `width:${safeW}px;height:${safeH}px;margin:auto;`
+    : `height:100%;`;
 
-  c.style.background = s.bg;
-
-  let art = '';
-  if (s.vial) {
-    const vh = Math.round(p.h * (p.safe ? 0.98 : 1.34));
-    const vialTop = Math.round(p.h * (p.safe ? 0.16 : -0.14));
-    art = `<img src="${s.vial}" style="position:absolute;right:${p.safe ? '4%' : '5%'};top:${vialTop}px;height:${vh}px;mix-blend-mode:multiply;" />`;
-  } else if (s.wm) {
-    const wmH = Math.round(p.h * 1.5);
-    art = `<div style="position:absolute;right:-${Math.round(wmH * 0.18)}px;top:50%;transform:translateY(-50%) rotate(-6deg);
-             width:${wmH}px;height:${wmH}px;opacity:.09;
-             background:url(${s.wm}) center/contain no-repeat;"></div>`;
+  let art = '', lk = '';
+  if (sname === 'photo') {
+    /* blurred product scene: the two vial renders, oversized and defocused */
+    const vh = Math.round(p.h * 1.5);
+    art = `<div style="position:absolute;inset:0;background:
+             radial-gradient(120% 170% at 30% 0%, #2A2E33 0%, #17191C 55%, #101214 100%);"></div>
+           <img src="${VIAL_BLACK}" style="position:absolute;left:12%;top:-14%;height:${vh}px;
+             filter:blur(30px) brightness(.6);transform:rotate(-9deg);" />
+           <img src="${VIAL_OLIVE}" style="position:absolute;right:10%;top:-20%;height:${Math.round(vh * 1.15)}px;
+             filter:blur(30px) brightness(.55);transform:rotate(8deg);" />
+           <div style="position:absolute;inset:0;background:rgba(10,11,12,.35)"></div>`;
+    lk = `<div class="lk center" style="${centerBox}">${lockup(p, true)}</div>`;
+  } else if (sname === 'watermark') {
+    const wmH = Math.round(p.h * 1.6);
+    art = `<div style="position:absolute;right:-${Math.round(wmH * 0.16)}px;top:-${Math.round(wmH * 0.12)}px;
+             width:${wmH}px;height:${wmH}px;opacity:.07;
+             background:url(${FLAG_WHITE}) center/contain no-repeat;"></div>`;
+    lk = `<div class="lk center" style="${centerBox}">${lockup(p, true)}</div>`;
+  } else { /* cutout */
+    const vh = Math.round(p.h * (p.safe ? 0.82 : 0.86));
+    const back = Math.round(vh * 0.82);
+    art = `<img src="${VIAL_BLACK}" style="position:absolute;right:${p.safe ? '26%' : '30%'};top:${Math.round(p.h * 0.10)}px;height:${back}px;transform:rotate(-8deg);" />
+           <img src="${VIAL_OLIVE}" style="position:absolute;right:${p.safe ? '8%' : '9%'};top:${Math.round(p.h * 0.07)}px;height:${vh}px;transform:rotate(7deg);" />`;
+    lk = p.safe
+      ? `<div class="lk" style="width:${safeW}px;height:${safeH}px;margin:auto;padding-left:${Math.round(safeW * 0.04)}px">${lockup(p, false)}</div>`
+      : `<div class="lk" style="height:100%;padding-left:${p.pad}px;max-width:${Math.round(p.w * 0.46)}px">${lockup(p, false)}</div>`;
   }
 
-  c.innerHTML = art + `
-    <div class="lk" style="color:${s.fg};${inner}">
-      <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${s.flag});${p.safe ? 'background-position:center;' : ''}"></div>
-      <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.30)}px">Steadfast</b>
-      <small style="font-size:${p.sub}px;margin-top:14px">RESEARCH GROUP</small>
-      <div class="tag" style="font-size:${p.tag}px;margin-top:${Math.round(p.tag * 0.9)}px">Documented batch by batch.</div>
-      <div class="ruo" style="font-size:${p.ruo}px;margin-top:${Math.round(p.ruo * 0.8)}px">For laboratory research use only</div>
-    </div>`;
+  c.innerHTML = art + lk;
 }
 
 /* Shipping highlight: parcel icon (nothing ships cold — Shayne's ruling). */
-const HL_GROUNDS = { black:{bg:'#23271F', fg:'#F4F1E8'}, sage:{bg:'#869274', fg:'#FFFFFF'}, white:{bg:'#F4F1E8', fg:'#23271F'} };
+const HL_GROUNDS = { black:{bg:'#141414', fg:'#FFFFFF'}, sage:{bg:'#869274', fg:'#FFFFFF'}, white:{bg:'#F4F1E8', fg:'#141414'} };
 function highlight(wname) {
   const g = HL_GROUNDS[wname];
   const c = document.getElementById('c');

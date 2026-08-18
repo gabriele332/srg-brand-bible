@@ -61,17 +61,20 @@ for (const [c, ink] of Object.entries(KITCOLORS)) {
     `  <text x="324" y="340" text-anchor="middle" font-weight="500" font-size="19" letter-spacing="9.5" fill="${ink}">RESEARCH GROUP</text>\n</svg>\n`,
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-stacked.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-stacked.png`, w: 638, h: 400, dsf: 2, transparent: true });
 
+  /* Ring geometry: both arcs share one radial band between the rings.
+     startOffset is absolute and pre-compensates the trailing letter-space,
+     so both lines sit optically dead-center (Gabi, 2026-08-18). */
   put(`assets/logos-grotesk/srg-grotesk-${c}-seal.svg`,
     head(600, 600) +
     `  <defs>\n` +
     `    <path id="arcT" d="M 55 300 A 245 245 0 0 1 545 300" fill="none"/>\n` +
-    `    <path id="arcB" d="M 20 300 A 280 280 0 0 0 580 300" fill="none"/>\n` +
+    `    <path id="arcB" d="M 18 300 A 282 282 0 0 0 582 300" fill="none"/>\n` +
     `  </defs>\n` +
     `  <circle cx="300" cy="300" r="292" fill="none" stroke="${ink}" stroke-width="4"/>\n` +
     `  <circle cx="300" cy="300" r="196" fill="none" stroke="${ink}" stroke-width="2"/>\n` +
     `  <image x="217" y="212" width="166" height="150.6" preserveAspectRatio="xMidYMid meet" href="${F}"/>\n` +
-    `  <text font-weight="600" font-size="52" letter-spacing="14" fill="${ink}"><textPath href="#arcT" startOffset="50%" text-anchor="middle">STEADFAST</textPath></text>\n` +
-    `  <text font-weight="500" font-size="34" letter-spacing="11" fill="${ink}"><textPath href="#arcB" startOffset="50%" text-anchor="middle">RESEARCH GROUP</textPath></text>\n` +
+    `  <text font-weight="600" font-size="54" letter-spacing="10" fill="${ink}"><textPath href="#arcT" startOffset="379.8" text-anchor="middle">STEADFAST</textPath></text>\n` +
+    `  <text font-weight="500" font-size="40" letter-spacing="9" fill="${ink}"><textPath href="#arcB" startOffset="438.5" text-anchor="middle">RESEARCH GROUP</textPath></text>\n` +
     `  <circle cx="47" cy="300" r="7" fill="${ink}"/>\n  <circle cx="553" cy="300" r="7" fill="${ink}"/>\n</svg>\n`,
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-seal.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-seal.png`, w: 600, h: 600, dsf: 2, transparent: true });
 }
@@ -146,8 +149,11 @@ for (const [cname, w] of Object.entries(WAYS)) for (const [sfx, vol] of [['30ml'
 }
 
 /* ---------------- render PNGs with Chrome ---------------- */
+/* ONLY=<substring> renders just the matching files (e.g. ONLY=seal) */
+const only = process.env.ONLY;
+const torun = only ? jobs.filter(j => j.svg.includes(only)) : jobs;
 let ok = 0;
-for (const j of jobs) {
+for (const j of torun) {
   const shot = join(TEMP, 'srg-rebrand-shot.png');
   const profile = join(TEMP, 'srg-rebrand-profile');
   rmSync(shot, { force: true });
