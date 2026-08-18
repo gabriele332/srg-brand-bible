@@ -4,27 +4,25 @@
 <meta charset="utf-8" />
 <title>SRG social header compositor</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Space+Grotesk:wght@500;600;700&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&family=Inter:wght@300;400&family=Space+Mono:wght@400&display=swap" rel="stylesheet">
 <style>
-  /* Renders ONE asset at true pixel size, chosen by ?id=. export via
-     node assets/social-src/make-headers.mjs — Blake's ask (2026-08-07):
-     the platform headers should carry the product photography from the
-     website rather than flat typographic grounds. */
-  html,body{margin:0;padding:0;background:#fff;overflow:hidden}
-  #c{position:relative;overflow:hidden;font-family:"Space Grotesk",sans-serif;display:flex}
-  #c img.ph{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-  #c .scrim{position:absolute;inset:0}
-
-  /* lockup block */
+  /* ==========================================================================
+     v3 "serif" (2026-08 rebrand, women-30 audience): light bone / sage / ink
+     grounds, Lora serif wordmark (flag unchanged), product cutout accent.
+     Three styles per platform, matching the shipped filenames:
+       photo     - bone ground, product cutout right       (light hero)
+       watermark - ink ground, huge low-opacity flag right (dark option)
+       cutout    - sage ground, product cutout right       (brand green)
+     ========================================================================== */
+  html,body{margin:0;padding:0}
+  #c{position:relative;overflow:hidden;font-family:"Lora",Georgia,serif;display:flex}
   .lk{position:relative;z-index:2;display:flex;flex-direction:column;justify-content:center}
-  .lk .flag{background-repeat:no-repeat;background-size:contain;background-position:left center}
-  .lk b{font-weight:700;letter-spacing:.24em;line-height:1}
-  .lk small{display:block;font-family:"Space Mono",monospace;letter-spacing:.42em;opacity:.75;font-weight:400}
-  .lk .tag{font-family:"Inter",sans-serif;font-weight:300;opacity:.92}
+  .lk .flag{background-size:contain;background-repeat:no-repeat;background-position:left center}
+  .lk b{font-weight:600;letter-spacing:.005em;line-height:1}
+  .lk small{display:block;font-family:"Lora",Georgia,serif;font-weight:500;letter-spacing:.42em;opacity:.8}
+  .lk .tag{font-family:"Lora",Georgia,serif;font-weight:500;font-style:italic;opacity:.92}
   .lk .ruo{font-family:"Space Mono",monospace;letter-spacing:.18em;text-transform:uppercase;opacity:.6}
-
-  /* highlight cover (1440x1440): plain ground + one stroked icon */
-  .hl{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+  .hl{display:grid;place-items:center;width:100%;height:100%}
   .hl svg{width:34%;height:34%}
 </style>
 </head>
@@ -34,69 +32,60 @@
 const FLAG_WHITE = '/assets/logos-grotesk/srg-grotesk-white-icon.png';
 const FLAG_BLACK = '/assets/logos-grotesk/srg-grotesk-black-icon.png';
 
-/* v2 "cutout" (Gabi, 2026-08-07): flat brand grounds and the PRODUCT as a
-   floating cutout accent — no scene photography. Sources are exclusively the
-   Blake-approved Drive mockups (the srg-prod set). The mockups are white-bg
-   JPGs: multiply makes the white vanish on the sage and bone grounds; on
-   carbon the vial sits inside a bone disc bleeding off the edge, because
-   multiply keeps only pixels darker than the ground. */
-const WAYS = {
-  black: { bg:'radial-gradient(120% 160% at 24% 30%, #1D1F1B 0%, #0D0D0D 68%)',
-           fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-bb10.jpg', disc:'#F2EFE6' },
-  sage:  { bg:'linear-gradient(115deg, #8F9A7D 0%, #869274 52%, #75816A 100%)',
-           fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-tr10.jpg', disc:null },
-  white: { bg:'linear-gradient(115deg, #F8F6EF 0%, #F2EFE6 55%, #E6E1D2 100%)',
-           fg:'#14150F', flag:FLAG_BLACK, vial:'/assets/social-src/srg-prod-tsm5.jpg', disc:null }
+const STYLES = {
+  photo:     { bg:'linear-gradient(115deg, #F8F6EF 0%, #F4F1E8 55%, #E9E4D4 100%)',
+               fg:'#23271F', flag:FLAG_BLACK, vial:'/assets/social-src/srg-prod-tsm5.jpg', wm:null },
+  watermark: { bg:'radial-gradient(120% 160% at 24% 30%, #2B3025 0%, #23271F 68%)',
+               fg:'#F4F1E8', flag:FLAG_WHITE, vial:null, wm:FLAG_WHITE },
+  cutout:    { bg:'linear-gradient(115deg, #93A07E 0%, #869274 52%, #75816A 100%)',
+               fg:'#FFFFFF', flag:FLAG_WHITE, vial:'/assets/social-src/srg-prod-tr10.jpg', wm:null }
 };
 
 /* platform canvases — EXACT dimensions of the files being replaced */
 const PLATFORMS = {
-  fb:  { w:2187, h:832,  pad:120, flagH:110, brand:74,  sub:26, tag:40, ruo:22 },
-  li:  { w:4224, h:1056, pad:200, flagH:140, brand:96,  sub:34, tag:52, ruo:28 },
-  x:   { w:4000, h:1333, pad:220, flagH:150, brand:104, sub:36, tag:56, ruo:30 },
-  yt:  { w:3413, h:1920, pad:0,   flagH:130, brand:88,  sub:32, tag:48, ruo:26, safe:true }
+  fb:  { w:2187, h:832,  pad:120, flagH:110, brand:84,  sub:26, tag:42, ruo:22 },
+  li:  { w:4224, h:1056, pad:200, flagH:140, brand:108, sub:34, tag:56, ruo:28 },
+  x:   { w:4000, h:1333, pad:220, flagH:150, brand:118, sub:36, tag:60, ruo:30 },
+  yt:  { w:3413, h:1920, pad:0,   flagH:130, brand:98,  sub:32, tag:52, ruo:26, safe:true }
 };
 
-function header(p, wname) {
-  const w = WAYS[wname];
+function header(p, sname) {
+  const s = STYLES[sname];
   const c = document.getElementById('c');
   c.style.width = p.w + 'px'; c.style.height = p.h + 'px';
 
-  /* YouTube shows only the centered safe area on desktop — everything
-     readable lives inside it, centred; the photo still fills the canvas. */
   const safeW = Math.round(p.w * 0.604), safeH = Math.round(p.h * 0.294);
   const inner = p.safe
     ? `display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;
        width:${safeW}px;height:${safeH}px;margin:auto;`
     : `padding-left:${p.pad}px;max-width:${Math.round(p.w * 0.52)}px;`;
 
-  c.style.background = w.bg;
+  c.style.background = s.bg;
 
-  /* the product: a cutout accent on the right, tilted by the render itself,
-     bleeding off the edge so it reads as a design detail, not a catalog shot */
-  const vh = Math.round(p.h * (p.safe ? 0.98 : 1.34));
-  const vialRight = p.safe ? '4%' : '5%';
-  const vialTop = Math.round(p.h * (p.safe ? 0.16 : -0.14));
-  const discSize = Math.round(vh * 1.18);
-  const art = (w.disc
-    ? `<div style="position:absolute;right:-${Math.round(discSize * 0.22)}px;top:50%;transform:translateY(-50%);
-         width:${discSize}px;height:${discSize}px;border-radius:50%;background:${w.disc};overflow:hidden;">
-         <img src="${w.vial}" style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);height:${Math.round(vh * 0.92)}px;mix-blend-mode:multiply;" /></div>`
-    : `<img src="${w.vial}" style="position:absolute;right:${vialRight};top:${vialTop}px;height:${vh}px;mix-blend-mode:multiply;" />`);
+  let art = '';
+  if (s.vial) {
+    const vh = Math.round(p.h * (p.safe ? 0.98 : 1.34));
+    const vialTop = Math.round(p.h * (p.safe ? 0.16 : -0.14));
+    art = `<img src="${s.vial}" style="position:absolute;right:${p.safe ? '4%' : '5%'};top:${vialTop}px;height:${vh}px;mix-blend-mode:multiply;" />`;
+  } else if (s.wm) {
+    const wmH = Math.round(p.h * 1.5);
+    art = `<div style="position:absolute;right:-${Math.round(wmH * 0.18)}px;top:50%;transform:translateY(-50%) rotate(-6deg);
+             width:${wmH}px;height:${wmH}px;opacity:.09;
+             background:url(${s.wm}) center/contain no-repeat;"></div>`;
+  }
 
   c.innerHTML = art + `
-    <div class="lk" style="color:${w.fg};${inner}">
-      <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${w.flag});${p.safe ? 'background-position:center;' : ''}"></div>
-      <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.28)}px">STEADFAST</b>
-      <small style="font-size:${p.sub}px;margin-top:12px">RESEARCH GROUP</small>
+    <div class="lk" style="color:${s.fg};${inner}">
+      <div class="flag" style="height:${p.flagH}px;width:100%;background-image:url(${s.flag});${p.safe ? 'background-position:center;' : ''}"></div>
+      <b style="font-size:${p.brand}px;margin-top:${Math.round(p.flagH * 0.30)}px">Steadfast</b>
+      <small style="font-size:${p.sub}px;margin-top:14px">RESEARCH GROUP</small>
       <div class="tag" style="font-size:${p.tag}px;margin-top:${Math.round(p.tag * 0.9)}px">Documented batch by batch.</div>
       <div class="ruo" style="font-size:${p.ruo}px;margin-top:${Math.round(p.ruo * 0.8)}px">For laboratory research use only</div>
     </div>`;
 }
 
-/* Shipping highlight: parcel icon replaces the snowflake — a snowflake reads
-   as a cold-shipping claim, and Shayne's ruling is that nothing ships cold. */
-const HL_GROUNDS = { black:{bg:'#141414', fg:'#FFFFFF'}, sage:{bg:'#869274', fg:'#FFFFFF'}, white:{bg:'#F4F2EC', fg:'#141414'} };
+/* Shipping highlight: parcel icon (nothing ships cold — Shayne's ruling). */
+const HL_GROUNDS = { black:{bg:'#23271F', fg:'#F4F1E8'}, sage:{bg:'#869274', fg:'#FFFFFF'}, white:{bg:'#F4F1E8', fg:'#23271F'} };
 function highlight(wname) {
   const g = HL_GROUNDS[wname];
   const c = document.getElementById('c');
@@ -110,7 +99,7 @@ function highlight(wname) {
 }
 
 const q = new URLSearchParams(location.search);
-const id = q.get('id') || 'fb-black';           // e.g. fb-black | yt-sage | hl-white
+const id = q.get('id') || 'fb-photo';           // e.g. fb-photo | yt-cutout | hl-white
 const [kind, way] = id.split('-');
 if (kind === 'hl') highlight(way); else header(PLATFORMS[kind], way);
 

@@ -26,21 +26,18 @@ const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript
   '.png': 'image/png', '.jpg': 'image/jpeg', '.svg': 'image/svg+xml' };
 
 const JOBS = [
-  { id: 'fb-black', w: 2187, h: 832,  file: 'srg-facebook-cover-black.png' },
-  { id: 'fb-sage',  w: 2187, h: 832,  file: 'srg-facebook-cover-sage.png' },
-  { id: 'fb-white', w: 2187, h: 832,  file: 'srg-facebook-cover-white.png' },
-  { id: 'li-black', w: 4224, h: 1056, file: 'srg-linkedin-banner-black.png' },
-  { id: 'li-sage',  w: 4224, h: 1056, file: 'srg-linkedin-banner-sage.png' },
-  { id: 'li-white', w: 4224, h: 1056, file: 'srg-linkedin-banner-white.png' },
-  { id: 'x-black',  w: 4000, h: 1333, file: 'srg-x-header-black.png' },
-  { id: 'x-sage',   w: 4000, h: 1333, file: 'srg-x-header-sage.png' },
-  { id: 'x-white',  w: 4000, h: 1333, file: 'srg-x-header-white.png' },
-  { id: 'yt-black', w: 3413, h: 1920, file: 'srg-youtube-banner-black.png' },
-  { id: 'yt-sage',  w: 3413, h: 1920, file: 'srg-youtube-banner-sage.png' },
-  { id: 'yt-white', w: 3413, h: 1920, file: 'srg-youtube-banner-white.png' },
-  { id: 'hl-black', w: 1440, h: 1440, file: 'srg-highlight-coldchain-black.png' },
-  { id: 'hl-sage',  w: 1440, h: 1440, file: 'srg-highlight-coldchain-sage.png' },
-  { id: 'hl-white', w: 1440, h: 1440, file: 'srg-highlight-coldchain-white.png' }
+  { id: 'fb-photo',     w: 2187, h: 832,  file: 'srg-facebook-cover-photo.png' },
+  { id: 'fb-watermark', w: 2187, h: 832,  file: 'srg-facebook-cover-watermark.png' },
+  { id: 'fb-cutout',    w: 2187, h: 832,  file: 'srg-facebook-cover-cutout.png' },
+  { id: 'li-photo',     w: 4224, h: 1056, file: 'srg-linkedin-banner-photo.png' },
+  { id: 'li-watermark', w: 4224, h: 1056, file: 'srg-linkedin-banner-watermark.png' },
+  { id: 'li-cutout',    w: 4224, h: 1056, file: 'srg-linkedin-banner-cutout.png' },
+  { id: 'x-photo',      w: 4000, h: 1333, file: 'srg-x-header-photo.png' },
+  { id: 'x-watermark',  w: 4000, h: 1333, file: 'srg-x-header-watermark.png' },
+  { id: 'x-cutout',     w: 4000, h: 1333, file: 'srg-x-header-cutout.png' },
+  { id: 'yt-photo',     w: 3413, h: 1920, file: 'srg-youtube-banner-photo.png' },
+  { id: 'yt-watermark', w: 3413, h: 1920, file: 'srg-youtube-banner-watermark.png' },
+  { id: 'yt-cutout',    w: 3413, h: 1920, file: 'srg-youtube-banner-cutout.png' }
 ];
 
 const server = createServer(async (req, res) => {

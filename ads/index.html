@@ -30,7 +30,7 @@
   .top-in{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
   .bd{display:flex;align-items:center;gap:11px;text-decoration:none}
   .bd img{width:26px;height:26px;object-fit:contain}
-  .bd b{font-family:var(--display);font-weight:600;font-size:13.5px;letter-spacing:.22em;color:var(--white);display:block}
+  .bd b{font-family:var(--display);font-weight:600;font-size:16px;letter-spacing:.01em;color:var(--white);display:block}
   .bd small{display:block;font-family:var(--mono);font-size:7.5px;letter-spacing:.32em;color:var(--g2);margin-top:2px}
   .top nav{margin-left:auto;display:flex;gap:6px;flex-wrap:wrap}
   .top nav a{font-size:12.5px;color:var(--g1);text-decoration:none;padding:7px 12px;border-radius:999px;border:1px solid transparent}
@@ -195,14 +195,18 @@
   details.cap summary:before{content:'+';font-size:16px;font-weight:700}
   details.cap[open] summary{border-bottom:1px solid rgba(138,154,107,.35);border-radius:4px 4px 0 0}
   details.cap[open] summary:before{content:'−'}
+  /* ?embed=1: the pack rendered inside the bible page - its own chrome hides */
+  body.embed .top{display:none}
+  body.embed .hero{padding-top:10px}
 </style>
 </head>
 <body>
+<script>if(new URLSearchParams(location.search).has('embed'))document.documentElement.className+=' emb',document.addEventListener('DOMContentLoaded',function(){document.body.classList.add('embed')});</script>
 
 <div class="top"><div class="wrap top-in">
   <a class="bd" href="../">
     <img src="assets/flag-ink.png" alt="" />
-    <span><b>STEADFAST</b><small>RESEARCH GROUP</small></span>
+    <span><b>Steadfast</b><small>RESEARCH GROUP</small></span>
   </a>
   <nav>
     <a href="#method">Method</a>
