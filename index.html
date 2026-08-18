@@ -344,7 +344,7 @@
   /* ---- motion round 2 ---- */
   /* one page-wide glow that follows the cursor everywhere (fixed, behind content) */
   #heroglow{position:fixed;width:560px;height:560px;border-radius:50%;left:72%;top:28%;transform:translate(-50%,-50%);
-    background:radial-gradient(circle,rgba(139,178,84,.45),rgba(139,178,84,.18) 40%,transparent 65%);pointer-events:none;z-index:0;transition:left .06s linear,top .06s linear,opacity .5s ease}
+    background:radial-gradient(circle,rgba(139,178,84,.45),rgba(139,178,84,.18) 40%,transparent 65%);pointer-events:none;z-index:-1;transition:left .06s linear,top .06s linear,opacity .5s ease}
   #refglow{display:none}
   .tilt{will-change:transform;transform-style:preserve-3d}
   .ico svg *{stroke-dasharray:1 0;stroke-dashoffset:0}
