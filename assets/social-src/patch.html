@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>SRG cover wordmark patcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:wght@500;600&display=swap" rel="stylesheet">
+<style>html,body{margin:0;padding:0}canvas{display:block}</style>
+</head>
+<body>
+<canvas id="cv"></canvas>
+<script>
+/* ==========================================================================
+   2026-08-18 (Gabi): the shipped covers are HER final art and the v4 source
+   that made them only ever lived on the laptop. So instead of rebuilding the
+   designs, this page performs surgery on the ORIGINAL PNGs: it finds the two
+   white wordmark lines (STEADFAST / RESEARCH GROUP), heals the background
+   behind them row by row from the flanking pixels, and draws the new Lora
+   serif wordmark in exactly the same spot. Flag, rule, tagline, compliance
+   line, photography, watermark - every other pixel is untouched.
+   ========================================================================== */
+const q = new URLSearchParams(location.search);
+const id = q.get('id') || 'fb-photo';               // e.g. li-watermark
+const [plat, style] = id.split('-');
+
+const FILES = p => `/assets/social-src/originals/srg-${({fb:'facebook-cover',li:'linkedin-banner',x:'x-header',yt:'youtube-banner'})[p]}-${style}.png`;
+const CFG = {
+  photo:     { win: [0.28, 0.72], anchor: 'center' },
+  watermark: { win: [0.28, 0.72], anchor: 'center' },
+  cutout:    { win: [0.04, 0.55], anchor: 'left' },
+};
+const cfg = Object.assign({}, CFG[style]);
+if (id === 'yt-cutout') { cfg.win = [0.10, 0.45]; cfg.anchor = 'center'; }
+
+const WHITE = 232;                                   // wordmark lines are pure white
+const img = new Image();
+img.src = FILES[plat] ? FILES[plat] : FILES(plat);
+
+img.onload = async () => {
+  const w = img.naturalWidth, h = img.naturalHeight;
+  const cv = document.getElementById('cv');
+  cv.width = w; cv.height = h;
+  const ctx = cv.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(img, 0, 0);
+
+  const x0 = Math.round(w * cfg.win[0]), x1 = Math.round(w * cfg.win[1]);
+  const data = ctx.getImageData(0, 0, w, h).data;
+  const at = (x, y) => (y * w + x) * 4;
+  const isW = (x, y) => data[at(x,y)] > WHITE && data[at(x,y)+1] > WHITE && data[at(x,y)+2] > WHITE;
+
+  /* row histogram of white pixels inside the search window */
+  const rows = new Array(h).fill(0);
+  for (let y = Math.round(h*0.05); y < Math.round(h*0.97); y++) {
+    let n = 0;
+    for (let x = x0; x < x1; x += 2) if (isW(x, y)) n++;
+    rows[y] = n * 2;
+  }
+  /* cluster consecutive hit-rows (small gaps split: the thin rule stays its own cluster) */
+  const clusters = [];
+  let cur = null;
+  for (let y = 0; y < h; y++) {
+    if (rows[y] >= 10) { if (cur && y - cur.b <= 5) cur.b = y; else { cur = { t: y, b: y }; clusters.push(cur); } }
+  }
+  const cl = clusters.filter(c => c.b - c.t >= 2);
+  if (cl.length < 3) { document.title = 'SHOT-FAIL-' + id; return; }
+
+  /* STEADFAST is by far the heaviest white mass in the window (the flag is a
+     thin outline, RESEARCH GROUP is tracked hairlines, the rule is 3px);
+     RESEARCH GROUP is the next cluster below it that isn't the rule. */
+  const mass = c => { let m = 0; for (let y = c.t; y <= c.b; y++) m += rows[y]; return m; };
+  let stead = cl[0];
+  for (const c of cl) if (mass(c) > mass(stead)) stead = c;
+  let rg = null;
+  for (const c of cl) { if (c.t > stead.b && c.b - c.t >= 9) { rg = c; break; } }
+  if (!rg) { document.title = 'SHOT-FAIL-' + id; return; }
+
+  const xspan = c => {
+    let mn = w, mx = 0;
+    for (let y = c.t; y <= c.b; y++) for (let x = x0; x < x1; x++) if (isW(x, y)) { if (x < mn) mn = x; if (x > mx) mx = x; }
+    return [mn, mx];
+  };
+  const [sMin, sMax] = xspan(stead);
+  const [rMin, rMax] = xspan(rg);
+
+  /* heal: scanline inpaint of ONLY the old glyph pixels (dilated a little for
+     the anti-aliased edges) — the background structure around them survives */
+  function heal(c, mn, mx) {
+    const y0 = Math.max(0, c.t - 3), y1 = Math.min(h - 1, c.b + 3);
+    const px0 = Math.max(0, mn - 6), px1 = Math.min(w - 1, mx + 6);
+    const bw = px1 - px0 + 1, bh = y1 - y0 + 1;
+    const idata = ctx.getImageData(px0, y0, bw, bh);
+    const d = idata.data;
+    const bright = (x, y) => { const i = ((y)*bw + x)*4; return d[i] > 205 && d[i+1] > 205 && d[i+2] > 205; };
+    /* mask = brightish pixels, dilated 2px in every direction */
+    const mask = new Uint8Array(bw * bh);
+    for (let y = 0; y < bh; y++) for (let x = 0; x < bw; x++) if (bright(x, y)) {
+      for (let dy = -2; dy <= 2; dy++) for (let dx = -2; dx <= 2; dx++) {
+        const yy = y + dy, xx = x + dx;
+        if (yy >= 0 && yy < bh && xx >= 0 && xx < bw) mask[yy*bw + xx] = 1;
+      }
+    }
+    /* per row: lerp each masked span between its unmasked neighbours */
+    for (let y = 0; y < bh; y++) {
+      let x = 0;
+      while (x < bw) {
+        if (!mask[y*bw + x]) { x++; continue; }
+        let s = x; while (x < bw && mask[y*bw + x]) x++;
+        const li = s - 1 >= 0 ? ((y)*bw + s - 1)*4 : null;
+        const ri = x < bw ? ((y)*bw + x)*4 : null;
+        for (let xx = s; xx < x; xx++) {
+          const t = (xx - s + 1) / (x - s + 1);
+          for (let ch = 0; ch < 3; ch++) {
+            const L = li !== null ? d[li+ch] : (ri !== null ? d[ri+ch] : 20);
+            const R = ri !== null ? d[ri+ch] : L;
+            d[((y)*bw + xx)*4 + ch] = L*(1-t) + R*t;
+          }
+          d[((y)*bw + xx)*4 + 3] = 255;
+        }
+      }
+    }
+    ctx.putImageData(idata, px0, y0);
+  }
+  heal(stead, sMin, sMax);
+  heal(rg, rMin, rMax);
+
+  /* draw the serif wordmark in the same spots */
+  await document.fonts.load('600 100px Lora');
+  await document.fonts.load('500 100px Lora');
+
+  const capH_s = stead.b - stead.t;
+  const size_s = Math.round(capH_s / 0.69);
+  ctx.fillStyle = '#FFFFFF';
+  ctx.font = `600 ${size_s}px Lora`;
+  ctx.letterSpacing = '0px';
+  if (cfg.anchor === 'center') {
+    ctx.textAlign = 'center';
+    ctx.fillText('Steadfast', (sMin + sMax) / 2, stead.b + 1);
+  } else {
+    ctx.textAlign = 'left';
+    ctx.fillText('Steadfast', sMin, stead.b + 1);
+  }
+
+  const capH_r = rg.b - rg.t;
+  const size_r = Math.round(capH_r / 0.69);
+  ctx.font = `500 ${size_r}px Lora`;
+  ctx.letterSpacing = '0px';
+  const base = ctx.measureText('RESEARCH GROUP').width;
+  const target = rMax - rMin;
+  const ls = Math.max(0, (target - base) / 14);
+  ctx.letterSpacing = ls.toFixed(2) + 'px';
+  if (cfg.anchor === 'center') {
+    ctx.textAlign = 'center';
+    ctx.fillText('RESEARCH GROUP', (rMin + rMax) / 2 + ls / 2, rg.b + 1);
+  } else {
+    ctx.textAlign = 'left';
+    ctx.fillText('RESEARCH GROUP', rMin, rg.b + 1);
+  }
+
+  requestAnimationFrame(() => { document.title = 'SHOT-READY-' + id; });
+};
+img.onerror = () => { document.title = 'SHOT-FAIL-' + id; };
+</script>
+</body>
+</html>

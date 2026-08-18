@@ -73,8 +73,8 @@ for (const [c, ink] of Object.entries(KITCOLORS)) {
     `  <circle cx="300" cy="300" r="292" fill="none" stroke="${ink}" stroke-width="4"/>\n` +
     `  <circle cx="300" cy="300" r="196" fill="none" stroke="${ink}" stroke-width="2"/>\n` +
     `  <image x="217" y="212" width="166" height="150.6" preserveAspectRatio="xMidYMid meet" href="${F}"/>\n` +
-    `  <text font-weight="600" font-size="54" letter-spacing="10" fill="${ink}"><textPath href="#arcT" startOffset="379.8" text-anchor="middle">STEADFAST</textPath></text>\n` +
-    `  <text font-weight="500" font-size="40" letter-spacing="9" fill="${ink}"><textPath href="#arcB" startOffset="438.5" text-anchor="middle">RESEARCH GROUP</textPath></text>\n` +
+    `  <text font-weight="600" font-size="54" letter-spacing="10" fill="${ink}"><textPath href="#arcT" startOffset="403" text-anchor="middle">STEADFAST</textPath></text>\n` +
+    `  <text font-weight="500" font-size="40" letter-spacing="9" fill="${ink}"><textPath href="#arcB" startOffset="461" text-anchor="middle">RESEARCH GROUP</textPath></text>\n` +
     `  <circle cx="47" cy="300" r="7" fill="${ink}"/>\n  <circle cx="553" cy="300" r="7" fill="${ink}"/>\n</svg>\n`,
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-seal.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-seal.png`, w: 600, h: 600, dsf: 2, transparent: true });
 }
