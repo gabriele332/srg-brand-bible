@@ -28,7 +28,14 @@ const GROTESK = "'Space Grotesk',sans-serif";
 const flag = c => 'data:image/png;base64,' +
   readFileSync(join(ROOT, `assets/logos-grotesk/srg-grotesk-${c}-icon.png`)).toString('base64');
 const FLAGS = { white: flag('white'), black: flag('black'), green: flag('green') };
-const KITCOLORS = { white: '#FFFFFF', black: '#0D0D0D', green: '#869274' };
+/* base trio keeps its original flag art; every other palette color tints the
+   ORIGINAL black flag PNG through an SVG flood filter (never redrawn). */
+const KITCOLORS = {
+  white: '#FFFFFF', black: '#0D0D0D', green: '#869274',
+  bone: '#F4F1E8', cream: '#FBF9F2', ink: '#23271F',
+  warmgray: '#6E7263', sage: '#8A9A6B', olive: '#5F6B45',
+};
+const BASE = ['white', 'black', 'green'];
 
 const jobs = []; // {svg (already written), png, w, h, dsf, transparent}
 
@@ -39,7 +46,20 @@ const head = (w, h) =>
 
 /* ---------------- logo kit ---------------- */
 for (const [c, ink] of Object.entries(KITCOLORS)) {
-  const F = FLAGS[c];
+  const isBase = BASE.includes(c);
+  const F = isBase ? FLAGS[c] : FLAGS.black;
+  const tintDef = isBase ? '' :
+    `  <defs><filter id="tint" color-interpolation-filters="sRGB"><feFlood flood-color="${ink}"/><feComposite in2="SourceAlpha" operator="in"/></filter></defs>\n`;
+  const tintAttr = isBase ? '' : ' filter="url(#tint)"';
+
+  /* palette colors also get their own tinted icon (the base trio keeps its
+     original hand-made icon files untouched) */
+  if (!isBase) {
+    put(`assets/logos-grotesk/srg-grotesk-${c}-icon.svg`,
+      `<svg xmlns="http://www.w3.org/2000/svg" width="661" height="600" viewBox="0 0 661 600">\n` + tintDef +
+      `  <image x="0" y="0" width="661" height="600" preserveAspectRatio="xMidYMid meet"${tintAttr} href="${F}"/>\n</svg>\n`,
+      { svg: `assets/logos-grotesk/srg-grotesk-${c}-icon.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-icon.png`, w: 661, h: 600, dsf: 2, transparent: true });
+  }
 
   put(`assets/logos-grotesk/srg-grotesk-${c}-wordmark.svg`,
     head(768, 220) +
@@ -48,15 +68,15 @@ for (const [c, ink] of Object.entries(KITCOLORS)) {
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-wordmark.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-wordmark.png`, w: 768, h: 220, dsf: 2, transparent: true });
 
   put(`assets/logos-grotesk/srg-grotesk-${c}-horizontal.svg`,
-    head(839, 230) +
-    `  <image x="26" y="25" width="198.4" height="180" preserveAspectRatio="xMidYMid meet" href="${F}"/>\n` +
+    head(839, 230) + tintDef +
+    `  <image x="26" y="25" width="198.4" height="180" preserveAspectRatio="xMidYMid meet"${tintAttr} href="${F}"/>\n` +
     `  <text x="262" y="128" font-weight="600" font-size="88" fill="${ink}">Steadfast</text>\n` +
     `  <text x="266" y="182" font-weight="500" font-size="21" letter-spacing="10.4" fill="${ink}">RESEARCH GROUP</text>\n</svg>\n`,
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-horizontal.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-horizontal.png`, w: 839, h: 230, dsf: 2, transparent: true });
 
   put(`assets/logos-grotesk/srg-grotesk-${c}-stacked.svg`,
-    head(638, 400) +
-    `  <image x="228" y="16" width="182" height="165" preserveAspectRatio="xMidYMid meet" href="${F}"/>\n` +
+    head(638, 400) + tintDef +
+    `  <image x="228" y="16" width="182" height="165" preserveAspectRatio="xMidYMid meet"${tintAttr} href="${F}"/>\n` +
     `  <text x="319" y="288" text-anchor="middle" font-weight="600" font-size="82" fill="${ink}">Steadfast</text>\n` +
     `  <text x="324" y="340" text-anchor="middle" font-weight="500" font-size="19" letter-spacing="9.5" fill="${ink}">RESEARCH GROUP</text>\n</svg>\n`,
     { svg: `assets/logos-grotesk/srg-grotesk-${c}-stacked.svg`, png: `assets/logos-grotesk/srg-grotesk-${c}-stacked.png`, w: 638, h: 400, dsf: 2, transparent: true });
@@ -65,14 +85,14 @@ for (const [c, ink] of Object.entries(KITCOLORS)) {
      startOffset is absolute and pre-compensates the trailing letter-space,
      so both lines sit optically dead-center (Gabi, 2026-08-18). */
   put(`assets/logos-grotesk/srg-grotesk-${c}-seal.svg`,
-    head(600, 600) +
+    head(600, 600) + tintDef +
     `  <defs>\n` +
     `    <path id="arcT" d="M 75 300 A 225 225 0 0 1 525 300" fill="none"/>\n` +
     `    <path id="arcB" d="M 42 300 A 258 258 0 0 0 558 300" fill="none"/>\n` +
     `  </defs>\n` +
     `  <circle cx="300" cy="300" r="292" fill="none" stroke="${ink}" stroke-width="4"/>\n` +
     `  <circle cx="300" cy="300" r="196" fill="none" stroke="${ink}" stroke-width="2"/>\n` +
-    `  <image x="217" y="212" width="166" height="150.6" preserveAspectRatio="xMidYMid meet" href="${F}"/>\n` +
+    `  <image x="217" y="212" width="166" height="150.6" preserveAspectRatio="xMidYMid meet"${tintAttr} href="${F}"/>\n` +
     `  <text font-weight="600" font-size="54" letter-spacing="10" fill="${ink}"><textPath href="#arcT" startOffset="357.6" text-anchor="middle">STEADFAST</textPath></text>\n` +
     `  <text font-weight="500" font-size="40" letter-spacing="9" fill="${ink}"><textPath href="#arcB" startOffset="409.3" text-anchor="middle">RESEARCH GROUP</textPath></text>\n` +
     `  <circle cx="47" cy="300" r="7" fill="${ink}"/>\n  <circle cx="553" cy="300" r="7" fill="${ink}"/>\n</svg>\n`,
