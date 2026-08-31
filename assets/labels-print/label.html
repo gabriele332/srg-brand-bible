@@ -36,7 +36,7 @@
   #l .brand img{width:auto;display:block}
   #l .brand .words{text-align:left}
   #l .brand div{line-height:1}
-  #l .name{font-weight:700;letter-spacing:.04em;line-height:1;white-space:nowrap}
+  #l .name{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:.01em;line-height:1;white-space:nowrap}
   /* Strength box centering: fixed height with matching line-height — padding
      maths under scaling is what let the figure drift off the box's centre. */
   #l .mg{display:inline-block;font-weight:700}
@@ -61,10 +61,18 @@ const SKUS = {
 /* colorways match the three label sets on the bible page */
 const WAYS = {
   black: { bg:'#141414', fg:'#FFFFFF', boxBg:'#FFFFFF', boxFg:'#141414' },
-  green: { bg:'#869274', fg:'#FFFFFF', boxBg:'#FFFFFF', boxFg:'#869274' },
+  green: { bg:'#5F6B45', fg:'#FFFFFF', boxBg:'#F4F1E8', boxFg:'#5F6B45' },
   white: { bg:'#F4F1E8', fg:'#23271F', boxBg:'#23271F', boxFg:'#F4F1E8' }
 };
 
+const DISPLAY = {
+  rt10:'Retatrutide', rt20:'Retatrutide', rt30:'Retatrutide',
+  tr10:'Tirzepatide', tr20:'Tirzepatide', tr30:'Tirzepatide',
+  tsm5:'Tesamorelin', tsm10:'Tesamorelin',
+  bb10:'BPC157/TB500', kpv10:'KPV', cp10:'CJC1295/Ipamorelin', cu50:'GHK-Cu',
+  nj1000:'NAD+', hgh10:'HGH', wa10:'BAC Water', peptide:'Peptide',
+  ss31:'SS-31', motsc:'MOTS-C',
+};
 const q = new URLSearchParams(location.search);
 const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
 const [name, mg] = SKUS[sku], w = WAYS[way];
@@ -98,14 +106,14 @@ l.innerHTML =
     '<img src="' + flag + '" alt="" style="height:' + px(15) + '"/>' +
     '<div class="words">' +
       /* 2026-08 rebrand: serif wordmark (Lora), mixed case, flag unchanged */
-      '<div style="font-family:\'Lora\',Georgia,serif;font-weight:600;font-size:' + px(11) + ';letter-spacing:.01em">Steadfast</div>' +
-      '<div style="font-family:\'Lora\',Georgia,serif;font-weight:500;font-size:' + px(4.2) + ';letter-spacing:' + px(1.55) + ';margin-top:' + px(1.2) + '">RESEARCH GROUP</div>' +
+      '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:500;font-size:' + px(9) + ';letter-spacing:' + px(2.2) + '">STEADFAST</div>' +
+      '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:500;font-size:' + px(4.2) + ';letter-spacing:' + px(1.55) + ';margin-top:' + px(1.4) + '">RESEARCH GROUP</div>' +
     '</div>' +
   '</div>' +
   '<div class="name" style="font-size:' + px(8.5) + ';margin-top:' + px(2) + '"></div>' +
   '<div class="mg" style="background:' + w.boxBg + ';color:' + w.boxFg +
     ';font-size:' + px(6) + ';height:' + px(8.6) + ';line-height:' + px(8.6) +
-    ';padding:0 ' + px(4) + ';margin-top:' + px(1.8) + '">' + mg + '</div>' +
+    ';padding:0 ' + px(4) + ';margin-top:' + px(1.8) + '">' + mg.replace(/ /g, '') + '</div>' +
   /* first compliance line matches the panel art: BAC water is a liquid, not
      a lyophilized powder */
   '<div class="c" style="font-size:' + px(4.9) + ';line-height:1.38;margin-top:' + px(1.8) + '">' +
@@ -114,7 +122,7 @@ l.innerHTML =
 
 /* long names shrink to fit inside the safe zone (~90% of canvas width) */
 const nameEl = l.querySelector('.name');
-nameEl.textContent = name;
+nameEl.textContent = DISPLAY[sku] || name;
 const maxW = CANVAS[0] * 0.9;
 let size = 8.5 * S;
 nameEl.style.fontSize = size + 'px';

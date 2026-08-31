@@ -111,31 +111,41 @@ const SKUS = {
 };
 const WAYS = {
   black: { dir: 'assets/labels-products',       sfx: '',       bg: '#141414', fg: '#FFFFFF', boxBg: '#FFFFFF', boxFg: '#141414', flag: 'white' },
-  green: { dir: 'assets/labels-products-green', sfx: '-green', bg: '#869274', fg: '#FFFFFF', boxBg: '#FFFFFF', boxFg: '#66704E', flag: 'green_white' },
+  green: { dir: 'assets/labels-products-green', sfx: '-green', bg: '#5F6B45', fg: '#FFFFFF', boxBg: '#F4F1E8', boxFg: '#5F6B45', flag: 'green_white' },
   white: { dir: 'assets/labels-products-white', sfx: '-white', bg: '#FFFFFF', fg: '#141414', boxBg: '#141414', boxFg: '#FFFFFF', flag: 'black' },
 };
 /* green labels historically use the white flag art */
 const flagFor = w => w.flag === 'green_white' ? FLAGS.white : FLAGS[w.flag];
 
+const DISPLAY = {
+  rt10:'Retatrutide', rt20:'Retatrutide', rt30:'Retatrutide',
+  tr10:'Tirzepatide', tr20:'Tirzepatide', tr30:'Tirzepatide',
+  tsm5:'Tesamorelin', tsm10:'Tesamorelin',
+  bb10:'BPC157/TB500', kpv10:'KPV', cp10:'CJC1295/Ipamorelin', cu50:'GHK-Cu',
+  nj1000:'NAD+', hgh10:'HGH', wa10:'BAC Water', peptide:'Peptide',
+  ss31:'SS-31', motsc:'MOTS-C',
+};
+
 function tallLabel(sku, w) {
   const [name, mg] = SKUS[sku];
-  const nameSize = Math.min(40, Math.round(300 / (0.62 * name.length)));
-  const boxW = Math.max(92, 30 + mg.length * 15.2);
+  const disp = DISPLAY[sku] || name;
+  const mgTxt = mg.replace(/ /g, '');
+  const nameSize = Math.min(46, Math.round(340 / (0.56 * disp.length)));
+  const boxW = Math.max(88, 34 + mgTxt.length * 14.5);
   const first = sku === 'wa10' ? 'BACTERIOSTATIC WATER' : 'LYOPHILIZED POWDER';
   return `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="430" viewBox="0 0 360 430">
   <style>${FONTS}</style>
   <rect x="0" y="0" width="360" height="430" fill="${w.bg}"/>
-  <image x="130" y="22" width="99.2" height="90" preserveAspectRatio="xMidYMid meet" href="${flagFor(w)}"/>
-  <text x="180" y="164" text-anchor="middle" font-family="${SERIF}" font-weight="600" font-size="42" fill="${w.fg}">Steadfast</text>
-  <line x1="84" y1="181" x2="276" y2="181" stroke="${w.fg}" stroke-width="1.2"/>
-  <text x="182.7" y="204" text-anchor="middle" font-family="${SERIF}" font-weight="500" font-size="13.5" letter-spacing="5.4" fill="${w.fg}">RESEARCH GROUP</text>
-  <text x="180" y="262" text-anchor="middle" font-family="${GROTESK}" font-weight="800" font-size="${nameSize}" letter-spacing="2" fill="${w.fg}">${name}</text>
-  <rect x="${(360 - boxW) / 2}" y="280" width="${boxW}" height="33" fill="${w.boxBg}"/>
-  <text x="180" y="304" text-anchor="middle" font-family="${GROTESK}" font-weight="800" font-size="21" fill="${w.boxFg}">${mg}</text>
-  <text x="180" y="346" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">${first}</text>
-  <text x="180" y="369" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">FOR RESEARCH USE ONLY</text>
-  <text x="180" y="392" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">NOT FOR HUMAN CONSUMPTION</text>
-  <line x1="84" y1="410" x2="276" y2="410" stroke="${w.fg}" stroke-width="1.1"/>
+  <image x="152" y="24" width="56" height="50" preserveAspectRatio="xMidYMid meet" href="${flagFor(w)}"/>
+  <text x="183.5" y="118" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="24" letter-spacing="7" fill="${w.fg}">STEADFAST</text>
+  <text x="182.3" y="140" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="11.5" letter-spacing="4.6" fill="${w.fg}">RESEARCH GROUP</text>
+  <text x="180" y="218" text-anchor="middle" font-family="${SERIF}" font-weight="500" font-size="${nameSize}" letter-spacing="0.5" fill="${w.fg}">${disp}</text>
+  <rect x="${(360 - boxW) / 2}" y="238" width="${boxW}" height="32" fill="${w.boxBg}"/>
+  <text x="180" y="261" text-anchor="middle" font-family="${GROTESK}" font-weight="700" font-size="19" fill="${w.boxFg}">${mgTxt}</text>
+  <text x="180" y="336" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">${first}</text>
+  <text x="180" y="359" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">FOR RESEARCH USE ONLY</text>
+  <text x="180" y="382" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="14.5" fill="${w.fg}">NOT FOR HUMAN CONSUMPTION</text>
+  <line x1="84" y1="406" x2="276" y2="406" stroke="${w.fg}" stroke-width="1.1"/>
 </svg>\n`;
 }
 
