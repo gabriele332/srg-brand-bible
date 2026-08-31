@@ -107,6 +107,7 @@ const SKUS = {
   bb10: ['BPC157/TB500', '10 MG'], kpv10: ['KPV', '10 MG'],
   cp10: ['CJC1295/IPAMORELIN', '10 MG'], cu50: ['GHK-CU', '50 MG'],
   nj1000: ['NAD+', '1000 MG'], hgh10: ['HGH', '10 IU'], wa10: ['BAC WATER', '10 ML'],
+  ss31: ['SS-31', '10 MG'], motsc: ['MOTS-C', '10 MG'],
 };
 const WAYS = {
   black: { dir: 'assets/labels-products',       sfx: '',       bg: '#141414', fg: '#FFFFFF', boxBg: '#FFFFFF', boxFg: '#141414', flag: 'white' },

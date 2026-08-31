@@ -31,7 +31,7 @@ const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
   'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => existsSync(p));
 
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.png': 'image/png' };
-const SKUS = ['rt10','rt20','rt30','tr10','tr20','tr30','tsm5','tsm10','bb10','kpv10','cp10','cu50','nj1000','hgh10','wa10','peptide'];
+const SKUS = ['rt10','rt20','rt30','tr10','tr20','tr30','tsm5','tsm10','bb10','kpv10','cp10','cu50','nj1000','hgh10','wa10','peptide','ss31','motsc'];
 const WAYS = ['black','green','white'];
 /* wa10 prints at 2.5in x 1in (Jessica, 2026-08-11); everything else 1.5x0.75.
    [CSS px canvas, PDF points] — 96 CSS px = 1in = 72 pt. */
