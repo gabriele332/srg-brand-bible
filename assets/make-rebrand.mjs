@@ -136,9 +136,10 @@ function tallLabel(sku, w) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="430" viewBox="0 0 360 430">
   <style>${FONTS}</style>
   <rect x="0" y="0" width="360" height="430" fill="${w.bg}"/>
-  <text x="183.5" y="96" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="24" letter-spacing="7" fill="${w.fg}">STEADFAST</text>
-  <text x="182.3" y="120" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="11.5" letter-spacing="4.6" fill="${w.fg}">RESEARCH GROUP</text>
-  <line x1="98" y1="136" x2="262" y2="136" stroke="${w.fg}" stroke-width="1"/>
+  <image x="52" y="74" width="52" height="48" preserveAspectRatio="xMidYMid meet" href="${flagFor(w)}"/>
+  <text x="118" y="96" text-anchor="start" font-family="${GROTESK}" font-weight="500" font-size="24" letter-spacing="7" fill="${w.fg}">STEADFAST</text>
+  <text x="119" y="120" text-anchor="start" font-family="${GROTESK}" font-weight="500" font-size="11.5" letter-spacing="4.6" fill="${w.fg}">RESEARCH GROUP</text>
+  <line x1="118" y1="136" x2="306" y2="136" stroke="${w.fg}" stroke-width="1"/>
   <text x="180" y="218" text-anchor="middle" font-family="${SERIF}" font-weight="500" font-size="${nameSize}" letter-spacing="0.5" fill="${w.fg}">${disp}</text>
   <rect x="${(360 - boxW) / 2}" y="238" width="${boxW}" height="32" fill="${w.boxBg}"/>
   <text x="180" y="261" text-anchor="middle" font-family="${GROTESK}" font-weight="700" font-size="19" fill="${w.boxFg}">${mgTxt}</text>

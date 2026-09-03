@@ -34,7 +34,7 @@
      verbatim; type = live Space Grotesk, same as the panel art. */
   #l .brand{display:flex;align-items:center;justify-content:center}
   #l .brand img{width:auto;display:block}
-  #l .brand .words{text-align:center}
+  #l .brand .words{text-align:left}
   #l .brand div{line-height:1}
   #l .name{font-family:'Lora',Georgia,serif;font-weight:600;letter-spacing:.01em;line-height:1;white-space:nowrap}
   /* Strength box centering: fixed height with matching line-height — padding
@@ -104,11 +104,12 @@ l.style.color = w.fg;
 l.innerHTML =
   '<div class="brand" style="gap:' + px(2.5) + '">' +
     
+    '<img src="' + flag + '" alt="" style="height:' + px(15) + '"/>' +
     '<div class="words">' +
       /* 2026-08 rebrand: serif wordmark (Lora), mixed case, flag unchanged */
       '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:500;font-size:' + px(9) + ';letter-spacing:' + px(2.2) + '">STEADFAST</div>' +
       '<div style="font-family:\'Space Grotesk\',sans-serif;font-weight:500;font-size:' + px(4.2) + ';letter-spacing:' + px(1.55) + ';margin-top:' + px(1.4) + '">RESEARCH GROUP</div>' +
-      '<div style="height:0;border-bottom:0.6px solid currentColor;margin-top:' + px(1.6) + ';margin-left:auto;margin-right:auto;width:' + px(56) + '"></div>' +
+      '<div style="height:0;border-bottom:0.6px solid currentColor;margin-top:' + px(1.6) + ';margin-left:0;margin-right:auto;width:' + px(56) + '"></div>' +
     '</div>' +
   '</div>' +
   '<div class="name" style="font-size:' + px(8.5) + ';margin-top:' + px(2) + '"></div>' +
