@@ -33,7 +33,7 @@ const FLAGS = { white: flag('white'), black: flag('black'), green: flag('green')
 const KITCOLORS = {
   white: '#FFFFFF', black: '#0D0D0D', green: '#869274',
   bone: '#F4F1E8', cream: '#FBF9F2', ink: '#23271F',
-  warmgray: '#6E7263', sage: '#8A9A6B', olive: '#5F6B45',
+  warmgray: '#6E7263', sage: '#8A9A6B', olive: '#545A2D',
 };
 const BASE = ['white', 'black', 'green'];
 
@@ -111,7 +111,7 @@ const SKUS = {
 };
 const WAYS = {
   black: { dir: 'assets/labels-products',       sfx: '',       bg: '#141414', fg: '#FFFFFF', boxBg: '#FFFFFF', boxFg: '#141414', flag: 'white' },
-  green: { dir: 'assets/labels-products-green', sfx: '-green', bg: '#5F6B45', fg: '#FFFFFF', boxBg: '#F4F1E8', boxFg: '#5F6B45', flag: 'green_white' },
+  green: { dir: 'assets/labels-products-green', sfx: '-green', bg: '#545A2D', fg: '#FFFFFF', boxBg: '#F4F1E8', boxFg: '#3A3D20', flag: 'green_white' },
   white: { dir: 'assets/labels-products-white', sfx: '-white', bg: '#FFFFFF', fg: '#141414', boxBg: '#141414', boxFg: '#FFFFFF', flag: 'black' },
 };
 /* green labels historically use the white flag art */
@@ -123,7 +123,7 @@ const DISPLAY = {
   tsm5:'Tesamorelin', tsm10:'Tesamorelin',
   bb10:'BPC157/TB500', kpv10:'KPV', cp10:'CJC1295/Ipamorelin', cu50:'GHK-Cu',
   nj1000:'NAD+', hgh10:'HGH', wa10:'BAC Water', peptide:'Peptide',
-  ss31:'SS-31', motsc:'MOTS-C',
+  ss31:'SS-31', motsc:'MOTS-c',
 };
 
 function tallLabel(sku, w) {
@@ -136,9 +136,9 @@ function tallLabel(sku, w) {
   return `<svg xmlns="http://www.w3.org/2000/svg" width="360" height="430" viewBox="0 0 360 430">
   <style>${FONTS}</style>
   <rect x="0" y="0" width="360" height="430" fill="${w.bg}"/>
-  <image x="152" y="24" width="56" height="50" preserveAspectRatio="xMidYMid meet" href="${flagFor(w)}"/>
-  <text x="183.5" y="118" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="24" letter-spacing="7" fill="${w.fg}">STEADFAST</text>
-  <text x="182.3" y="140" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="11.5" letter-spacing="4.6" fill="${w.fg}">RESEARCH GROUP</text>
+  <text x="183.5" y="96" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="24" letter-spacing="7" fill="${w.fg}">STEADFAST</text>
+  <text x="182.3" y="120" text-anchor="middle" font-family="${GROTESK}" font-weight="500" font-size="11.5" letter-spacing="4.6" fill="${w.fg}">RESEARCH GROUP</text>
+  <line x1="98" y1="136" x2="262" y2="136" stroke="${w.fg}" stroke-width="1"/>
   <text x="180" y="218" text-anchor="middle" font-family="${SERIF}" font-weight="500" font-size="${nameSize}" letter-spacing="0.5" fill="${w.fg}">${disp}</text>
   <rect x="${(360 - boxW) / 2}" y="238" width="${boxW}" height="32" fill="${w.boxBg}"/>
   <text x="180" y="261" text-anchor="middle" font-family="${GROTESK}" font-weight="700" font-size="19" fill="${w.boxFg}">${mgTxt}</text>
