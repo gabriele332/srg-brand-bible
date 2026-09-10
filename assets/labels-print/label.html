@@ -8,16 +8,18 @@
 <style>
   /* ==========================================================================
      Print label at Jessica's confirmed dieline (Slack 2026-08-11):
-     1.5in x 0.75in, one size for every vial. Her three revisions applied:
+     1.5in x 0.75in trim for every vial (2.5in x 1in for BAC Water and NAD+),
+     delivered with 1/8in bleed on every side since 2026-09-09 - see the
+     dieline block in the script. Her three earlier revisions applied:
        - vector PDF output (this page is printed to PDF, type stays live)
        - the three compliance lines LARGER and BOLDER than the panel art
        - no flag at the very top: at 0.75in tall the old centered stack with
          an 8mm flag doesn't fit. The wordmark carries the brand; the flag
          stays on the cap emboss and the back of the wrap.
-     Chrome maps 96 CSS px = 1in, so the artboard is exactly 144x72px and
-     @page emits a true 1.5x0.75in PDF with the art flooded to the edge.
+     Chrome maps 96 CSS px = 1in, so the artboard is exactly the bleed size
+     in px and @page emits a PDF of that size with the art flooded to the edge.
      ========================================================================== */
-  @page{size:1.5in 0.75in;margin:0}
+  /* @page is set from JS per dieline (see the bleed note below). */
   html,body{margin:0;padding:0}
   /* Every dimension that depends on the dieline is set inline from JS as a
      computed pixel value — NO zoom and NO transform. Chrome's print pipeline
@@ -55,6 +57,9 @@ const SKUS = {
   cp10:  ['CJC1295/IPAMORELIN', '10 MG'], cu50: ['GHK-CU', '50 MG'],
   nj1000:['NAD+', '1000 MG'], hgh10:['HGH', '10 IU'], wa10: ['BAC WATER', '10 ML'],
   ss31: ['SS-31', '10 MG'], motsc: ['MOTS-C', '10 MG'],
+  /* Shayne, 2026-09-10: the current SS-31 stock is 50 mg vials (same 3 mL
+     glass), so this label runs until the 10 mg batch lands; keep both. */
+  ss3150: ['SS-31', '50 MG'],
   /* generic label for Jessica's press test — matches the mockup vials */
   peptide: ['PEPTIDE', '5 MG']
 };
@@ -71,20 +76,29 @@ const DISPLAY = {
   tsm5:'Tesamorelin', tsm10:'Tesamorelin',
   bb10:'BPC157/TB500', kpv10:'KPV', cp10:'CJC1295/Ipamorelin', cu50:'GHK-Cu',
   nj1000:'NAD+', hgh10:'HGH', wa10:'BAC Water', peptide:'Peptide',
-  ss31:'SS-31', motsc:'MOTS-c',
+  ss31:'SS-31', ss3150:'SS-31', motsc:'MOTS-c',
 };
 const q = new URLSearchParams(location.search);
 const sku = q.get('sku') || 'bb10', way = q.get('way') || 'black';
 const [name, mg] = SKUS[sku], w = WAYS[way];
 
-/* BAC Water prints at 2.5in x 1in (Jessica, 2026-08-11); everything else is
-   1.5in x 0.75in. S scales every layout value off the 72px-tall base design. */
+/* Dielines. Jessica's test print of the green labels came out great; her one
+   revision (Slack 2026-09-09) is that the FILES run slightly larger than the
+   trimmed label so the art is guaranteed to print all the way to the edge:
+     - every vial:         trim 1.5 x 0.75 in  ->  file 1.75 x 1 in
+     - BAC Water and NAD+: trim 2.5 x 1 in     ->  file 2.75 x 1.25 in
+   That is 1/8 in of bleed on every side. "The text on them can stay the
+   same", so every layout value still scales off the TRIM height (S) and the
+   centered stack simply sits inside the larger, edge-to-edge canvas.
+   Chrome maps 96 CSS px = 1 in. */
 const isBac = sku === 'wa10';
-const CANVAS = isBac ? [240, 96] : [144, 72];
-const S = CANVAS[1] / 72;
-if (isBac) {
+const isWide = isBac || sku === 'nj1000';
+const TRIM = isWide ? [240, 96] : [144, 72];
+const CANVAS = isWide ? [264, 120] : [168, 96];
+const S = TRIM[1] / 72;
+{
   const st = document.createElement('style');
-  st.textContent = '@page{size:2.5in 1in;margin:0}';
+  st.textContent = '@page{size:' + (CANVAS[0] / 96) + 'in ' + (CANVAS[1] / 96) + 'in;margin:0}';
   document.head.appendChild(st);
 }
 const px = v => (v * S).toFixed(2) + 'px';
@@ -122,10 +136,11 @@ l.innerHTML =
   (isBac ? 'BACTERIOSTATIC WATER' : 'LYOPHILIZED POWDER') +
   '<br>FOR RESEARCH USE ONLY<br>NOT FOR HUMAN CONSUMPTION</div>';
 
-/* long names shrink to fit inside the safe zone (~90% of canvas width) */
+/* long names shrink to fit inside the safe zone (~90% of the TRIM width -
+   nothing may lean on the bleed, it is cut away) */
 const nameEl = l.querySelector('.name');
 nameEl.textContent = DISPLAY[sku] || name;
-const maxW = CANVAS[0] * 0.9;
+const maxW = TRIM[0] * 0.9;
 let size = 8.5 * S;
 nameEl.style.fontSize = size + 'px';
 while (nameEl.scrollWidth > maxW && size > 6 * S) {

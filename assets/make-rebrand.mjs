@@ -4,7 +4,7 @@
    Regenerates, keeping every filename identical so no page link changes:
      - logo kit: wordmark / horizontal / stacked / seal SVG+PNG x 3 colors
        (icon untouched - the flag never changes)
-     - product labels: 15 SKUs x 3 colorways SVG+PNG (tall panel art)
+     - product labels: 18 SKUs x 3 colorways SVG+PNG (tall panel art)
      - BAC Water wide labels: 2 fills x 3 colorways SVG+PNG
    SVGs carry live Google-Fonts text (same approach as the previous labels);
    PNGs are flattened by headless Chrome, so the font always renders there.
@@ -14,12 +14,23 @@
 import { readFileSync, writeFileSync, existsSync, copyFileSync, rmSync } from 'node:fs';
 import { spawn } from 'node:child_process';
 import { join, resolve } from 'node:path';
+import { tmpdir } from 'node:os';
 
 const ROOT = resolve('.');
 if (!existsSync(join(ROOT, 'assets/logos-grotesk'))) { console.error('run from repo root'); process.exit(1); }
-const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
-  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe'].find(p => existsSync(p));
-const TEMP = process.env.TEMP;
+/* Chrome / Chromium: CHROME=<path> overrides; otherwise the usual installs. */
+const CHROME = process.env.CHROME || [
+  'C:/Program Files/Google/Chrome/Application/chrome.exe',
+  'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',
+  '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
+  /* Playwright's headless_shell first: its viewport is exactly --window-size
+     (the full Chromium build in --headless=new keeps ~86px for browser UI). */
+  '/opt/pw-browsers/chromium_headless_shell-1194/chrome-linux/headless_shell',
+  '/opt/pw-browsers/chromium-1194/chrome-linux/chrome',
+  '/usr/bin/google-chrome', '/usr/bin/chromium', '/usr/bin/chromium-browser',
+].find(p => existsSync(p));
+if (!CHROME) { console.error('No Chrome found - set CHROME=<path to chrome binary>.'); process.exit(1); }
+const TEMP = process.env.TEMP || tmpdir();
 
 const FONTS = "@import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;1,500&amp;family=Space+Grotesk:wght@500;700;800&amp;display=swap');";
 const SERIF = "'Lora',Georgia,serif";
@@ -108,6 +119,9 @@ const SKUS = {
   cp10: ['CJC1295/IPAMORELIN', '10 MG'], cu50: ['GHK-CU', '50 MG'],
   nj1000: ['NAD+', '1000 MG'], hgh10: ['HGH', '10 IU'], wa10: ['BAC WATER', '10 ML'],
   ss31: ['SS-31', '10 MG'], motsc: ['MOTS-C', '10 MG'],
+  /* Shayne, 2026-09-10: current SS-31 stock is 50 mg vials; the 10 mg label
+     comes back when that batch lands, so both SKUs stay in the kit. */
+  ss3150: ['SS-31', '50 MG'],
 };
 const WAYS = {
   black: { dir: 'assets/labels-products',       sfx: '',       bg: '#141414', fg: '#FFFFFF', boxBg: '#FFFFFF', boxFg: '#141414', flag: 'white' },
@@ -123,7 +137,7 @@ const DISPLAY = {
   tsm5:'Tesamorelin', tsm10:'Tesamorelin',
   bb10:'BPC157/TB500', kpv10:'KPV', cp10:'CJC1295/Ipamorelin', cu50:'GHK-Cu',
   nj1000:'NAD+', hgh10:'HGH', wa10:'BAC Water', peptide:'Peptide',
-  ss31:'SS-31', motsc:'MOTS-c',
+  ss31:'SS-31', ss3150:'SS-31', motsc:'MOTS-c',
 };
 
 function tallLabel(sku, w) {
@@ -191,6 +205,7 @@ for (const j of torun) {
   rmSync(shot, { force: true });
   await new Promise((done, fail) => {
     const args = ['--headless=new', '--disable-gpu', '--hide-scrollbars',
+      ...(process.platform === 'win32' ? [] : ['--no-sandbox']),
       `--force-device-scale-factor=${j.dsf}`, `--window-size=${j.w},${j.h}`,
       `--user-data-dir=${profile}`, `--screenshot=${shot}`, '--virtual-time-budget=9000'];
     if (j.transparent) args.push('--default-background-color=00000000');
