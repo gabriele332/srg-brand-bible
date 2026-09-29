@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="960" height="768" viewBox="0 0 960 768">
+  <style>@import url('https://fonts.googleapis.com/css2?family=Graduate&amp;family=Lora:ital,wght@0,500;0,600;1,500;1,600&amp;family=Space+Grotesk:wght@500;700&amp;display=swap');</style>
+  <text x="480" y="118" text-anchor="middle" font-family="'Lora',Georgia,serif" font-weight="600" font-size="118" fill="#23271F">Ask me</text>
+  <text x="480" y="258" text-anchor="middle" font-family="'Lora',Georgia,serif" font-weight="600" font-size="118" fill="#23271F">where I get</text>
+  <text x="480" y="398" text-anchor="middle" font-family="'Lora',Georgia,serif" font-weight="600" font-size="118" fill="#23271F">my <tspan font-style="italic">peptides</tspan>.</text>
+  <line x1="420" y1="470" x2="540" y2="470" stroke="#23271F" stroke-width="2.4"/>
+  <text x="480" y="590" text-anchor="middle" font-family="'Lora',Georgia,serif" font-weight="500" font-size="74" fill="#23271F">Trust shouldn’t be</text>
+  <text x="480" y="686" text-anchor="middle" font-family="'Lora',Georgia,serif" font-weight="500" font-size="74" fill="#23271F">a <tspan font-style="italic">variable</tspan>.</text>
+</svg>
