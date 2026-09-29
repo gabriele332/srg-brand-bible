@@ -217,7 +217,7 @@
   .show-files .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--gray-3);margin-right:10px}
   .show-files a{display:inline-block;margin:4px 5px;padding:7px 13px;border:1px solid var(--olive);color:var(--white);text-decoration:none;font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;background:var(--bg-soft);transition:background .25s ease,color .25s ease,transform .35s ease}
   .show-files a:hover{background:var(--olive);color:#F4F1E8;transform:translateY(-1px)}
-  .show-thumbs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px}
+  .show-thumbs{display:flex;gap:10px;overflow-x:auto;padding-bottom:6px;position:relative}
   .show-thumbs button{flex:none;width:96px;border:1px solid var(--line);background:#fff;padding:4px;cursor:pointer;opacity:.6;transition:opacity .2s;border-radius:12px}
   .show-thumbs button:hover{opacity:1}
   .show-thumbs button.on{border-color:var(--olive);outline:1px solid var(--olive);opacity:1}
@@ -1017,64 +1017,64 @@
 
   <h3 class="socsub">Profile pictures &middot; five combinations</h3>
   <div class="socgrid">
-    <div class="soccard"><img src="assets/social/srg-profile-white-on-black.png" alt="White on black" loading="lazy" /><div class="scap"><span>White on black &middot; default</span><a href="assets/social/srg-profile-white-on-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-profile-white-on-sage.png" alt="White on sage" loading="lazy" /><div class="scap"><span>White on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-white-on-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-profile-black-on-sage.png" alt="Black on sage" loading="lazy" /><div class="scap"><span>Black on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-profile-black-on-white.png" alt="Black on white" loading="lazy" /><div class="scap"><span>Black on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-profile-sage-on-white.png" alt="Sage on white" loading="lazy" /><div class="scap"><span>Sage on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-sage-on-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-white-on-black.png" alt="White on black" width="1440" height="1440" loading="lazy" /><div class="scap"><span>White on black &middot; default</span><a href="assets/social/srg-profile-white-on-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-white-on-sage.png" alt="White on sage" width="1440" height="1440" loading="lazy" /><div class="scap"><span>White on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-white-on-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-black-on-sage.png" alt="Black on sage" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Black on sage &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-black-on-white.png" alt="Black on white" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Black on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-black-on-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-profile-sage-on-white.png" alt="Sage on white" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Sage on white &middot; 1080&times;1080</span><a href="assets/social/srg-profile-sage-on-white.png" download>PNG</a></div></div>
   </div>
 
   <h3 class="socsub">Instagram highlight covers &middot; black</h3>
   <div class="socgrid">
-    <div class="soccard"><img src="assets/social/srg-highlight-flag-black.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-vial-black.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-flask-black.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coa-black.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-black.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-black.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-verified-black.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-black.png" alt="About" width="1440" height="1440" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-black.png" alt="Products" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-black.png" alt="Testing" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-black.png" alt="COA" width="1440" height="1440" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-black.png" alt="Shipping" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-black.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-black.png" alt="Verified" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-black.png" download>PNG</a></div></div>
   </div>
   <h3 class="socsub">Instagram highlight covers &middot; sage</h3>
   <div class="socgrid">
-    <div class="soccard"><img src="assets/social/srg-highlight-flag-sage.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-vial-sage.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-flask-sage.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coa-sage.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-sage.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-sage.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-verified-sage.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-sage.png" alt="About" width="1440" height="1440" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-sage.png" alt="Products" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-sage.png" alt="Testing" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-sage.png" alt="COA" width="1440" height="1440" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-sage.png" alt="Shipping" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-sage.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-sage.png" alt="Verified" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-sage.png" download>PNG</a></div></div>
   </div>
   <h3 class="socsub">Instagram highlight covers &middot; white</h3>
   <div class="socgrid">
-    <div class="soccard"><img src="assets/social/srg-highlight-flag-white.png" alt="About" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-vial-white.png" alt="Products" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-flask-white.png" alt="Testing" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coa-white.png" alt="COA" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-white.png" alt="Shipping" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-white.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-highlight-verified-white.png" alt="Verified" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flag-white.png" alt="About" width="1440" height="1440" loading="lazy" /><div class="scap"><span>About &middot; flag</span><a href="assets/social/srg-highlight-flag-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-vial-white.png" alt="Products" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Products &middot; vial</span><a href="assets/social/srg-highlight-vial-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-flask-white.png" alt="Testing" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Testing &middot; flask</span><a href="assets/social/srg-highlight-flask-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coa-white.png" alt="COA" width="1440" height="1440" loading="lazy" /><div class="scap"><span>COA &middot; document</span><a href="assets/social/srg-highlight-coa-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-coldchain-white.png" alt="Shipping" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Shipping &middot; tracked</span><a href="assets/social/srg-highlight-coldchain-white.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-highlight-verified-white.png" alt="Verified" width="1440" height="1440" loading="lazy" /><div class="scap"><span>Verified &middot; shield</span><a href="assets/social/srg-highlight-verified-white.png" download>PNG</a></div></div>
   </div>
 
     <h3 class="socsub">Facebook cover &middot; 820&times;312 @2x</h3>
   <div class="socgrid soc3">
-    <div class="soccard"><img src="assets/social/srg-facebook-cover-photo.png" alt="Product photo" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-facebook-cover-photo.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-facebook-cover-watermark.png" alt="Flag watermark" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-facebook-cover-watermark.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-facebook-cover-cutout.png" alt="Type only" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-facebook-cover-cutout.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-photo.png" alt="Product photo" width="2187" height="832" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-facebook-cover-photo.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-watermark.png" alt="Flag watermark" width="2187" height="832" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-facebook-cover-watermark.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-facebook-cover-cutout.png" alt="Type only" width="2187" height="832" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-facebook-cover-cutout.png" download>PNG</a></div></div>
   </div>
   <h3 class="socsub">LinkedIn banner &middot; 1584&times;396 @2x</h3>
   <div class="socgrid soc3">
-    <div class="soccard"><img src="assets/social/srg-linkedin-banner-photo.png" alt="Product photo" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-linkedin-banner-photo.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-linkedin-banner-watermark.png" alt="Flag watermark" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-linkedin-banner-watermark.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-linkedin-banner-cutout.png" alt="Type only" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-linkedin-banner-cutout.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-photo.png" alt="Product photo" width="4224" height="1056" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-linkedin-banner-photo.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-watermark.png" alt="Flag watermark" width="4224" height="1056" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-linkedin-banner-watermark.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-linkedin-banner-cutout.png" alt="Type only" width="4224" height="1056" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-linkedin-banner-cutout.png" download>PNG</a></div></div>
   </div>
   <h3 class="socsub">X header &middot; 1500&times;500 @2x</h3>
   <div class="socgrid soc3">
-    <div class="soccard"><img src="assets/social/srg-x-header-photo.png" alt="Product photo" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-x-header-photo.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-x-header-watermark.png" alt="Flag watermark" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-x-header-watermark.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-x-header-cutout.png" alt="Type only" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-x-header-cutout.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-x-header-photo.png" alt="Product photo" width="4000" height="1333" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-x-header-photo.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-x-header-watermark.png" alt="Flag watermark" width="4000" height="1333" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-x-header-watermark.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-x-header-cutout.png" alt="Type only" width="4000" height="1333" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-x-header-cutout.png" download>PNG</a></div></div>
   </div>
   <h3 class="socsub">YouTube banner &middot; 2560&times;1440 &middot; safe-area centered</h3>
   <div class="socgrid soc3">
-    <div class="soccard"><img src="assets/social/srg-youtube-banner-photo.png" alt="Product photo" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-youtube-banner-photo.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-youtube-banner-watermark.png" alt="Flag watermark" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-youtube-banner-watermark.png" download>PNG</a></div></div>
-    <div class="soccard"><img src="assets/social/srg-youtube-banner-cutout.png" alt="Type only" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-youtube-banner-cutout.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-photo.png" alt="Product photo" width="3413" height="1920" loading="lazy" /><div class="scap"><span>Elaborate photo</span><a href="assets/social/srg-youtube-banner-photo.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-watermark.png" alt="Flag watermark" width="3413" height="1920" loading="lazy" /><div class="scap"><span>Type + flag watermark</span><a href="assets/social/srg-youtube-banner-watermark.png" download>PNG</a></div></div>
+    <div class="soccard"><img src="assets/social/srg-youtube-banner-cutout.png" alt="Type only" width="3413" height="1920" loading="lazy" /><div class="scap"><span>Peptide cutout</span><a href="assets/social/srg-youtube-banner-cutout.png" download>PNG</a></div></div>
   </div>
 </section>
 
@@ -1112,7 +1112,7 @@
         return '<a href="'+f.u+'" download>'+f.n+', PNG</a><a href="'+pdf+'" download>'+f.n+', print PDF</a><a href="'+svg+'" download>SVG</a>';
       }).join(''):'';
       th.querySelectorAll('button').forEach(function(b,k){ b.classList.toggle('on',k===i); });
-      var t=th.children[i]; if(t&&t.scrollIntoView) t.scrollIntoView({block:'nearest',inline:'center',behavior:'smooth'});
+      var t=th.children[i]; if(t) th.scrollTo({left:t.offsetLeft-(th.clientWidth-t.clientWidth)/2,behavior:'smooth'});
     }
     S.forEach(function(s,k){ var b=document.createElement('button'); b.type='button'; b.setAttribute('aria-label','Show slide '+(k+1)); b.innerHTML='<img src="'+s.s+'" alt="" loading="lazy">'; b.addEventListener('click',function(){ go(k); }); th.appendChild(b); });
     root.querySelector('.prev').addEventListener('click',function(){ go(i-1); });
@@ -1248,6 +1248,26 @@
           var old=em.textContent; em.textContent='COPIED!'; setTimeout(function(){em.textContent=old;},900);
         }).catch(function(){});
       });
+    });
+  })();
+</script>
+<script>
+  // Menu links: images above the target that have not loaded yet grow the page
+  // while it scrolls and push the target down (Merch used to land in the social
+  // covers). Load them now and re-anchor as each one arrives, for a few seconds,
+  // unless the reader scrolls on their own.
+  (function(){
+    document.addEventListener('click',function(e){
+      var a=e.target.closest&&e.target.closest('a[href^="#"]'); if(!a) return;
+      var id=a.getAttribute('href').slice(1), t=id&&document.getElementById(id); if(!t) return;
+      var pend=[].filter.call(document.images,function(i){ return !i.complete && (i.compareDocumentPosition(t)&Node.DOCUMENT_POSITION_FOLLOWING); });
+      if(!pend.length) return;
+      var until=Date.now()+4000;
+      function stop(){ until=0; }
+      addEventListener('wheel',stop,{once:true,passive:true}); addEventListener('touchstart',stop,{once:true,passive:true});
+      function fix(){ if(Date.now()<until) t.scrollIntoView({block:'start'}); }
+      pend.forEach(function(i){ i.loading='eager'; i.addEventListener('load',fix,{once:true}); });
+      setTimeout(fix,900); setTimeout(fix,2000);
     });
   })();
 </script>
